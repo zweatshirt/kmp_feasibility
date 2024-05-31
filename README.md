@@ -11,8 +11,10 @@ Zach and Josh @ Cru Kotlin feasability testing repository
 ### Version documentation
 Kotlin Multiplatform Mobile
 - 0.8.2(233)-8 JetBrains
+
 Kotlin
 - 1.9.29
+
 Device Emulator (Subject to change)
 - Pixel 3a API 34
 - Android 14.0 ("UpsideDownCake") | x86_64
