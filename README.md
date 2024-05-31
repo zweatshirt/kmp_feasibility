@@ -19,3 +19,5 @@ Device Emulator (Subject to change)
 - Pixel 3a API 34
 - Android 14.0 ("UpsideDownCake") | x86_64
 
+Grade
+- 8.4.1
