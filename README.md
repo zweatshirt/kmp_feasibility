@@ -7,6 +7,7 @@ Zach and Josh @ Cru Kotlin feasability testing repository
 "
 ### Recommendations:
 - "In general, write your implementation as common code whenever possible instead of duplicating functionality in platform-specific source sets."
+- "Generally the consensus seems to be that you use Jetpack Compose for your Android UI layer, swift UI for your iOS UI layer, and then Kotlin Multiplatform for your data layer and potentially your view models as well if you want to share code between the two."
 
 ### Version documentation
 Kotlin Multiplatform Mobile
@@ -21,3 +22,25 @@ Device Emulator (Subject to change)
 
 Grade
 - 8.4.1
+
+## Zach's positive and negative notes:
+### Positives
+- The ability to compile to many different targets (for example, Apple watches, iOS, Android, Web, Native)
+- emphasis on code reusability
+	- share logic across the various platforms, simplifying maintenance 
+- You can utilize platform specific UI components in conjunction with Compose UI, leading to performance that is potentially on par with native development
+- You still have the ability to tap into platform specific APIs, you are not limited by the APIs and libraries provided by Kotlin Multiplatform
+- Kotlin is interoperable with Java and Swift
+- Kotlin is statically typed, decreasing chances of bugs in applications
+- Broad range of platforms that KMP supports.
+- large changes being made constantly
+### Negatives
+- Platform specific requirements must be heavily understood before taking on projects
+- There is still a possibility you will need to write platform specific UI code.
+- The Kotlin community is smaller compared to Flutter, which may affect the availability of libraries, third party tools, and the responsiveness of community support.
+- Cross-platform desktop UIs have been neglected for quite a while. Swing has been a standard for some time, but it’s old and unmaintained. JetBrains is hoping to bring Compose fully to Desktop
+- Compose UI is apparently 'technically usable for iOS' but it's still in beta
+	- SwiftUI is the alternative for it
+	- More fully fledged for Android
+	- Compose for Web is in alpha, may be unstable
+- large changes are being made all the time, there is a lot to learn (both good and bad)
