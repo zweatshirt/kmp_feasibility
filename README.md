@@ -20,7 +20,7 @@ Device Emulator (Subject to change)
 - Pixel 3a API 34
 - Android 14.0 ("UpsideDownCake") | x86_64
 
-Grade
+Gradle
 - 8.4.1
 
 ## Zach's positive and negative notes:
@@ -38,9 +38,11 @@ Grade
 - Platform specific requirements must be heavily understood before taking on projects
 - There is still a possibility you will need to write platform specific UI code.
 - The Kotlin community is smaller compared to Flutter, which may affect the availability of libraries, third party tools, and the responsiveness of community support.
-- Cross-platform desktop UIs have been neglected for quite a while. Swing has been a standard for some time, but it’s old and unmaintained. JetBrains is hoping to bring Compose fully to Desktop
+- Cross-platform desktop UIs have been neglected for quite a while. Swing has been a standard for some time, but it’s old and unmaintained. JetBrains is hoping to bring Compose fully to Desktop and Web
 - Compose UI is apparently 'technically usable for iOS' but it's still in beta
 	- SwiftUI is the alternative for it
 	- More fully fledged for Android
 	- Compose for Web is in alpha, may be unstable
 - large changes are being made all the time, there is a lot to learn (both good and bad)
+- Navigation across application screens is still in an experimental phase, deep links are not supported. Also cannot override default back handling (what button or gesture to use for going to previous Composable)
+
