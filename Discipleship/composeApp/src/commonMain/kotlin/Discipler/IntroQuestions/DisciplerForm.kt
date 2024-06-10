@@ -1,17 +1,22 @@
-package Disciple.IntroQuestions
+package Discipler.IntroQuestions
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Checkbox
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -22,13 +27,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun DiscipleQuestions () {
+fun DisciplerQuestions () {
     var BibleKnowledge by remember { mutableStateOf(0f)}
-
+    var years by remember { mutableStateOf("")}
 
     val experience = setOf("None", "Some", "Decent", "A Lot")
     val selectedExperience = remember { mutableStateListOf<String>() }
@@ -40,7 +46,7 @@ fun DiscipleQuestions () {
         modifier = Modifier.padding(24.dp)
     ) {
         Text(
-            text = "Disciple",
+            text = "Discipler",
             modifier = Modifier.align(Alignment.Start),
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
@@ -49,7 +55,7 @@ fun DiscipleQuestions () {
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        Text(text = "Have you been discipled before?")
+        Text(text = "Have you discipled someone before?")
         Row {
             options.forEach {
                 Column(
@@ -64,6 +70,17 @@ fun DiscipleQuestions () {
                 }
             }
         }
+
+        Spacer(modifier = Modifier.padding(8.dp))
+
+        Text(text = "How many years of experience do you  have discipling?")
+        OutlinedTextField(
+            value = years,
+            onValueChange = {years = it},
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number
+            )
+        )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
