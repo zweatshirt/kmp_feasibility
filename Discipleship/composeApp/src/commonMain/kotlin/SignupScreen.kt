@@ -3,11 +3,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -19,8 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.semantics.Role.Companion.Image
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,17 +26,13 @@ import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.crulogo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import  androidx.compose.ui.graphics.Color
 
 /* Author: Zachery Linscott
-*
-* This is the primary login screen for the application.
 * TODO: Change color of input fields to blue or something other than purple
 * */
 
 @Composable
-fun LoginScreen() {
-    val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
+fun SignupScreen() {
 
     // Container for everything on the screen
     Column(modifier = Modifier
@@ -47,13 +40,6 @@ fun LoginScreen() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        Image(
-            painterResource(cru),
-            contentDescription = "Cru logo",
-            modifier = Modifier
-                .size(200.dp)
-        )
 
         Text(
             text = "Discipleship",
