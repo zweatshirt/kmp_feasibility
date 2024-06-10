@@ -1,4 +1,5 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontFamily
@@ -43,6 +45,14 @@ fun LoginScreen() {
 
     // Container for everything on the screen
     Column(modifier = Modifier
+        .background(
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    Color.Blue.copy(alpha = .1f),
+                    Color.White,
+                    Color.Blue.copy(alpha = .15f))
+            )
+        )
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -56,8 +66,8 @@ fun LoginScreen() {
         )
 
         Text(
-            text = "Discipleship",
-            fontSize = 34.sp,
+            text = "ChristCompanions",
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif
         )

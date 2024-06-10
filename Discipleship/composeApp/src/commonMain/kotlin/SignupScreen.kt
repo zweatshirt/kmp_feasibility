@@ -1,11 +1,15 @@
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -17,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -36,44 +41,56 @@ fun SignupScreen() {
 
     // Container for everything on the screen
     Column(modifier = Modifier
-        .fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        .background(
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    Color.Blue.copy(alpha = .1f),
+                    Color.White,
+                    Color.Blue.copy(alpha = .15f))
+            )
+        )
+        .fillMaxSize()
+        .padding(8.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
-        Text(
-            text = "Discipleship",
+        Column {
+        Text(modifier = Modifier
+            .align(Alignment.Start),
+            text = "Signup",
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif
+            fontFamily = FontFamily.SansSerif,
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
 
         // Login fields
-        Column {
-            Text(modifier = Modifier
-                .padding(),
-                text = "Login to your account",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.SansSerif,
-            )
+        OutlinedTextField(value = "", onValueChange = {}, label = {
+            Text(text = "First name")
+        })
 
-            OutlinedTextField(value = "", onValueChange = {}, label = {
-                Text(text = "Email address")
-            })
+        OutlinedTextField(value = "", onValueChange = {}, label = {
+            Text(text = "Last name")
+        })
+        Spacer(modifier = Modifier.padding(8.dp))
+        // Login fields
+        OutlinedTextField(value = "", onValueChange = {}, label = {
+            Text(text = "Email")
+        })
 
-            Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(8.dp))
 
-            OutlinedTextField(value = "", onValueChange = {}, label = {
-                Text(text = "Password")
-            })
-
-            TextButton(modifier = Modifier.align(Alignment.End), onClick = {}) {
-                Text(text = "Forgot password?", color = Color.Blue)
-            }
+        OutlinedTextField(value = "", onValueChange = {}, label = {
+            Text(text = "Password")
+        })
+        OutlinedTextField(value = "", onValueChange = {}, label = {
+            Text(text = "Confirm password")
+        })
         }
+
+        Spacer(modifier = Modifier.padding(16.dp))
 
         // Login button
         Button(modifier = Modifier
@@ -84,25 +101,16 @@ fun SignupScreen() {
                 backgroundColor = Color.Blue, contentColor = Color.White
             ),
             content = {
-                Text("Login")
-            }
-        )
-
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-        Divider()
-        Text(text = "or", color = Color.Gray)
-
-        // Signup button (needs to go to SignupScreen on click)
-        Button(modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
-            .width(100.dp),
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Gray, contentColor = Color.White
-            ),
-            content = {
                 Text("Signup")
             }
         )
+
+        Spacer(modifier = Modifier.padding(4.dp))
+
+        // Needs to route back to the Login screen
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(text = "Already have an account?", fontSize = 16.sp)
+            Text(modifier = Modifier.clickable {}, text = "Click here.", color = Color.Blue, fontSize = 16.sp)
+        }
     }
 }
