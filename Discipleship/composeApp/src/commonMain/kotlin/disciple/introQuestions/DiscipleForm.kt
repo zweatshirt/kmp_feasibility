@@ -1,4 +1,4 @@
-package Disciple.IntroQuestions
+package disciple.introQuestions
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun DiscipleQuestions () {
-    var BibleKnowledge by remember { mutableStateOf(0f)}
+    var bibleKnowledge by remember { mutableStateOf(0f)}
 
 
     val experience = setOf("None", "Some", "Decent", "A Lot")
@@ -40,7 +40,7 @@ fun DiscipleQuestions () {
         modifier = Modifier.padding(24.dp)
     ) {
         Text(
-            text = "Disciple",
+            text = "disciple",
             modifier = Modifier.align(Alignment.Start),
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
@@ -70,8 +70,8 @@ fun DiscipleQuestions () {
         Text(text = "Rate your knowledge of the Bible on a scale of 1 to 10")
         Column {
             Slider(
-                value = BibleKnowledge,
-                onValueChange = { BibleKnowledge = it },
+                value = bibleKnowledge,
+                onValueChange = { bibleKnowledge = it },
                 colors = SliderDefaults.colors(
                     thumbColor = MaterialTheme.colors.secondary,
                     activeTrackColor = MaterialTheme.colors.secondary,
@@ -81,7 +81,7 @@ fun DiscipleQuestions () {
                 valueRange = 0f..10f
 
             )
-            Text(text = BibleKnowledge.toInt().toString())
+            Text(text = bibleKnowledge.toInt().toString())
 
         }
 

@@ -1,4 +1,4 @@
-package Discipleship
+package discipleship
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 val resources = listOf(
 
     Resources(
-        resourceName = "How to Disiple",
+        resourceName = "How to Disciple",
         resourceType = "Article"
     )
 )

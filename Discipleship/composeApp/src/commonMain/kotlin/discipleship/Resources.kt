@@ -1,4 +1,4 @@
-package Discipleship
+package discipleship
 
 data class Resources(
     val resourceName: String,

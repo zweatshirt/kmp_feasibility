@@ -1,4 +1,4 @@
-package Discipler.IntroQuestions
+package discipler.introQuestions
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,10 +13,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldColors
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -46,7 +43,7 @@ fun DisciplerQuestions () {
         modifier = Modifier.padding(24.dp)
     ) {
         Text(
-            text = "Discipler",
+            text = "discipler",
             modifier = Modifier.align(Alignment.Start),
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
