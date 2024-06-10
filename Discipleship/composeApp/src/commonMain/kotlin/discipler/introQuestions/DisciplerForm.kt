@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun DisciplerQuestions () {
-    var BibleKnowledge by remember { mutableStateOf(0f)}
+    var bibleKnowledge by remember { mutableStateOf(0f)}
     var years by remember { mutableStateOf("")}
 
     val experience = setOf("None", "Some", "Decent", "A Lot")
@@ -84,8 +84,8 @@ fun DisciplerQuestions () {
         Text(text = "Rate your knowledge of the Bible on a scale of 1 to 10")
         Column {
             Slider(
-                value = BibleKnowledge,
-                onValueChange = { BibleKnowledge = it },
+                value = bibleKnowledge,
+                onValueChange = { bibleKnowledge = it },
                 colors = SliderDefaults.colors(
                     thumbColor = MaterialTheme.colors.secondary,
                     activeTrackColor = MaterialTheme.colors.secondary,
@@ -95,7 +95,7 @@ fun DisciplerQuestions () {
                 valueRange = 0f..10f
 
             )
-            Text(text = BibleKnowledge.toInt().toString())
+            Text(text = bibleKnowledge.toInt().toString())
 
         }
 
