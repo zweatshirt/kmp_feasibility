@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import Disciple.IntroQuestions.DiscipleQuestions
 
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.compose_multiplatform
@@ -27,6 +28,9 @@ fun App() {
             // LoginScreen()
             SignupScreen()
             // DiscipleOrDiscipler()
+            //LoginScreen()
+            // AccountCreate()
+            //DiscipleQuestions()
         }
     }
 }
