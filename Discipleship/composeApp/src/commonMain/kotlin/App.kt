@@ -25,9 +25,9 @@ fun App() {
     MaterialTheme {
         Scaffold {
             // All of our main screen composables can go here
-            // LoginScreen()
-            SignupScreen()
-            // DiscipleOrDiscipler()
+            LoginScreen()
+            // SignupScreen()
+            // DorDScreen()
             //LoginScreen()
             // AccountCreate()
             //DiscipleQuestions()

@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -20,9 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -46,12 +44,7 @@ fun LoginScreen() {
     // Container for everything on the screen
     Column(modifier = Modifier
         .background(
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    Color.Blue.copy(alpha = .1f),
-                    Color.White,
-                    Color.Blue.copy(alpha = .15f))
-            )
+            MaterialTheme.colors.background
         )
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -69,7 +62,8 @@ fun LoginScreen() {
             text = "ChristCompanions",
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif
+            fontFamily = FontFamily.SansSerif,
+            color = MaterialTheme.colors.onSecondary
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
