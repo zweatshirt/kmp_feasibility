@@ -1,17 +1,24 @@
 package disciple.introQuestions
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonColors
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -24,6 +31,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ui.theme.backgroundLight
+import ui.theme.primaryDark
+import ui.theme.primaryLight
+import ui.theme.secondaryLight
+
 
 @Composable
 fun DiscipleQuestions () {
@@ -37,16 +49,23 @@ fun DiscipleQuestions () {
     var discipledBefore by remember { mutableStateOf("")}
 
     Column(
-        modifier = Modifier.padding(24.dp)
+        modifier = Modifier
+            .background(
+                backgroundLight
+            )
+            .padding(24.dp)
+            .fillMaxSize()
     ) {
         Text(
-            text = "disciple",
-            modifier = Modifier.align(Alignment.Start),
-            fontSize = 34.sp,
+            text = "Disciple",
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            fontSize = 46.sp,
             fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif
+            fontFamily = FontFamily.SansSerif,
+            color = primaryLight
         )
 
+        HorizontalDivider(thickness = 8.dp, color = primaryDark)
         Spacer(modifier = Modifier.padding(8.dp))
 
         Text(text = "Have you been discipled before?")
@@ -59,12 +78,17 @@ fun DiscipleQuestions () {
                     RadioButton(
                         selected = discipledBefore == it,
                         onClick = { discipledBefore = it },
+                        colors = RadioButtonDefaults.colors(
+                            selectedColor = secondaryLight
+                        )
                     )
                     Text(text = it, style = MaterialTheme.typography.caption)
                 }
             }
         }
 
+        Spacer(modifier = Modifier.padding(8.dp))
+        HorizontalDivider(thickness = 2.dp, color = primaryDark)
         Spacer(modifier = Modifier.padding(8.dp))
 
         Text(text = "Rate your knowledge of the Bible on a scale of 1 to 10")
@@ -73,9 +97,9 @@ fun DiscipleQuestions () {
                 value = bibleKnowledge,
                 onValueChange = { bibleKnowledge = it },
                 colors = SliderDefaults.colors(
-                    thumbColor = MaterialTheme.colors.secondary,
-                    activeTrackColor = MaterialTheme.colors.secondary,
-                    inactiveTickColor = MaterialTheme.colors.secondary,
+                    thumbColor = secondaryLight,
+                    activeTrackColor = secondaryLight,
+                    inactiveTickColor = secondaryLight,
                 ),
                 steps = 9,
                 valueRange = 0f..10f
@@ -85,6 +109,8 @@ fun DiscipleQuestions () {
 
         }
 
+        Spacer(modifier = Modifier.padding(8.dp))
+        HorizontalDivider(thickness = 2.dp, color = primaryDark)
         Spacer(modifier = Modifier.padding(8.dp))
 
         Text("Select your experience level sharing your faith")
@@ -99,15 +125,26 @@ fun DiscipleQuestions () {
                             if (!unchecked) selectedExperience.remove(it)
                             else selectedExperience.add(it)
                         },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = secondaryLight
+                        )
                     )
                     Text(text = it, style = MaterialTheme.typography.caption)
                 }
             }
         }
 
+        Spacer(modifier = Modifier.padding(8.dp))
+        HorizontalDivider(thickness = 2.dp, color = primaryDark)
+        Spacer(modifier = Modifier.padding(8.dp))
+
         Button(
             onClick = {},
-            modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth()
+            modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = primaryLight,
+                contentColor = backgroundLight
+            )
         ) {
             Text("Submit")
         }
