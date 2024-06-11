@@ -121,16 +121,10 @@ fun MeetingCard(meeting: Meeting) {
         .clickable {},
         elevation = 12.dp
     ) {
-        Column(modifier = Modifier.background(primaryContainerLight)) {
-            Row(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.background(primaryContainerLight).padding(16.dp)) {
+            Row() {
                 Text(
                     text = "${meeting.date} ${meeting.time}",
-                    fontSize = 16.sp,
-                    color = primaryLight,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = "${meetDisc.firstName} ${meetDisc.lastName}",
                     fontSize = 16.sp,
                     color = primaryLight,
                     fontWeight = FontWeight.Bold
@@ -142,6 +136,12 @@ fun MeetingCard(meeting: Meeting) {
                     )
                 }
             }
+            Text(
+                text = "with ${meetDisc.firstName} ${meetDisc.lastName}",
+                fontSize = 16.sp,
+                color = primaryLight,
+                fontWeight = FontWeight.Bold
+            )
 
         }
     }
