@@ -15,12 +15,13 @@ fun App() {
     MaterialTheme {
         Scaffold {
             // All of our main screen composables can go here
-            //LoginScreen()
-            //SignupScreen()
+            // WelcomeScreen()
+            // LoginScreen()
+            // SignupScreen()
             // DorD()
-            //DiscipleQuestions()
-            DisciplerQuestions()
-            //WelcomeScreen()
+            // DiscipleQuestions()
+            // DisciplerQuestions()
+            HomeScreen()
         }
     }
 }

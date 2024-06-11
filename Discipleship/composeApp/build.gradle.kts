@@ -86,5 +86,6 @@ android {
 dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.core)
+    implementation(libs.androidx.foundation.android)
 }
 

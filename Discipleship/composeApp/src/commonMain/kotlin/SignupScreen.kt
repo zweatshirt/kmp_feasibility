@@ -17,6 +17,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,25 +66,40 @@ fun SignupScreen() {
         Spacer(modifier = Modifier.padding(16.dp))
 
         // Login fields
-        OutlinedTextField(value = "", onValueChange = {}, label = {
+        OutlinedTextField(value = "", onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight),
+            label = {
             Text(text = "First name", color = secondaryLight)
         })
 
-        OutlinedTextField(value = "", onValueChange = {}, label = {
+        OutlinedTextField(value = "", onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight),
+            label = {
             Text(text = "Last name", color = secondaryLight)
         })
         Spacer(modifier = Modifier.padding(8.dp))
         // Login fields
-        OutlinedTextField(value = "", onValueChange = {}, label = {
+        OutlinedTextField(value = "", onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight),
+            label = {
             Text(text = "Email", color = secondaryLight)
         })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        OutlinedTextField(value = "", onValueChange = {}, label = {
+        OutlinedTextField(value = "", onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight),
+            label = {
             Text(text = "Password", color = secondaryLight)
         })
-        OutlinedTextField(value = "", onValueChange = {}, label = {
+        OutlinedTextField(value = "", onValueChange = {},
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight),
+            label = {
             Text(text = "Confirm password", color = secondaryLight)
         })
         }
