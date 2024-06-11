@@ -29,7 +29,10 @@ import org.jetbrains.compose.resources.painterResource
 import discipleship.composeapp.generated.resources.crulogo
 import org.jetbrains.compose.resources.DrawableResource
 import ui.theme.backgroundLight
+import ui.theme.onPrimaryContainerLight
+import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
+import ui.theme.secondaryContainerLight
 
 
 val resources = listOf(
@@ -131,8 +134,8 @@ fun ResourceItem(
     ) {
         Column(
             modifier = Modifier
-                .clip(RoundedCornerShape(25.dp))
-                .background(Color.Blue)
+                .clip(RoundedCornerShape(8.dp))
+                .background(primaryContainerLight)
                 .width(200.dp)
                 .height(150.dp)
                 .clickable {}
@@ -141,13 +144,13 @@ fun ResourceItem(
         ) {
             Text(
                 text = resource.resourceName,
-                color = Color.White,
+                color = onPrimaryContainerLight,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.SemiBold
             )
             Text(
                 text = resource.resourceType,
-                color = Color.White,
+                color = onPrimaryContainerLight,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.SemiBold
             )
