@@ -114,7 +114,7 @@ fun LoginScreen() {
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
-        Divider()
+        Divider(color = secondaryLight)
         Text(text = "or", color = secondaryLight)
 
         // Signup button (needs to go to SignupScreen on click)

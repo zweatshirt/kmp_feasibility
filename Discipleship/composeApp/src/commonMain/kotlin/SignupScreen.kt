@@ -27,6 +27,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ui.theme.backgroundLight
+import ui.theme.inversePrimaryLight
+import ui.theme.inverseSurfaceLight
+import ui.theme.primaryContainerLight
+import ui.theme.primaryLight
+import ui.theme.secondaryLight
 
 /* Author: Zachery Linscott
 * TODO: Change color of input fields to blue or something other than purple
@@ -38,12 +44,7 @@ fun SignupScreen() {
     // Container for everything on the screen
     Column(modifier = Modifier
         .background(
-            brush = Brush.verticalGradient(
-                colors = listOf(
-                    Color.Blue.copy(alpha = .1f),
-                    Color.White,
-                    Color.Blue.copy(alpha = .15f))
-            )
+            backgroundLight
         )
         .fillMaxSize()
         .padding(8.dp),
@@ -58,31 +59,32 @@ fun SignupScreen() {
             fontSize = 34.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif,
+            color = primaryLight
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
 
         // Login fields
         OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "First name")
+            Text(text = "First name", color = secondaryLight)
         })
 
         OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "Last name")
+            Text(text = "Last name", color = secondaryLight)
         })
         Spacer(modifier = Modifier.padding(8.dp))
         // Login fields
         OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "Email")
+            Text(text = "Email", color = secondaryLight)
         })
 
         Spacer(modifier = Modifier.padding(8.dp))
 
         OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "Password")
+            Text(text = "Password", color = secondaryLight)
         })
         OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "Confirm password")
+            Text(text = "Confirm password", color = secondaryLight)
         })
         }
 
@@ -91,13 +93,13 @@ fun SignupScreen() {
         // Login button
         Button(modifier = Modifier
             .clip(RoundedCornerShape(12.dp))
-            .width(100.dp),
+            .width(180.dp),
             onClick = {},
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Blue, contentColor = Color.White
+                backgroundColor = primaryContainerLight, contentColor = primaryLight
             ),
             content = {
-                Text("Signup")
+                Text("Create account", color = primaryLight)
             }
         )
 
@@ -105,8 +107,8 @@ fun SignupScreen() {
 
         // Needs to route back to the Login screen
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(text = "Already have an account?", fontSize = 16.sp)
-            Text(modifier = Modifier.clickable {}, text = "Click here.", color = Color.Blue, fontSize = 16.sp)
+            Text(text = "Already have an account?", fontSize = 16.sp, color = primaryLight)
+            Text(modifier = Modifier.clickable {}, text = "Click here.", color = inverseSurfaceLight, fontSize = 16.sp)
         }
     }
 }

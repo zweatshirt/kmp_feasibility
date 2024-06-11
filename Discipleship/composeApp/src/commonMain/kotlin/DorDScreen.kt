@@ -1,20 +1,35 @@
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -23,6 +38,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ui.theme.backgroundLight
+import ui.theme.inversePrimaryLight
+import ui.theme.onBackgroundDark
+import ui.theme.onBackgroundLight
+import ui.theme.onPrimaryContainerLight
+import ui.theme.onPrimaryLight
+import ui.theme.onSecondaryContainerLight
+import ui.theme.primaryContainerDark
+import ui.theme.primaryContainerLight
+import ui.theme.primaryLight
+import ui.theme.secondaryContainerLight
+import ui.theme.secondaryLight
+import ui.theme.surfaceDimLight
+import ui.theme.surfaceLight
 
 /* Author: Zachery Linscott
 *
@@ -31,46 +60,144 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun DorDScreen() {
     val fSize = 30.sp // font size for all font on screen
+    val fSizeTwo = 20.sp
     Column(
         modifier = Modifier
-            .background(Color.White)
+            .background(backgroundLight)
             .fillMaxSize()
-            .padding(8.dp),
+            .padding(16.dp),
+
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
+        // You have to build a string
+        // if you want to style different parts of the string
         Text(
             buildAnnotatedString {
-                append("Are you a ")
                 withStyle(
                     style = SpanStyle(
-                        color = Color.Blue,
-                        fontWeight = FontWeight.SemiBold)
+                        color = secondaryLight
+                    )
+                ) {
+                    append("Are you a ")
+                }
+
+                withStyle(
+                    style = SpanStyle(
+                        color = primaryLight,
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.SemiBold),
                 ) {
                     append("Disciple")
                 }
-                append(", or a\n\n")
+
                 withStyle(
                     style = SpanStyle(
-                        color = Color.Blue,
+                        color = secondaryLight
+                    )
+                ) {
+                    append(", or a\n\n")
+                }
+
+                withStyle(
+                    style = SpanStyle(
+                        color = primaryLight,
+                        fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.SemiBold)
                 ) {
                     append("Discipler")
                 }
-                append("?")
+
+                withStyle(
+                    style = SpanStyle(
+                        color = secondaryLight
+                    )
+                ) {
+                    append("?")
+                }
             },
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 40.dp),
             fontSize = fSize
         )
 
-        Card(modifier = Modifier.width(200.dp), backgroundColor = Color.Black){
-            Text(text = "Disciple", fontSize = fSize, color = Color.White)
+        Spacer(modifier = Modifier.padding(16.dp))
+
+        // This column contains the cards that the user can click on
+        // where they determine if they are a disciple or discipler
+        Column(verticalArrangement = Arrangement.Center) {
+            OutlinedCard(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable {}, // Needs to route to the disciple intro screens
+                border = BorderStroke(2.dp, primaryLight),
+                colors = CardDefaults.cardColors(
+                    primaryContainerLight
+                ),
+                elevation = CardDefaults.cardElevation(16.dp)
+            ) {
+                Column {
+                    Row(modifier = Modifier.padding(16.dp)) {
+                        Icon(modifier = Modifier
+                                .padding(6.dp),
+                            imageVector = Icons.Outlined.Face,
+                            contentDescription = "Disciple icon")
+                        Text(
+                            text = "Disciple",
+                            fontSize = fSize,
+                            color = primaryLight,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        modifier = Modifier.padding(end = 16.dp, start = 16.dp, bottom = 12.dp),
+                        text = "Disciples are dedicated to learning about " +
+                                "Jesus Christ and the gospel, and take on the role of the learner.",
+                        color = onSecondaryContainerLight,
+                        fontSize = fSizeTwo
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            OutlinedCard(modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .clickable {}, // needs to route to discipler intro screens
+                border = BorderStroke(2.dp, primaryLight),
+                colors = CardDefaults.cardColors(
+                    primaryContainerLight
+                ),
+                elevation = CardDefaults.cardElevation(16.dp)
+            ) {
+                Column {
+                    Row(modifier = Modifier.padding(16.dp)) {
+                        Icon(modifier = Modifier
+                            .padding(6.dp),
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Discipler icon")
+                        Text(
+                            text = "Discipler",
+                            fontSize = fSize,
+                            color = primaryLight,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        modifier = Modifier.padding(end = 16.dp, start = 16.dp, bottom = 12.dp),
+                        text = "Disciplers are dedicated to teaching others about Jesus Christ " +
+                                "and the gospel, and typically take on one or more disciples.",
+                        color = onSecondaryContainerLight,
+                        fontSize = fSizeTwo
+                    )
+                }
+            }
         }
 
-        Card(modifier = Modifier.width(200.dp), backgroundColor = Color.Black) {
-            Text(text = "Discipler", fontSize = fSize, color = Color.White)
-        }
     }
 }
