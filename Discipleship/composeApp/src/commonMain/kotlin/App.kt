@@ -9,12 +9,13 @@ import discipler.introQuestions.DisciplerQuestions // keep to use for testing di
 @Composable
 @Preview
 
+
 // At some point soon we need to define navigation
 fun App() {
     MaterialTheme {
         Scaffold {
             // All of our main screen composables can go here
-            //LoginScreen()
+            LoginScreen()
             //SignupScreen()
             // DorD()
             //DiscipleQuestions()
