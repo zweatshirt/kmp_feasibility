@@ -29,13 +29,11 @@ import discipleship.composeapp.generated.resources.crulogo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import  androidx.compose.ui.graphics.Color
-import ui.theme.backgroundDark
-import ui.theme.primaryContainerDark
-import ui.theme.primaryDark
+import ui.theme.backgroundLight
+import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
-import ui.theme.secondaryContainerDark
 import ui.theme.secondaryContainerLight
-import ui.theme.secondaryDark
+import ui.theme.secondaryLight
 
 /* Author: Zachery Linscott
 *
@@ -50,7 +48,7 @@ fun LoginScreen() {
     // Container for everything on the screen
     Column(modifier = Modifier
         .background(
-            backgroundDark
+            backgroundLight
         )
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -69,7 +67,7 @@ fun LoginScreen() {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif,
-            color = primaryDark
+            color = primaryLight
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
@@ -82,22 +80,23 @@ fun LoginScreen() {
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.SansSerif,
-                color = primaryDark
+                color = primaryLight
             )
 
             OutlinedTextField(value = "", onValueChange = {}, colors = TextFieldDefaults.textFieldColors(
-                textColor = primaryDark), label = {
-                Text(text = "Email address", color = secondaryDark)
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight), label = {
+                Text(text = "Email address", color = secondaryLight)
             })
 
             Spacer(modifier = Modifier.padding(8.dp))
 
-            OutlinedTextField(value = "", onValueChange = {}, label = {
-                Text(text = "Password", color = secondaryDark)
+            OutlinedTextField(value = "", onValueChange = {}, colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryLight, focusedIndicatorColor = primaryContainerLight), label = {
+                Text(text = "Password", color = secondaryLight)
             })
 
             TextButton(modifier = Modifier.align(Alignment.End), onClick = {}) {
-                Text(text = "Forgot password?", color = secondaryDark)
+                Text(text = "Forgot password?", color = secondaryLight)
             }
         }
 
@@ -107,16 +106,16 @@ fun LoginScreen() {
             .width(100.dp),
             onClick = {},
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = primaryContainerDark, contentColor = secondaryDark
+                backgroundColor = primaryContainerLight, contentColor = secondaryLight
             ),
             content = {
-                Text("Login", color = secondaryDark)
+                Text("Login", color = secondaryLight)
             }
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
         Divider()
-        Text(text = "or", color = secondaryContainerDark)
+        Text(text = "or", color = secondaryLight)
 
         // Signup button (needs to go to SignupScreen on click)
         Button(modifier = Modifier
