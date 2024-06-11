@@ -1,15 +1,13 @@
-package com.example.compose
+package ui.theme
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.SideEffect
-
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import com.example.ui.theme.AppTypography
+import kmp.project.discipleship.AppTypography
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -255,14 +253,15 @@ val unspecified_scheme = ColorFamily(
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = true,
     content: @Composable() () -> Unit
 ) {
-//  val colorScheme = when {
-//
-//      darkTheme -> darkScheme
-//      else -> lightScheme
-//  }
-    val colorScheme = darkScheme
+  val colorScheme = when {
+      darkTheme -> darkScheme
+      else -> lightScheme
+  }
+  // val view = LocalView.current
+
 
   MaterialTheme(
     colorScheme = colorScheme,

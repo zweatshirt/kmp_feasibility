@@ -4,11 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -17,6 +15,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +29,13 @@ import discipleship.composeapp.generated.resources.crulogo
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import  androidx.compose.ui.graphics.Color
+import ui.theme.backgroundDark
+import ui.theme.primaryContainerDark
+import ui.theme.primaryDark
+import ui.theme.primaryLight
+import ui.theme.secondaryContainerDark
+import ui.theme.secondaryContainerLight
+import ui.theme.secondaryDark
 
 /* Author: Zachery Linscott
 *
@@ -44,7 +50,7 @@ fun LoginScreen() {
     // Container for everything on the screen
     Column(modifier = Modifier
         .background(
-            MaterialTheme.colors.background
+            backgroundDark
         )
         .fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -63,7 +69,7 @@ fun LoginScreen() {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.SansSerif,
-            color = MaterialTheme.colors.onSecondary
+            color = primaryDark
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
@@ -76,20 +82,22 @@ fun LoginScreen() {
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.SansSerif,
+                color = primaryDark
             )
 
-            OutlinedTextField(value = "", onValueChange = {}, label = {
-                Text(text = "Email address")
+            OutlinedTextField(value = "", onValueChange = {}, colors = TextFieldDefaults.textFieldColors(
+                textColor = primaryDark), label = {
+                Text(text = "Email address", color = secondaryDark)
             })
 
             Spacer(modifier = Modifier.padding(8.dp))
 
             OutlinedTextField(value = "", onValueChange = {}, label = {
-                Text(text = "Password")
+                Text(text = "Password", color = secondaryDark)
             })
 
             TextButton(modifier = Modifier.align(Alignment.End), onClick = {}) {
-                Text(text = "Forgot password?", color = Color.Blue)
+                Text(text = "Forgot password?", color = secondaryDark)
             }
         }
 
@@ -99,16 +107,16 @@ fun LoginScreen() {
             .width(100.dp),
             onClick = {},
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Blue, contentColor = Color.White
+                backgroundColor = primaryContainerDark, contentColor = secondaryDark
             ),
             content = {
-                Text("Login")
+                Text("Login", color = secondaryDark)
             }
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
         Divider()
-        Text(text = "or", color = Color.Gray)
+        Text(text = "or", color = secondaryContainerDark)
 
         // Signup button (needs to go to SignupScreen on click)
         Button(modifier = Modifier

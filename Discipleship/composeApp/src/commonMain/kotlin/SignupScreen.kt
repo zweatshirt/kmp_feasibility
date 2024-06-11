@@ -27,10 +27,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import discipleship.composeapp.generated.resources.Res
-import discipleship.composeapp.generated.resources.crulogo
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 
 /* Author: Zachery Linscott
 * TODO: Change color of input fields to blue or something other than purple

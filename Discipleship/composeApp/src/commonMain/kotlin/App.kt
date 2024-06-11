@@ -17,7 +17,7 @@ fun App() {
             //SignupScreen()
             // DorD()
             //DiscipleQuestions()
-            WelcomeScreen()
+            //WelcomeScreen()
         }
     }
 }
