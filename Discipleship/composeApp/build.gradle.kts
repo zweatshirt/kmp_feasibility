@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            val voyagerVersion = "1.1.0-beta02"
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -43,6 +44,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
+            implementation("io.github.wojciechosak:calendar:1.0.1")
+            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
         }
     }
 }
@@ -90,5 +93,6 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.core)
+    implementation(libs.places)
 }
 
