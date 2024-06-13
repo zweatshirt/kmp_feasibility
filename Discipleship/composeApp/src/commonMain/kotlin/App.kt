@@ -1,8 +1,9 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
+import calendar.calendarPage
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import calendarV2.CalendarV2
+
 
 @Composable
 @Preview
@@ -51,8 +52,7 @@ fun App() {
             // DiscipleQuestions()
             // DisciplerQuestions()
             //HomeScreen()
-            //calendarPage()
-            CalendarV2()
+            calendarPage()
         }
     }
 }
