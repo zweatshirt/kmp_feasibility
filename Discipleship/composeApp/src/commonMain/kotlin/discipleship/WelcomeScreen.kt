@@ -38,7 +38,7 @@ import ui.theme.secondaryContainerLight
 val resources = listOf(
 
     Resources(
-        resourceName = "How to Disciple",
+        resourceName = "How to disciple.Disciple",
         resourceType = "Article"
     ),
 
