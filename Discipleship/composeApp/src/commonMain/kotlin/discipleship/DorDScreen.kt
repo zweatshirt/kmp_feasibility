@@ -1,3 +1,5 @@
+package discipleship
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -89,7 +91,7 @@ fun DorDScreen() {
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.SemiBold),
                 ) {
-                    append("Disciple")
+                    append("disciple.Disciple")
                 }
 
                 withStyle(
@@ -106,7 +108,7 @@ fun DorDScreen() {
                         fontStyle = FontStyle.Italic,
                         fontWeight = FontWeight.SemiBold)
                 ) {
-                    append("Discipler")
+                    append("discipler.Discipler")
                 }
 
                 withStyle(
@@ -144,9 +146,9 @@ fun DorDScreen() {
                         Icon(modifier = Modifier
                                 .padding(6.dp),
                             imageVector = Icons.Outlined.Face,
-                            contentDescription = "Disciple icon")
+                            contentDescription = "disciple.Disciple icon")
                         Text(
-                            text = "Disciple",
+                            text = "disciple.Disciple",
                             fontSize = fSize,
                             color = primaryLight,
                             fontWeight = FontWeight.Bold
@@ -180,9 +182,9 @@ fun DorDScreen() {
                         Icon(modifier = Modifier
                             .padding(6.dp),
                             imageVector = Icons.Default.Person,
-                            contentDescription = "Discipler icon")
+                            contentDescription = "discipler.Discipler icon")
                         Text(
-                            text = "Discipler",
+                            text = "discipler.Discipler",
                             fontSize = fSize,
                             color = primaryLight,
                             fontWeight = FontWeight.Bold

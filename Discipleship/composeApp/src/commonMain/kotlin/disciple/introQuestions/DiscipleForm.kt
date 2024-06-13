@@ -57,7 +57,7 @@ fun DiscipleQuestions () {
             .fillMaxSize()
     ) {
         Text(
-            text = "Disciple",
+            text = "disciple.Disciple",
             modifier = Modifier.align(Alignment.CenterHorizontally),
             fontSize = 46.sp,
             fontWeight = FontWeight.Bold,
