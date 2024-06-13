@@ -46,6 +46,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation("io.github.wojciechosak:calendar:1.0.1")
             implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
+            implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha05")
         }
     }
 }

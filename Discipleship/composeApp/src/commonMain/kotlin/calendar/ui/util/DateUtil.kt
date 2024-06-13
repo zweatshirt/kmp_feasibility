@@ -1,10 +1,12 @@
 package calendar.ui.util
 
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.TextStyle
-import java.util.Locale
+import calendar.dateTime.YearMonth
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.isoDayNumber
+import kotlinx.datetime.plus
+
 
 object DateUtil {
 
@@ -13,8 +15,7 @@ object DateUtil {
             val daysOfWeek = Array(7) { "" }
 
             for (dayOfWeek in DayOfWeek.entries) {
-                val localizedDayName = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
-                daysOfWeek[dayOfWeek.value - 1] = localizedDayName
+                daysOfWeek[dayOfWeek.isoDayNumber - 1] = dayOfWeek.toString()
             }
 
             return daysOfWeek
@@ -22,15 +23,18 @@ object DateUtil {
 }
 
 fun YearMonth.getDayOfMonthStartingFromMonday(): List<LocalDate> {
-    val firstDayOfMonth = LocalDate.of(year, month, 1)
-    val firstMondayOfMonth = firstDayOfMonth.with(DayOfWeek.MONDAY)
-    val firstDayOfNextMonth = firstDayOfMonth.plusMonths(1)
+    val firstDayOfMonth = LocalDate(year, month, 1)
+    var firstMondayOfMonth = firstDayOfMonth
+    while (firstMondayOfMonth.dayOfWeek != DayOfWeek.MONDAY) {
+        firstMondayOfMonth = firstMondayOfMonth.plus(1, DateTimeUnit.DAY)
+    }
+    val firstDayOfNextMonth = firstDayOfMonth.plus(1, DateTimeUnit.MONTH)
 
-    return generateSequence(firstMondayOfMonth) { it.plusDays(1) }
-        .takeWhile { it.isBefore(firstDayOfNextMonth) }
+    return generateSequence(firstDayOfMonth) { it.plus(1, DateTimeUnit.DAY) }
+        .takeWhile { it != firstDayOfNextMonth }
         .toList()
 }
 
 fun YearMonth.getDisplayName(): String {
-    return "${month.getDisplayName(TextStyle.FULL, Locale.getDefault())} $year"
+    return "$month $year"
 }

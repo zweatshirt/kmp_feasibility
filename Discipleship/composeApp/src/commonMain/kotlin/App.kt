@@ -59,13 +59,14 @@ fun App() {
 //            }
         ) {
             // All of our main screen composables can go here
-            WelcomeScreen()
+            //WelcomeScreen()
             //LoginScreen()
             //SignupScreen()
             // DorDScreen()
             // DiscipleQuestions()
             // DisciplerQuestions()
             //HomeScreen()
+            calendarPage()
         }
     }
 }

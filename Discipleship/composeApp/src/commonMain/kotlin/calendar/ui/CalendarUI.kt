@@ -27,39 +27,33 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import calendar.R
 import calendar.data.CalendarUiState
-import ui.theme.MyCalendarTheme
-import com.pandaways.mycalendar.ui.util.DateUtil
-import com.pandaways.mycalendar.ui.util.getDisplayName
-import java.time.YearMonth
+import calendar.dateTime.YearMonth
+import calendar.dateTime.printMonthYear
+import calendar.ui.util.DateUtil
+import calendar.ui.util.getDisplayName
+import kotlinx.datetime.LocalDate
+
 
 /**
  * Created by meyta.taliti on 20/05/23.
  */
-@Preview(showSystemUi = true)
-@Composable
-fun CalendarAppPreview() {
-    MyCalendarTheme {
-        CalendarApp()
-    }
-}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalendarApp(
-    viewModel: CalendarViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+fun Calendar(
+    viewModel: CalendarViewModel = CalendarViewModel(), //androidx.lifecycle.viewmodel.compose.viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val days: Array<String> = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(id = R.string.app_name)) },
+                title = { Text("Calendar") },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 ))
@@ -73,7 +67,7 @@ fun CalendarApp(
                 .padding(padding)
         ) {
             CalendarWidget(
-                days = DateUtil.daysOfWeek,
+                days = days,
                 yearMonth = uiState.yearMonth,
                 dates = uiState.dates,
                 onPreviousMonthButtonClicked = { prevMonth ->
@@ -134,11 +128,11 @@ fun Header(
         }) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowLeft,
-                contentDescription = stringResource(id = R.string.back)
+                contentDescription = "Back"
             )
         }
         Text(
-            text = yearMonth.getDisplayName(),
+            text = printMonthYear(yearMonth),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
@@ -150,7 +144,7 @@ fun Header(
         }) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowRight,
-                contentDescription = stringResource(id = R.string.next)
+                contentDescription = "Next"
             )
         }
     }

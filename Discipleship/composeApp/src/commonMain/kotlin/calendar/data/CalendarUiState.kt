@@ -1,6 +1,9 @@
 package calendar.data
 
-import java.time.YearMonth
+import calendar.dateTime.YearMonth
+import calendar.dateTime.now
+import kotlinx.datetime.LocalDate
+
 
 /**
  * Created by meyta.taliti on 20/05/23.
@@ -11,7 +14,7 @@ data class CalendarUiState(
 ) {
     companion object {
         val Init = CalendarUiState(
-            yearMonth = YearMonth.now(),
+            yearMonth = YearMonth(LocalDate.now().dayOfMonth, LocalDate.now().month),
             dates = emptyList()
         )
     }
