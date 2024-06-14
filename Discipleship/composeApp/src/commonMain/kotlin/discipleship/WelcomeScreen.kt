@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
@@ -54,64 +55,65 @@ val resources = listOf(
 @Composable
 fun WelcomeScreen() {
     val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
-
-    Column (
-        modifier = Modifier
-            .background(
-                backgroundLight
-            )
-            .fillMaxSize()
-            .padding(18.dp)
-            .fillMaxSize(),
-    ){
-
-        Image(
-            painterResource(cru),
-            contentDescription = "Cru logo",
+    Scaffold {
+        Column(
             modifier = Modifier
-                .size(125.dp)
-                .align(Alignment.CenterHorizontally)
-        )
+                .background(
+                    backgroundLight
+                )
+                .fillMaxSize()
+                .padding(18.dp)
+                .fillMaxSize(),
+        ) {
 
-        Text(
-            text = "Welcome",
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            fontSize = 72.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif,
-            color = primaryLight
-        )
+            Image(
+                painterResource(cru),
+                contentDescription = "Cru logo",
+                modifier = Modifier
+                    .size(125.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
 
-        Spacer(modifier = Modifier.padding(20.dp))
+            Text(
+                text = "Welcome",
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontSize = 72.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.SansSerif,
+                color = primaryLight
+            )
 
-        Text(
-            text = "What is Discipleship?",
-            modifier = Modifier.align(Alignment.Start),
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            fontFamily = FontFamily.SansSerif,
-            color = primaryLight
-        )
-        Text(
-            text = "Discipleship is a journey of intentional decisions leading to maturity in your relationship with Jesus so that you become more like Him in your attitudes, focus and ultimately behavior. It requires a commitment from the potential disciple and the disciple-makers. It’s not something that happens by accident or overnight, and it can’t be completed in a six-week class. This is a lifelong commitment to follow God with your whole self and to both learn from and eventually teach others about how to follow Him.",
-            fontSize = 12.sp
-        )
+            Spacer(modifier = Modifier.padding(20.dp))
 
-        Spacer(modifier = Modifier.padding(12.dp))
+            Text(
+                text = "What is Discipleship?",
+                modifier = Modifier.align(Alignment.Start),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.SansSerif,
+                color = primaryLight
+            )
+            Text(
+                text = "Discipleship is a journey of intentional decisions leading to maturity in your relationship with Jesus so that you become more like Him in your attitudes, focus and ultimately behavior. It requires a commitment from the potential disciple and the disciple-makers. It’s not something that happens by accident or overnight, and it can’t be completed in a six-week class. This is a lifelong commitment to follow God with your whole self and to both learn from and eventually teach others about how to follow Him.",
+                fontSize = 12.sp
+            )
 
-        Text(
-            text = "Resources",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            fontFamily = FontFamily.SansSerif,
-            color = primaryLight
-        )
+            Spacer(modifier = Modifier.padding(12.dp))
 
-        Spacer(modifier = Modifier.padding(8.dp))
+            Text(
+                text = "Resources",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.SansSerif,
+                color = primaryLight
+            )
 
-        LazyRow {
-            items(resources.size) {index ->
-                ResourceItem(index)
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            LazyRow {
+                items(resources.size) { index ->
+                    ResourceItem(index)
+                }
             }
         }
     }

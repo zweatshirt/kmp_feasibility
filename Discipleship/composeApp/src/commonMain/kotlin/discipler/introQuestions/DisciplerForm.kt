@@ -18,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
@@ -51,144 +52,149 @@ fun DisciplerQuestions () {
 
     val options = setOf("Yes", "No")
     var discipledBefore by remember { mutableStateOf("")}
+    Scaffold {
 
-    Column(
-        modifier = Modifier
-            .background(
-                backgroundLight
-            )
-            .padding(24.dp)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        Text(
-            text = "Discipler",
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            fontSize = 46.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif,
-            color = primaryLight
-        )
-
-        HorizontalDivider(thickness = 8.dp, color = primaryDark)
-        Spacer(modifier = Modifier.padding(8.dp))
-
-
-        Text(text = "Have you discipled someone before?")
-        Row {
-            options.forEach {
-                Column(
-                    modifier = Modifier.padding(horizontal = 4.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    RadioButton(
-                        selected = discipledBefore == it,
-                        onClick = { discipledBefore = it },
-                        colors = RadioButtonDefaults.colors(
-                            selectedColor = secondaryLight
-                        )
-                    )
-                    Text(text = it, style = MaterialTheme.typography.caption)
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.padding(8.dp))
-        HorizontalDivider(thickness = 2.dp, color = primaryDark)
-        Spacer(modifier = Modifier.padding(8.dp))
-
-        Text(text = "How many years of experience do you have discipling?")
-        Row (
-            modifier = Modifier.padding(12.dp)
-        ){
-            OutlinedTextField(
-                modifier = Modifier
-                    .weight(2f)
-                    .align(Alignment.CenterVertically),
-                value = years,
-                onValueChange = {years = it},
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number
-                ),
-                colors = TextFieldDefaults.textFieldColors(
-                    focusedIndicatorColor = secondaryLight,
-                    focusedLabelColor = secondaryLight,
-                    cursorColor = secondaryLight,
-                    backgroundColor = backgroundLight
+        Column(
+            modifier = Modifier
+                .background(
+                    backgroundLight
                 )
-            )
+                .padding(24.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
             Text(
-                text = "years",
-                style = MaterialTheme.typography.caption,
-                modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically)
-                    .padding(12.dp),
-                fontSize = 16.sp,
+                text = "Discipler",
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontSize = 46.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.SansSerif,
+                color = primaryLight
             )
-        }
+
+            HorizontalDivider(thickness = 8.dp, color = primaryDark)
+            Spacer(modifier = Modifier.padding(8.dp))
 
 
-        Spacer(modifier = Modifier.padding(8.dp))
-        HorizontalDivider(thickness = 2.dp, color = primaryDark)
-        Spacer(modifier = Modifier.padding(8.dp))
-
-        Text(text = "Rate your knowledge of the Bible on a scale of 1 to 10")
-        Column {
-            Slider(
-                value = bibleKnowledge,
-                onValueChange = { bibleKnowledge = it },
-                colors = SliderDefaults.colors(
-                    thumbColor = secondaryLight,
-                    activeTrackColor = secondaryLight,
-                    inactiveTickColor = secondaryLight,
-                ),
-                steps = 9,
-                valueRange = 0f..10f
-
-            )
-            Text(text = bibleKnowledge.toInt().toString())
-
-        }
-
-        Spacer(modifier = Modifier.padding(8.dp))
-        HorizontalDivider(thickness = 2.dp, color = primaryDark)
-        Spacer(modifier = Modifier.padding(8.dp))
-
-        Text("Select your experience level sharing your faith")
-        Row (
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            experience.forEach {
-                Column(modifier = Modifier.padding(horizontal = 4.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Checkbox(
-                        checked = selectedExperience.contains(it),
-                        onCheckedChange = { unchecked ->
-                            if (!unchecked) selectedExperience.remove(it)
-                            else selectedExperience.add(it)
-                        },
-                        colors = CheckboxDefaults.colors(
-                            checkedColor = secondaryLight
+            Text(text = "Have you discipled someone before?")
+            Row {
+                options.forEach {
+                    Column(
+                        modifier = Modifier.padding(horizontal = 4.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        RadioButton(
+                            selected = discipledBefore == it,
+                            onClick = { discipledBefore = it },
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = secondaryLight
+                            )
                         )
-                    )
-                    Text(text = it, style = MaterialTheme.typography.caption)
+                        Text(text = it, style = MaterialTheme.typography.caption)
+                    }
                 }
             }
-        }
 
-        Spacer(modifier = Modifier.padding(8.dp))
-        HorizontalDivider(thickness = 2.dp, color = primaryDark)
-        Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
+            HorizontalDivider(thickness = 2.dp, color = primaryDark)
+            Spacer(modifier = Modifier.padding(8.dp))
 
-        Button(
-            onClick = {},
-            modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = primaryLight,
-                contentColor = backgroundLight
-            )
-        ) {
-            Text("Submit")
+            Text(text = "How many years of experience do you have discipling?")
+            Row(
+                modifier = Modifier.padding(12.dp)
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .weight(2f)
+                        .align(Alignment.CenterVertically),
+                    value = years,
+                    onValueChange = { years = it },
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Number
+                    ),
+                    colors = TextFieldDefaults.textFieldColors(
+                        focusedIndicatorColor = secondaryLight,
+                        focusedLabelColor = secondaryLight,
+                        cursorColor = secondaryLight,
+                        backgroundColor = backgroundLight
+                    )
+                )
+                Text(
+                    text = "years",
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
+                        .padding(12.dp),
+                    fontSize = 16.sp,
+                )
+            }
+
+
+            Spacer(modifier = Modifier.padding(8.dp))
+            HorizontalDivider(thickness = 2.dp, color = primaryDark)
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            Text(text = "Rate your knowledge of the Bible on a scale of 1 to 10")
+            Column {
+                Slider(
+                    value = bibleKnowledge,
+                    onValueChange = { bibleKnowledge = it },
+                    colors = SliderDefaults.colors(
+                        thumbColor = secondaryLight,
+                        activeTrackColor = secondaryLight,
+                        inactiveTickColor = secondaryLight,
+                    ),
+                    steps = 9,
+                    valueRange = 0f..10f
+
+                )
+                Text(text = bibleKnowledge.toInt().toString())
+
+            }
+
+            Spacer(modifier = Modifier.padding(8.dp))
+            HorizontalDivider(thickness = 2.dp, color = primaryDark)
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            Text("Select your experience level sharing your faith")
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                experience.forEach {
+                    Column(
+                        modifier = Modifier.padding(horizontal = 4.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Checkbox(
+                            checked = selectedExperience.contains(it),
+                            onCheckedChange = { unchecked ->
+                                if (!unchecked) selectedExperience.remove(it)
+                                else selectedExperience.add(it)
+                            },
+                            colors = CheckboxDefaults.colors(
+                                checkedColor = secondaryLight
+                            )
+                        )
+                        Text(text = it, style = MaterialTheme.typography.caption)
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.padding(8.dp))
+            HorizontalDivider(thickness = 2.dp, color = primaryDark)
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            Button(
+                onClick = {},
+                modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = primaryLight,
+                    contentColor = backgroundLight
+                )
+            ) {
+                Text("Submit")
+            }
         }
     }
 }

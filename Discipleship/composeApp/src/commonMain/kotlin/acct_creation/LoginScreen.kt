@@ -15,6 +15,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextFieldDefaults
@@ -49,109 +50,114 @@ fun LoginScreen() {
     val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
 
     // Container for everything on the screen
-    Column(modifier = Modifier
-        .background(
-            backgroundLight
-        )
-        .fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Image(
-            painterResource(cru),
-            contentDescription = "Cru logo",
+    Scaffold {
+        Column(
             modifier = Modifier
-                .size(200.dp)
-        )
+                .background(
+                    backgroundLight
+                )
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        Text(
-            text = "Christ Companions",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.Default,
-            color = primaryLight
-        )
-        Image(
-            modifier = Modifier.size(120.dp),
-            painter = painterResource(Res.drawable.dove),
-            contentDescription = "Dove"
-        )
+            Image(
+                painterResource(cru),
+                contentDescription = "Cru logo",
+                modifier = Modifier
+                    .size(200.dp)
+            )
 
-        Spacer(modifier = Modifier.padding(16.dp))
-
-        // Login fields
-        Column {
-            Text(modifier = Modifier
-                .padding(),
-                text = "Login to your account",
-                fontSize = 20.sp,
+            Text(
+                text = "Christ Companions",
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = FontFamily.Default,
                 color = primaryLight
             )
-
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = primaryLight,
-                    focusedIndicatorColor = primaryContainerLight,
-                    cursorColor = secondaryLight),
-                label = {
-                    Text(text = "Email address", color = secondaryLight)
-                }
+            Image(
+                modifier = Modifier.size(120.dp),
+                painter = painterResource(Res.drawable.dove),
+                contentDescription = "Dove"
             )
 
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(16.dp))
 
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = primaryLight,
-                    focusedIndicatorColor = primaryContainerLight,
-                    cursorColor = secondaryLight
+            // Login fields
+            Column {
+                Text(
+                    modifier = Modifier
+                        .padding(),
+                    text = "Login to your account",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.SansSerif,
+                    color = primaryLight
+                )
+
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = {},
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = primaryLight,
+                        focusedIndicatorColor = primaryContainerLight,
+                        cursorColor = secondaryLight
+                    ),
+                    label = {
+                        Text(text = "Email address", color = secondaryLight)
+                    }
+                )
+
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = {},
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = primaryLight,
+                        focusedIndicatorColor = primaryContainerLight,
+                        cursorColor = secondaryLight
+                    ),
+                    label = {
+                        Text(text = "Password", color = secondaryLight)
+                    }
+                )
+
+                TextButton(modifier = Modifier.align(Alignment.End), onClick = {}) {
+                    Text(text = "Forgot password?", color = secondaryLight)
+                }
+            }
+
+            // Login button
+            Button(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .width(100.dp),
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = primaryContainerLight, contentColor = secondaryLight
                 ),
-                label = {
-                    Text(text = "Password", color = secondaryLight)
+                content = {
+                    Text("Login", color = secondaryLight)
                 }
             )
 
-            TextButton(modifier = Modifier.align(Alignment.End), onClick = {}) {
-                Text(text = "Forgot password?", color = secondaryLight)
-            }
+            Spacer(modifier = Modifier.padding(bottom = 8.dp))
+            Divider(color = secondaryLight)
+            Text(text = "or", color = secondaryLight)
+
+            // Signup button (needs to go to SignupScreen on click)
+            Button(modifier = Modifier
+                .clip(RoundedCornerShape(12.dp))
+                .width(100.dp),
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Gray, contentColor = Color.White
+                ),
+                content = {
+                    Text("Signup")
+                }
+            )
         }
-
-        // Login button
-        Button(
-            modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
-            .width(100.dp),
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = primaryContainerLight, contentColor = secondaryLight
-            ),
-            content = {
-                Text("Login", color = secondaryLight)
-            }
-        )
-
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-        Divider(color = secondaryLight)
-        Text(text = "or", color = secondaryLight)
-
-        // Signup button (needs to go to SignupScreen on click)
-        Button(modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
-            .width(100.dp),
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Gray, contentColor = Color.White
-            ),
-            content = {
-                Text("Signup")
-            }
-        )
     }
 }
