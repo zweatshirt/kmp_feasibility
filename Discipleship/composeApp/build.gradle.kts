@@ -96,5 +96,8 @@ dependencies {
     implementation(libs.androidx.foundation.android)
     implementation(libs.places)
     implementation(libs.androidx.media3.common)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.core)
 }
 
