@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,6 +36,7 @@ import calendar.dateTime.YearMonth
 import calendar.dateTime.printMonthYear
 import calendar.ui.util.DateUtil
 import calendar.ui.util.getDisplayName
+import io.wojciechosak.calendar.utils.today
 import kotlinx.datetime.LocalDate
 
 
@@ -48,7 +51,7 @@ fun Calendar(
     viewModel: CalendarViewModel = CalendarViewModel(), //androidx.lifecycle.viewmodel.compose.viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val days: Array<String> = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+    val days: Array<String> = arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 
     Scaffold(
         topBar = {
@@ -68,6 +71,8 @@ fun Calendar(
         ) {
             CalendarWidget(
                 days = days,
+//                yearMonth = YearMonth(year = LocalDate.today().year, month = LocalDate.today().month), //uiState.yearMonth,
+//                dates = uiState.dates,
                 yearMonth = uiState.yearMonth,
                 dates = uiState.dates,
                 onPreviousMonthButtonClicked = { prevMonth ->
@@ -93,6 +98,7 @@ fun CalendarWidget(
     onNextMonthButtonClicked: (YearMonth) -> Unit,
     onDateClickListener: (CalendarUiState.Date) -> Unit,
 ) {
+    println(dates.joinToString(" "))
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,7 +133,7 @@ fun Header(
             onPreviousMonthButtonClicked.invoke(yearMonth.minusMonths(1))
         }) {
             Icon(
-                imageVector = Icons.Filled.KeyboardArrowLeft,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                 contentDescription = "Back"
             )
         }
@@ -143,7 +149,7 @@ fun Header(
             onNextMonthButtonClicked.invoke(yearMonth.plusMonths(1))
         }) {
             Icon(
-                imageVector = Icons.Filled.KeyboardArrowRight,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Next"
             )
         }

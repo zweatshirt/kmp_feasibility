@@ -2,6 +2,7 @@ package calendar.data
 
 import calendar.dateTime.YearMonth
 import calendar.dateTime.now
+import io.wojciechosak.calendar.utils.today
 import kotlinx.datetime.LocalDate
 
 
@@ -14,7 +15,7 @@ data class CalendarUiState(
 ) {
     companion object {
         val Init = CalendarUiState(
-            yearMonth = YearMonth(LocalDate.now().dayOfMonth, LocalDate.now().month),
+            yearMonth = YearMonth(year = LocalDate.today().year, month = LocalDate.today().month),
             dates = emptyList()
         )
     }
