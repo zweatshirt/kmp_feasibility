@@ -25,19 +25,22 @@ object DateUtil {
 
 fun YearMonth.getDayOfMonthStartingFromMonday(): List<LocalDate> {
     val firstDayOfMonth = LocalDate(year, month, 1)
-    println(firstDayOfMonth)
-    println(firstDayOfMonth.dayOfWeek)
     var firstSundayOfMonth = firstDayOfMonth
     while (firstSundayOfMonth.dayOfWeek != DayOfWeek.SUNDAY) {
         firstSundayOfMonth = firstSundayOfMonth.plus(1, DateTimeUnit.DAY)
     }
-    println(firstSundayOfMonth)
     val firstDayOfNextMonth = firstDayOfMonth.plus(1, DateTimeUnit.MONTH)
-    println(firstDayOfNextMonth)
 
-    return generateSequence(firstSundayOfMonth.minus(7,DateTimeUnit.DAY)) { it.plus(1, DateTimeUnit.DAY) }
-        .takeWhile { it != firstDayOfNextMonth}
-        .toList()
+    if (firstDayOfMonth == firstSundayOfMonth) {
+        return generateSequence(firstSundayOfMonth) { it.plus(1, DateTimeUnit.DAY) }
+            .takeWhile { it != firstDayOfNextMonth}
+            .toList()
+    } else {
+        return generateSequence(firstSundayOfMonth.minus(7,DateTimeUnit.DAY)) { it.plus(1, DateTimeUnit.DAY) }
+            .takeWhile { it != firstDayOfNextMonth}
+            .toList()
+    }
+
 }
 
 fun YearMonth.getDisplayName(): String {

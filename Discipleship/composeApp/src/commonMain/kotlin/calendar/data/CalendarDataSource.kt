@@ -16,10 +16,8 @@ class CalendarDataSource {
             .map { date:LocalDate ->
                 CalendarUiState.Date(
                     dayOfMonth = if (date.month == yearMonth.month) {
-                        println(date)
                         "${date.dayOfMonth}"
                     } else {
-                        println(date)
                         "" // Fill with empty string for days outside the current month
                     },
                     isSelected = date.equals(LocalDate.now()) && date.month == yearMonth.month
