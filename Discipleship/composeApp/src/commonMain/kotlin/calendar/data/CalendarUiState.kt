@@ -1,7 +1,6 @@
 package calendar.data
 
 import calendar.dateTime.YearMonth
-import calendar.dateTime.now
 import io.wojciechosak.calendar.utils.today
 import kotlinx.datetime.LocalDate
 

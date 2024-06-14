@@ -45,7 +45,7 @@ data class YearMonth(val year: Int, val month: Month) {
     }
 
     private fun Int.toMonth(): Month {
-        return Month.values()[this - 1]
+        return Month.entries[this - 1]
     }
 
 }
