@@ -17,11 +17,11 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationBar
@@ -105,7 +105,7 @@ fun DisciplerHomeScreen() {
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector = Icons.Filled.Menu,
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
                             contentDescription = "Localized description",
                         )
                     }
@@ -159,7 +159,8 @@ fun DisciplerHomeScreen() {
                     icon = {
                         Icon(
                             imageVector = Icons.Rounded.Home,
-                            contentDescription = "Home")
+                            contentDescription = "Home"
+                        )
                     },
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = inversePrimaryLight,
@@ -170,7 +171,7 @@ fun DisciplerHomeScreen() {
                     selected = true,
                     onClick = {},
                     icon = {
-                        androidx.compose.material.Icon(
+                        Icon(
                             imageVector = Icons.Rounded.DateRange,
                             contentDescription = "Calendar")
                     },

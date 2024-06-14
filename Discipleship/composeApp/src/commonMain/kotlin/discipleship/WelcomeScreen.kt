@@ -19,7 +19,6 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -32,7 +31,6 @@ import ui.theme.backgroundLight
 import ui.theme.onPrimaryContainerLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
-import ui.theme.secondaryContainerLight
 
 
 val resources = listOf(

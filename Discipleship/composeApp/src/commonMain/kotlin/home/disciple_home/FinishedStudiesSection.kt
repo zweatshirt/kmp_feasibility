@@ -14,9 +14,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,30 +27,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import home.ButtonBox
 import home.SectionTitle
-import ui.theme.primaryCheck
+import ui.theme.errorLight
 import ui.theme.primaryLight
-
-/* Author: Zachery Linscott */
 
 //val iconSize = 30.dp
 @Composable
-fun ToDoSection() {
-    SectionTitle("To-do list")
+fun FinishedStudiesSection() {
+    SectionTitle("Completed tools")
     LazyRow {
-        items(toDoList.size) {
-            ToDoCard(toDoList[it])
+        items(finishedList.size) {
+            FinishedStudyCard(finishedList[it])
         }
     }
 }
 
-
-
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun ToDoCard(tool: Tool) {
+private fun FinishedStudyCard(tool: Tool) {
     val cardHeight = 140.dp
-    val squareSize = 48.dp
 
     Card(
         modifier = Modifier
@@ -63,13 +57,13 @@ private fun ToDoCard(tool: Tool) {
         Column(
         ) {
 
-                Text(
-                    modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 36.dp ),
-                    text = tool.toolName, // replace with dynamic loading
-                    fontSize = 20.sp,
-                    color = primaryLight,
-                    fontWeight = FontWeight.SemiBold
-                )
+            Text(
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 36.dp ),
+                text = tool.toolName, // replace with dynamic loading
+                fontSize = 20.sp,
+                color = primaryLight,
+                fontWeight = FontWeight.SemiBold
+            )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -77,16 +71,17 @@ private fun ToDoCard(tool: Tool) {
                     .background(Color.LightGray.copy(alpha = .2f))
                     .weight(1f)
             ) {
+                // notify user on clicking trash icon with dialog on whether they really want to delete the card
                 ButtonBox(Icons.Default.Delete, "Trash Icon", Color.Black) {  }
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
-                ButtonBox(
-                    Icons.Default.Favorite,
-                    "Favorite icon",
-                    Color.Red.copy(alpha = .5f)) {  }
+                // change to unfilled on unlike (we also want a list of favorite tools eventually)
+                ButtonBox(Icons.Default.Favorite, "Favorite icon", Color.Red.copy(alpha = .5f)) {  }
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
-                ButtonBox(Icons.Rounded.Check, "Checkmark icon", primaryCheck) {  }
+                // implement onClick functionality to return back to toDoList:
+                ButtonBox(Icons.Default.Close, "Checkmark icon", errorLight) {  }
             }
 
         }
     }
 }
+
