@@ -14,22 +14,26 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ui.theme.primaryLight
-import ui.theme.secondaryLight
 import ui.theme.tertiaryLight
 
 /* Author: Zachery Linscott */
 
 @Composable
-fun SectionTitle(titleString: String) {
+fun SectionTitle(titleString: String = "Fill Title") {
     val containerPad = 16.dp
     Row(modifier = Modifier.fillMaxWidth().padding(containerPad),
     horizontalArrangement = Arrangement.SpaceBetween,
     verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = titleString,
-            fontSize = 28.sp,
-            color = primaryLight
-        )
+        Row {
+            Text(
+                text = titleString,
+                fontSize = 28.sp,
+                color = primaryLight
+            )
+//            if (icon != null) {
+//                Icon(icon, "icon for title")
+//            }
+        }
         Text(modifier = Modifier
             .clickable {},
             text = "View all",

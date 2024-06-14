@@ -1,10 +1,10 @@
 package home.disciple_home
 
-import disciple.Disciple
 import Meeting
 import Tool
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -17,8 +17,9 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -32,13 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import disciple.Disciple
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
-import discipleship.composeapp.generated.resources.social
 import home.MeetingSection
 import home.ToolsSection
 import home.discipler_home.disciplesList
-import org.jetbrains.compose.resources.painterResource
 import ui.theme.backgroundLight
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryLight
@@ -95,7 +95,52 @@ val toDoList = mutableListOf(
         toolDescription = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
         languageList = listOf("English", "German")
-    )
+    ),
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
+)
+
+val finishedList = listOf(
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
+    Tool(
+        toolName = "Four Spiritual Laws",
+        toolDescription = "This is a cool tool.",
+        toolLink = "https://knowgod.com/en/fourlaws/0",
+        languageList = listOf("English", "German")
+    ),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,7 +152,7 @@ fun DiscipleHomeScreen() {
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector = Icons.Filled.Menu,
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
                             contentDescription = "Localized description",
                         )
                     }
@@ -127,8 +172,8 @@ fun DiscipleHomeScreen() {
                 actions = {
                     IconButton(onClick = {}) {
                         Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = "App info"
+                            imageVector = Icons.Outlined.Settings,
+                            contentDescription = "Profile settings"
                         )
                     }
                 }
@@ -147,8 +192,8 @@ fun DiscipleHomeScreen() {
                     icon = {
                         Icon(
                             modifier = Modifier.size(25.dp),
-                            painter = painterResource(Res.drawable.social),
-                            contentDescription = "Social",
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Profile"
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(
@@ -191,8 +236,11 @@ fun DiscipleHomeScreen() {
             .verticalScroll(rememberScrollState())
         ) {
             MeetingSection()
+            Spacer(modifier = Modifier.padding(12.dp))
             ToDoSection()
+            Spacer(modifier = Modifier.padding(12.dp))
             FinishedStudiesSection()
+            Spacer(modifier = Modifier.padding(12.dp))
             ToolsSection()
         }
     }
