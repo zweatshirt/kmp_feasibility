@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -12,8 +13,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,10 +33,6 @@ import androidx.compose.ui.unit.dp
 import calendar.data.CalendarUiState
 import calendar.dateTime.YearMonth
 import calendar.dateTime.printMonthYear
-import calendar.ui.util.DateUtil
-import calendar.ui.util.getDisplayName
-import io.wojciechosak.calendar.utils.today
-import kotlinx.datetime.LocalDate
 
 
 /**
@@ -71,8 +66,6 @@ fun Calendar(
         ) {
             CalendarWidget(
                 days = days,
-//                yearMonth = YearMonth(year = LocalDate.today().year, month = LocalDate.today().month), //uiState.yearMonth,
-//                dates = uiState.dates,
                 yearMonth = uiState.yearMonth,
                 dates = uiState.dates,
                 onPreviousMonthButtonClicked = { prevMonth ->
@@ -211,7 +204,8 @@ fun ContentItem(
             )
             .clickable {
                 onClickListener(date)
-            }
+            },
+            contentAlignment = Alignment.TopStart
     ) {
         Text(
             text = date.dayOfMonth,
