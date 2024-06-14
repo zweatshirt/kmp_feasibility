@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
+import ui.theme.tertiaryLight
 
 /* Author: Zachery Linscott */
 
@@ -32,7 +33,7 @@ fun SectionTitle(titleString: String) {
         Text(modifier = Modifier
             .clickable {},
             text = "View all",
-            color = secondaryLight,
+            color = tertiaryLight,
             textDecoration = TextDecoration.Underline,
             textAlign = TextAlign.End)
     }

@@ -21,7 +21,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationBar

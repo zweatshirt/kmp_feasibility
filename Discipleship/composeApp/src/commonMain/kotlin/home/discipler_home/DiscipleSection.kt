@@ -25,8 +25,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import disciple.Disciple
@@ -35,7 +33,7 @@ import org.jetbrains.compose.resources.painterResource
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
-import ui.theme.secondaryLight
+import ui.theme.tertiaryLight
 
 
 /* Author: Zachery Linscott
@@ -66,7 +64,6 @@ fun DiscipleCard(disciple: Disciple) {
     ) {
         Column(modifier = Modifier
             .background(primaryContainerLight)
-            .border(2.dp, inversePrimaryLight)
         ) {
             Row(modifier = Modifier
                 .padding(12.dp)
@@ -80,10 +77,10 @@ fun DiscipleCard(disciple: Disciple) {
                             .clip(RoundedCornerShape(4.dp))
                             .padding(end = 8.dp)
                             .clip(CircleShape)
-                            .border(2.dp, primaryLight, CircleShape),
+                            .border(2.dp, tertiaryLight, CircleShape),
                         painter = painterResource(disciple.image),
                         contentDescription = "Icon for ${disciple.firstName}",
-                        contentScale = ContentScale.Fit
+                        contentScale = ContentScale.Fit,
                     )
                 }
                 Box(modifier = Modifier

@@ -8,3 +8,4 @@ import home.SectionTitle
 fun FinishedStudiesSection() {
     SectionTitle("Finished studies/tools")
 }
+

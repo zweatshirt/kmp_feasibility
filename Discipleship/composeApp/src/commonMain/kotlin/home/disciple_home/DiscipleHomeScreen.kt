@@ -19,11 +19,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.DateRange
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationBar
@@ -38,7 +35,6 @@ import androidx.compose.ui.unit.sp
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import discipleship.composeapp.generated.resources.social
-import home.discipler_home.DiscipleSection
 import home.MeetingSection
 import home.ToolsSection
 import home.discipler_home.disciplesList
