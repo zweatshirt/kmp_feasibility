@@ -18,7 +18,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 // At some point soon we need to define navigation
 fun App() {
     MaterialTheme {
-        Scaffold{
+        Scaffold {
             // All of our main screen composables can go here
             //WelcomeScreen()
             //LoginScreen()
@@ -29,4 +29,5 @@ fun App() {
             //HomeScreen()
             calendarPage()
         }
+    }
 }
