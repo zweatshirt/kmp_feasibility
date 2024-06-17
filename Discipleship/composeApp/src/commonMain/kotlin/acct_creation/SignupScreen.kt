@@ -28,7 +28,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.DorDScreen
-import ui.theme.backgroundDark
 import ui.theme.backgroundLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
