@@ -21,6 +21,7 @@ import home.disciple_home.DiscipleHomeScreen
 import home.discipler_home.DisciplerHomeScreen
 import navigation.ScreenData
 import org.jetbrains.compose.resources.painterResource
+import profile.AccountProfile
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
@@ -36,12 +37,12 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
     ) {
         NavigationBarItem(
             selected = true,
-            onClick = {},
+            onClick = {navigator.push(AccountProfile(screenData))},
             icon = {
                 Icon(
                     modifier = Modifier.size(25.dp),
                     painter = painterResource(Res.drawable.social),
-                    contentDescription = "Social",
+                    contentDescription = "Profile",
                 )
             },
             colors = NavigationBarItemDefaults.colors(

@@ -1,6 +1,7 @@
 package discipler.introQuestions
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -168,6 +169,8 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
 
                 Text("Select your experience level sharing your faith")
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     experience.forEach {
