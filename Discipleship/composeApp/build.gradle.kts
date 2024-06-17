@@ -27,7 +27,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         
         androidMain.dependencies {
@@ -44,30 +44,30 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
-            implementation("io.github.wojciechosak:calendar:1.0.1")
+            implementation(libs.calendar)
             implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
 
             // Navigator
-            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+            implementation(libs.voyager.navigator)
             // Screen Model
-            implementation("cafe.adriel.voyager:voyager-screenmodel:$voyagerVersion")
+            implementation(libs.voyager.screenmodel)
             // BottomSheetNavigator
-            implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
+            implementation(libs.voyager.bottom.sheet.navigator)
             // TabNavigator
-            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
+            implementation(libs.voyager.tab.navigator)
             // Transitions
-            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+            implementation(libs.voyager.transitions)
 
             // Navigator
-            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+            implementation(libs.voyager.navigator)
             // Screen Model
-            implementation("cafe.adriel.voyager:voyager-screenmodel:$voyagerVersion")
+            implementation(libs.voyager.screenmodel)
             // BottomSheetNavigator
-            implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
+            implementation(libs.voyager.bottom.sheet.navigator)
             // TabNavigator
-            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
+            implementation(libs.voyager.tab.navigator)
             // Transitions
-            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+            implementation(libs.voyager.transitions)
         }
     }
 }
