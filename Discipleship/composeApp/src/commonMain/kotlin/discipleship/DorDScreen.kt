@@ -31,6 +31,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import disciple.introQuestions.DiscipleForm
+import discipler.introQuestions.DisciplerForm
 import ui.theme.backgroundLight
 import ui.theme.onSecondaryContainerLight
 import ui.theme.primaryContainerLight
@@ -41,158 +46,171 @@ import ui.theme.secondaryLight
 *
 * This screen asks a user whether they are a disciple or discipler upon first sign up
  */
-@Composable
-fun DorDScreen() {
-    val fSize = 30.sp // font size for all font on screen
-    val fSizeTwo = 20.sp
-    Scaffold {
 
-        Column(
-            modifier = Modifier
-                .background(backgroundLight)
-                .fillMaxSize()
-                .padding(16.dp),
+class DorDScreen: Screen {
+    @Composable
+    override fun Content() {
+        val fSize = 30.sp // font size for all font on screen
+        val fSizeTwo = 20.sp
+        val navigator = LocalNavigator.currentOrThrow
 
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        Scaffold {
 
-            // You have to build a string
-            // if you want to style different parts of the string
-            Text(
-                buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            color = secondaryLight
-                        )
-                    ) {
-                        append("Are you a ")
-                    }
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = primaryLight,
-                            fontStyle = FontStyle.Italic,
-                            fontWeight = FontWeight.SemiBold
-                        ),
-                    ) {
-                        append("Disciple")
-                    }
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = secondaryLight
-                        )
-                    ) {
-                        append(", or a\n\n")
-                    }
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = primaryLight,
-                            fontStyle = FontStyle.Italic,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    ) {
-                        append("Discipler")
-                    }
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = secondaryLight
-                        )
-                    ) {
-                        append("?")
-                    }
-                },
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp),
-                fontSize = fSize
-            )
+                    .background(backgroundLight)
+                    .fillMaxSize()
+                    .padding(16.dp),
 
-            Spacer(modifier = Modifier.padding(16.dp))
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
 
-            // This column contains the cards that the user can click on
-            // where they determine if they are a disciple or discipler
-            Column(verticalArrangement = Arrangement.Center) {
-                OutlinedCard(
+                // You have to build a string
+                // if you want to style different parts of the string
+                Text(
+                    buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = secondaryLight
+                            )
+                        ) {
+                            append("Are you a ")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = primaryLight,
+                                fontStyle = FontStyle.Italic,
+                                fontWeight = FontWeight.SemiBold
+                            ),
+                        ) {
+                            append("Disciple")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = secondaryLight
+                            )
+                        ) {
+                            append(", or a\n\n")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = primaryLight,
+                                fontStyle = FontStyle.Italic,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        ) {
+                            append("Discipler")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = secondaryLight
+                            )
+                        ) {
+                            append("?")
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(180.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .clickable {}, // Needs to route to the disciple intro screens
-                    border = BorderStroke(2.dp, primaryLight),
-                    colors = CardDefaults.cardColors(
-                        primaryContainerLight
-                    ),
-                    elevation = CardDefaults.cardElevation(16.dp)
-                ) {
-                    Column {
-                        Row(modifier = Modifier.padding(16.dp)) {
-                            Icon(
-                                modifier = Modifier
-                                    .padding(6.dp),
-                                imageVector = Icons.Outlined.Face,
-                                contentDescription = "Disciple icon"
-                            )
-                            Text(
-                                text = "Disciple",
-                                fontSize = fSize,
-                                color = primaryLight,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                        Text(
-                            modifier = Modifier.padding(end = 16.dp, start = 16.dp, bottom = 12.dp),
-                            text = "Disciples are dedicated to learning about " +
-                                    "Jesus Christ and the gospel, and take on the role of the learner.",
-                            color = onSecondaryContainerLight,
-                            fontSize = fSizeTwo
-                        )
-                    }
-                }
+                        .padding(top = 40.dp),
+                    fontSize = fSize
+                )
 
                 Spacer(modifier = Modifier.padding(16.dp))
 
-                OutlinedCard(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(180.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .clickable {}, // needs to route to discipler intro screens
-                    border = BorderStroke(2.dp, primaryLight),
-                    colors = CardDefaults.cardColors(
-                        primaryContainerLight
-                    ),
-                    elevation = CardDefaults.cardElevation(16.dp)
-                ) {
-                    Column {
-                        Row(modifier = Modifier.padding(16.dp)) {
-                            Icon(
-                                modifier = Modifier
-                                    .padding(6.dp),
-                                imageVector = Icons.Default.Person,
-                                contentDescription = "Discipler icon"
-                            )
+                // This column contains the cards that the user can click on
+                // where they determine if they are a disciple or discipler
+                Column(verticalArrangement = Arrangement.Center) {
+                    OutlinedCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(180.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .clickable {navigator.push(DiscipleForm())}, // Needs to route to the disciple intro screens
+                        border = BorderStroke(2.dp, primaryLight),
+                        colors = CardDefaults.cardColors(
+                            primaryContainerLight
+                        ),
+                        elevation = CardDefaults.cardElevation(16.dp)
+                    ) {
+                        Column {
+                            Row(modifier = Modifier.padding(16.dp)) {
+                                Icon(
+                                    modifier = Modifier
+                                        .padding(6.dp),
+                                    imageVector = Icons.Outlined.Face,
+                                    contentDescription = "Disciple icon"
+                                )
+                                Text(
+                                    text = "Disciple",
+                                    fontSize = fSize,
+                                    color = primaryLight,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                             Text(
-                                text = "Discipler",
-                                fontSize = fSize,
-                                color = primaryLight,
-                                fontWeight = FontWeight.Bold
+                                modifier = Modifier.padding(
+                                    end = 16.dp,
+                                    start = 16.dp,
+                                    bottom = 12.dp
+                                ),
+                                text = "Disciples are dedicated to learning about " +
+                                        "Jesus Christ and the gospel, and take on the role of the learner.",
+                                color = onSecondaryContainerLight,
+                                fontSize = fSizeTwo
                             )
                         }
-                        Text(
-                            modifier = Modifier.padding(end = 16.dp, start = 16.dp, bottom = 12.dp),
-                            text = "Disciplers are dedicated to teaching others about Jesus Christ " +
-                                    "and the gospel, and typically take on one or more disciples.",
-                            color = onSecondaryContainerLight,
-                            fontSize = fSizeTwo
-                        )
+                    }
+
+                    Spacer(modifier = Modifier.padding(16.dp))
+
+                    OutlinedCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(180.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .clickable {navigator.push(DisciplerForm())}, // needs to route to discipler intro screens
+                        border = BorderStroke(2.dp, primaryLight),
+                        colors = CardDefaults.cardColors(
+                            primaryContainerLight
+                        ),
+                        elevation = CardDefaults.cardElevation(16.dp)
+                    ) {
+                        Column {
+                            Row(modifier = Modifier.padding(16.dp)) {
+                                Icon(
+                                    modifier = Modifier
+                                        .padding(6.dp),
+                                    imageVector = Icons.Default.Person,
+                                    contentDescription = "Discipler icon"
+                                )
+                                Text(
+                                    text = "Discipler",
+                                    fontSize = fSize,
+                                    color = primaryLight,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                            Text(
+                                modifier = Modifier.padding(
+                                    end = 16.dp,
+                                    start = 16.dp,
+                                    bottom = 12.dp
+                                ),
+                                text = "Disciplers are dedicated to teaching others about Jesus Christ " +
+                                        "and the gospel, and typically take on one or more disciples.",
+                                color = onSecondaryContainerLight,
+                                fontSize = fSizeTwo
+                            )
+                        }
                     }
                 }
-            }
 
+            }
         }
     }
 }
