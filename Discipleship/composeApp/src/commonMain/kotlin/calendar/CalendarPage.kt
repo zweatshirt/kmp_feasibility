@@ -1,9 +1,12 @@
 package calendar
 
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.core.screen.Screen
 import calendar.ui.Calendar
-
-@Composable
-fun calendarPage() {
-    Calendar()
+class CalendarPage: Screen {
+    @Composable
+    override fun Content() {
+        Calendar()
+    }
 }

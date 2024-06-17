@@ -32,6 +32,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import calendar.CalendarPage
+import calendar.ui.Calendar
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import discipleship.composeapp.generated.resources.social
@@ -95,102 +100,109 @@ val toolsList = mutableListOf(
     )
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DisciplerHomeScreen() {
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                            contentDescription = "Localized description",
-                        )
+class DisciplerHomeScreen: Screen {
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    navigationIcon = {
+                        IconButton(onClick = { /* do something */ }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                contentDescription = "Localized description",
+                            )
+                        }
+                    },
+                    title = {
+                        Text(
+                            text = "Christ Companions",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = primaryLight
+                        ) // change in the future to show current screen name
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = inversePrimaryLight,
+                        titleContentColor = primaryLight
+                    ),
+                    actions = {
+                        IconButton(onClick = {}) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = "App info"
+                            )
+                        }
                     }
-                },
-                title = {
-                    Text(
-                        text = "Christ Companions",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = primaryLight
-                    ) // change in the future to show current screen name
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
+                )
+            },
+            bottomBar = {  // will refactor
+                NavigationBar(
+                    modifier = Modifier
+                        .height(65.dp)
+                        .navigationBarsPadding(),
                     containerColor = inversePrimaryLight,
-                    titleContentColor = primaryLight
-                ),
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = "App info"
+                    contentColor = secondaryLight
+                ) {
+                    NavigationBarItem(
+                        selected = true,
+                        onClick = {},
+                        icon = {
+                            Icon(
+                                modifier = Modifier.size(25.dp),
+                                painter = painterResource(Res.drawable.social),
+                                contentDescription = "Social",
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = inversePrimaryLight,
+                            selectedIconColor = primaryLight
                         )
-                    }
+                    )
+                    NavigationBarItem(
+                        selected = true,
+                        onClick = {},
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Rounded.Home,
+                                contentDescription = "Home"
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = inversePrimaryLight,
+                            selectedIconColor = primaryLight
+                        )
+                    )
+                    NavigationBarItem(
+                        selected = true,
+                        onClick = {navigator.push(CalendarPage())},
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Rounded.DateRange,
+                                contentDescription = "Calendar"
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = inversePrimaryLight,
+                            selectedIconColor = primaryLight
+                        )
+                    )
                 }
-            )
-        },
-        bottomBar = {  // will refactor
-            NavigationBar(
-                modifier = Modifier
-                    .height(65.dp)
-                    .navigationBarsPadding(),
-                containerColor = inversePrimaryLight,
-                contentColor = secondaryLight) {
-                NavigationBarItem(
-                    selected = true,
-                    onClick = {},
-                    icon = {
-                        Icon(
-                            modifier = Modifier.size(25.dp),
-                            painter = painterResource(Res.drawable.social),
-                            contentDescription = "Social",
-                        )
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = inversePrimaryLight,
-                        selectedIconColor = primaryLight)
-                )
-                NavigationBarItem(
-                    selected = true,
-                    onClick = {},
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Rounded.Home,
-                            contentDescription = "Home"
-                        )
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = inversePrimaryLight,
-                        selectedIconColor = primaryLight
-                    )
-                )
-                NavigationBarItem(
-                    selected = true,
-                    onClick = {},
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Rounded.DateRange,
-                            contentDescription = "Calendar")
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = inversePrimaryLight,
-                        selectedIconColor = primaryLight
-                    )
-                )
             }
-        }
-    ) { padding ->
-        Column(modifier = Modifier
-            .background(backgroundLight)
-            .fillMaxSize()
-            .padding(padding)
-            .verticalScroll(rememberScrollState())
-        ) {
-            MeetingSection()
-            DiscipleSection()
-            ToolsSection()
+        ) { padding ->
+            Column(
+                modifier = Modifier
+                    .background(backgroundLight)
+                    .fillMaxSize()
+                    .padding(padding)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                MeetingSection()
+                DiscipleSection()
+                ToolsSection()
+            }
         }
     }
 }
