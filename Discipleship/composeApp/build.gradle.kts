@@ -64,6 +64,8 @@ kotlin {
             // Atlas/realm dependencies
             implementation(libs.library.base)
             implementation(libs.library.sync)
+//            implementation(libs.messagebarcompose)
+//            implementation("com.github.stevdza-san:OneTapCompose:1.0.0")
         }
     }
 }

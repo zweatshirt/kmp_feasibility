@@ -1,12 +1,8 @@
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.runtime.*
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import home.disciple_home.DiscipleHomeScreen
-import discipleship.WelcomeScreen
-import acct_creation.LoginScreen
+import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
+import discipleship.WelcomeScreen
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable

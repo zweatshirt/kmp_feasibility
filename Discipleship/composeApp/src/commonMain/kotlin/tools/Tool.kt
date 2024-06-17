@@ -1,3 +1,5 @@
+package tools
+
 // This class is meant to serve as a container
 // for any GodTools tools we collect from the API
 // not sure
