@@ -7,6 +7,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+
+    // Atlas/Realm dependencies
+    id("io.realm.kotlin") version "1.16.0"
 }
 
 kotlin {
@@ -58,16 +61,9 @@ kotlin {
             // Transitions
             implementation(libs.voyager.transitions)
 
-            // Navigator
-            implementation(libs.voyager.navigator)
-            // Screen Model
-            implementation(libs.voyager.screenmodel)
-            // BottomSheetNavigator
-            implementation(libs.voyager.bottom.sheet.navigator)
-            // TabNavigator
-            implementation(libs.voyager.tab.navigator)
-            // Transitions
-            implementation(libs.voyager.transitions)
+            // Atlas/realm dependencies
+            implementation(libs.library.base)
+            implementation(libs.library.sync)
         }
     }
 }
