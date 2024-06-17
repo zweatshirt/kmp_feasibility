@@ -1,9 +1,8 @@
-package disciple
+package user
 
 import org.jetbrains.compose.resources.DrawableResource
 
-
-data class Disciple (
+open class User(
     val firstName: String,
     val lastName: String,
     val email: String,

@@ -36,7 +36,7 @@ import ui.theme.primaryLight
 val resources = listOf(
 
     Resources(
-        resourceName = "How to disciple.Disciple",
+        resourceName = "How to disciple",
         resourceType = "Article"
     ),
 

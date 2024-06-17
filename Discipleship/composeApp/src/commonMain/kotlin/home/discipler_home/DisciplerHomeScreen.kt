@@ -1,6 +1,6 @@
 package home.discipler_home
 
-import disciple.Disciple
+import user.Disciple
 import Meeting
 import Tool
 import androidx.compose.foundation.background
@@ -18,7 +18,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Home

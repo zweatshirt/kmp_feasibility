@@ -44,8 +44,6 @@ fun ToDoSection() {
 }
 
 
-
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun ToDoCard(tool: Tool) {

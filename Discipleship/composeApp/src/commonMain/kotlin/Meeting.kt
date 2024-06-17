@@ -1,4 +1,4 @@
-import disciple.Disciple
+import user.Disciple
 
 data class Meeting(
     val date: String?,
