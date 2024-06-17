@@ -29,9 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import calendar.data.CalendarUiState
 import calendar.dateTime.YearMonth
 import calendar.dateTime.printMonthYear
+import home.BottomBar
+import home.TopBar
+import navigation.ScreenData
 
 
 /**
@@ -42,18 +47,20 @@ import calendar.dateTime.printMonthYear
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Calendar(
+    screenData: ScreenData,
     viewModel: CalendarViewModel = CalendarViewModel(), //androidx.lifecycle.viewmodel.compose.viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val days: Array<String> = arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 
+    val navigator = LocalNavigator.currentOrThrow
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Calendar") },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                ))
+            TopBar(navigator = navigator, title = "Calendar")
+        },
+        bottomBar = {
+            BottomBar(navigator = navigator, currentScreen = "Calendar", screenData = screenData)
         }
     ) { padding ->
 

@@ -40,9 +40,12 @@ import calendar.CalendarPage
 import disciple.Disciple
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
+import home.BottomBar
 import home.MeetingSection
 import home.ToolsSection
+import home.TopBar
 import home.discipler_home.disciplesList
+import navigation.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryLight
@@ -147,96 +150,17 @@ val finishedList = listOf(
     ),
 )
 
-class DiscipleHomeScreen : Screen {
+data class DiscipleHomeScreen(val screenData: ScreenData) : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                                contentDescription = "Localized description",
-                            )
-                        }
-                    },
-                    title = {
-                        Text(
-                            text = "Christ Companions",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = primaryLight
-                        ) // change in the future to show current screen name
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = inversePrimaryLight,
-                        titleContentColor = primaryLight
-                    ),
-                    actions = {
-                        IconButton(onClick = {}) {
-                            Icon(
-                                imageVector = Icons.Outlined.Settings,
-                                contentDescription = "Profile settings"
-                            )
-                        }
-                    }
-                )
+                TopBar(navigator = navigator, title = "Christ Companions")
             },
             bottomBar = {  // will refactor
-                NavigationBar(
-                    modifier = Modifier
-                        .height(65.dp)
-                        .navigationBarsPadding(),
-                    containerColor = inversePrimaryLight,
-                    contentColor = secondaryLight
-                ) {
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {},
-                        icon = {
-                            Icon(
-                                modifier = Modifier.size(25.dp),
-                                imageVector = Icons.Default.Person,
-                                contentDescription = "Profile"
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = inversePrimaryLight,
-                            selectedIconColor = primaryLight
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {},
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Rounded.CheckCircle,
-                                contentDescription = "Todo"
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = inversePrimaryLight,
-                            selectedIconColor = primaryLight
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {navigator.push(CalendarPage())},
-                        icon = {
-                            androidx.compose.material.Icon(
-                                imageVector = Icons.Rounded.DateRange,
-                                contentDescription = "Calendar"
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = inversePrimaryLight,
-                            selectedIconColor = primaryLight
-                        )
-                    )
-                }
+                BottomBar(navigator = navigator, currentScreen = "Home", screenData = screenData)
             }
         ) { padding ->
             Column(

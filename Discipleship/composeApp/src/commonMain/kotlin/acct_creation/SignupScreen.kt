@@ -136,7 +136,7 @@ class SignupScreen: Screen {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(text = "Already have an account?", fontSize = 16.sp, color = primaryLight)
                     Text(
-                        modifier = Modifier.clickable {},
+                        modifier = Modifier.clickable {navigator.push(LoginScreen())},
                         text = "Click here.",
                         color = inverseSurfaceLight,
                         fontSize = 16.sp
