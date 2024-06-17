@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ui.theme.backgroundDark
+import cafe.adriel.voyager.core.screen.Screen
 import ui.theme.backgroundLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
