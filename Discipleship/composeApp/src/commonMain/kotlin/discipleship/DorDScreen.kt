@@ -36,6 +36,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import disciple.introQuestions.DiscipleForm
 import discipler.introQuestions.DisciplerForm
+import navigation.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.onSecondaryContainerLight
 import ui.theme.primaryContainerLight
@@ -130,7 +131,10 @@ class DorDScreen: Screen {
                             .fillMaxWidth()
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
-                            .clickable {navigator.push(DiscipleForm())}, // Needs to route to the disciple intro screens
+                            .clickable {
+                                val screenData = ScreenData(true)
+                                navigator.push(DiscipleForm(screenData))
+                            }, // Needs to route to the disciple intro screens
                         border = BorderStroke(2.dp, primaryLight),
                         colors = CardDefaults.cardColors(
                             primaryContainerLight
@@ -173,7 +177,10 @@ class DorDScreen: Screen {
                             .fillMaxWidth()
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
-                            .clickable {navigator.push(DisciplerForm())}, // needs to route to discipler intro screens
+                            .clickable {
+                                val screenData = ScreenData(false)
+                                navigator.push(DisciplerForm(screenData))
+                            }, // needs to route to discipler intro screens
                         border = BorderStroke(2.dp, primaryLight),
                         colors = CardDefaults.cardColors(
                             primaryContainerLight

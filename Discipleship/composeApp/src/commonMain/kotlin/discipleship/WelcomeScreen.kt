@@ -4,7 +4,6 @@ import acct_creation.LoginScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,7 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Scaffold
@@ -35,7 +36,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.painterResource
 import discipleship.composeapp.generated.resources.crulogo
-import home.disciple_home.DiscipleHomeScreen
 import org.jetbrains.compose.resources.DrawableResource
 import ui.theme.backgroundLight
 import ui.theme.onPrimaryContainerLight
@@ -66,6 +66,7 @@ class WelcomeScreen: Screen {
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
         val navigator = LocalNavigator.currentOrThrow
+        val scrollState = rememberScrollState()
 
         Scaffold {
             Column(
@@ -75,7 +76,8 @@ class WelcomeScreen: Screen {
                     )
                     .fillMaxSize()
                     .padding(18.dp)
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .verticalScroll(scrollState),
             ) {
 
                 Image(

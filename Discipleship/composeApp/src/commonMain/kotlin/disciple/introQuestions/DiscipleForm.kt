@@ -35,12 +35,13 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import home.disciple_home.DiscipleHomeScreen
+import navigation.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.primaryDark
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 
-class DiscipleForm: Screen {
+data class DiscipleForm(val screenData: ScreenData): Screen {
     @Composable
     override fun Content() {
         var bibleKnowledge by remember { mutableStateOf(0f) }
@@ -148,7 +149,7 @@ class DiscipleForm: Screen {
                 Spacer(modifier = Modifier.padding(8.dp))
 
                 Button(
-                    onClick = {navigator.push(DiscipleHomeScreen())},
+                    onClick = {navigator.replaceAll(DiscipleHomeScreen(screenData))},
                     modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = primaryLight,

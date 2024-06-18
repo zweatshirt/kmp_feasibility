@@ -28,7 +28,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.DorDScreen
-import ui.theme.backgroundDark
 import ui.theme.backgroundLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
@@ -136,7 +135,7 @@ class SignupScreen: Screen {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(text = "Already have an account?", fontSize = 16.sp, color = primaryLight)
                     Text(
-                        modifier = Modifier.clickable {},
+                        modifier = Modifier.clickable {navigator.push(LoginScreen())},
                         text = "Click here.",
                         color = inverseSurfaceLight,
                         fontSize = 16.sp

@@ -6,47 +6,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.DateRange
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import calendar.CalendarPage
-import user.Disciple
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
+import home.BottomBar
+import home.TopBar
+import calendar.CalendarPage
+import user.Disciple
 import meetings.MeetingSection
 import tools.ToolsSection
 import home.discipler_home.disciplesList
+import navigation.ScreenData
 import ui.theme.backgroundLight
-import ui.theme.inversePrimaryLight
-import ui.theme.primaryLight
-import ui.theme.secondaryLight
 
 /* Author: Zachery Linscott */
 
@@ -147,96 +127,16 @@ val finishedList = listOf(
     ),
 )
 
-class DiscipleHomeScreen : Screen {
-    @OptIn(ExperimentalMaterial3Api::class)
+data class DiscipleHomeScreen(val screenData: ScreenData) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                                contentDescription = "Localized description",
-                            )
-                        }
-                    },
-                    title = {
-                        Text(
-                            text = "Christ Companions",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = primaryLight
-                        ) // change in the future to show current screen name
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = inversePrimaryLight,
-                        titleContentColor = primaryLight
-                    ),
-                    actions = {
-                        IconButton(onClick = {}) {
-                            Icon(
-                                imageVector = Icons.Outlined.Settings,
-                                contentDescription = "Profile settings"
-                            )
-                        }
-                    }
-                )
+                TopBar(navigator = navigator, title = "Christ Companions")
             },
             bottomBar = {  // will refactor
-                NavigationBar(
-                    modifier = Modifier
-                        .height(65.dp)
-                        .navigationBarsPadding(),
-                    containerColor = inversePrimaryLight,
-                    contentColor = secondaryLight
-                ) {
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {},
-                        icon = {
-                            Icon(
-                                modifier = Modifier.size(25.dp),
-                                imageVector = Icons.Default.Person,
-                                contentDescription = "Profile"
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = inversePrimaryLight,
-                            selectedIconColor = primaryLight
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {},
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Rounded.CheckCircle,
-                                contentDescription = "Todo"
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = inversePrimaryLight,
-                            selectedIconColor = primaryLight
-                        )
-                    )
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {navigator.push(CalendarPage())},
-                        icon = {
-                            androidx.compose.material.Icon(
-                                imageVector = Icons.Rounded.DateRange,
-                                contentDescription = "Calendar"
-                            )
-                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = inversePrimaryLight,
-                            selectedIconColor = primaryLight
-                        )
-                    )
-                }
+                BottomBar(navigator = navigator, currentScreen = "Home", screenData = screenData)
             }
         ) { padding ->
             Column(
