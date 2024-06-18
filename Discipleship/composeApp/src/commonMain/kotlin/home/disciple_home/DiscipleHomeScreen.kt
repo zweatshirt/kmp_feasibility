@@ -1,7 +1,7 @@
 package home.disciple_home
 
-import Meeting
-import Tool
+import meetings.Meeting
+import tools.Tool
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -40,8 +40,8 @@ import calendar.CalendarPage
 import user.Disciple
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
-import home.MeetingSection
-import home.ToolsSection
+import meetings.MeetingSection
+import tools.ToolsSection
 import home.discipler_home.disciplesList
 import ui.theme.backgroundLight
 import ui.theme.inversePrimaryLight

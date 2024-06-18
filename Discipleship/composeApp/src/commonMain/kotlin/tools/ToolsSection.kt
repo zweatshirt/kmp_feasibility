@@ -1,6 +1,5 @@
-package home
+package tools
 
-import Tool
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,13 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import home.SectionTitle
 import home.discipler_home.toolsList
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 
 /*
 * Author: Zachery Linscott
-* Meeting(s) section code
+* meetings.Meeting(s) section code
 TODO: Fix padding at the end of the lazy rows
     (can be done by adding a unique pad value to the last item)
 */

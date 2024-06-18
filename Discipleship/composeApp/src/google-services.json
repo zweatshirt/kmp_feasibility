@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "815305936285",
+    "project_id": "discipleship-79cb7",
+    "storage_bucket": "discipleship-79cb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815305936285:android:0c25c141e93a84273ff374",
+        "android_client_info": {
+          "package_name": "kmp.project.discipleship"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeBicl6NeNTz2H1miwpilK-sI5r_t_2xA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

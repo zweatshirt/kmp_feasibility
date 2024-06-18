@@ -19,6 +19,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,9 @@ import  androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseUser
+import dev.gitlive.firebase.auth.auth
 import discipleship.DorDScreen
 import discipleship.composeapp.generated.resources.dove
 import ui.theme.backgroundDark
@@ -55,6 +63,8 @@ class LoginScreen: Screen {
         val navigator = LocalNavigator.currentOrThrow
 
         // Container for everything on the screen
+        // This screen only needs to be displayed if the user
+        // is not logged in
         Scaffold {
             Column(
                 modifier = Modifier

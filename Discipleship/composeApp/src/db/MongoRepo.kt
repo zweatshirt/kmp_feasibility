@@ -1,15 +1,11 @@
-package user
-
-import org.jetbrains.compose.resources.DrawableResource
-
-open class User(
-    val firstName: String,
-    val lastName: String,
-    val email: String,
-    val image: DrawableResource?,
-    val bio: String?
-) {
-
+package db
+interface MongoRepo {
+    fun configRealm()
+    fun getData(): Flow<List<User>>
+    fun filterData(name: String)
+    suspend fun insertUser(user: User)
+    suspend fun updateUser(user: User)
+    suspend fun deleteUser(user: User)
 }
 
 /*

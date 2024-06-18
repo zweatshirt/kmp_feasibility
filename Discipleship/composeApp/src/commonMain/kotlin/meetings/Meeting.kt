@@ -1,3 +1,5 @@
+package meetings
+
 import user.Disciple
 
 data class Meeting(

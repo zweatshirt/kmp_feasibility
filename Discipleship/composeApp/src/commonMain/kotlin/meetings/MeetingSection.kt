@@ -1,6 +1,5 @@
-package home
+package meetings
 
-import Meeting
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import home.SectionTitle
 import home.discipler_home.meetingsList
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
@@ -30,7 +30,7 @@ import ui.theme.secondaryLight
 
 /*
 * Author: Zachery Linscott
-* Meeting(s) section code
+* meetings.Meeting(s) section code
 TODO: Fix padding at the end of the lazy rows
     (can be done by adding a unique pad value to the last item)
 */
@@ -99,7 +99,7 @@ fun MeetingCard(meeting: Meeting) {
                         .padding(4.dp)
                 ) {
                     Text(
-                        text = "Meeting with ${meetDisc.firstName} ${meetDisc.lastName}",
+                        text = "meetings.Meeting with ${meetDisc.firstName} ${meetDisc.lastName}",
                         fontSize = 16.sp,
                         color = primaryLight,
                         fontWeight = FontWeight.Bold
