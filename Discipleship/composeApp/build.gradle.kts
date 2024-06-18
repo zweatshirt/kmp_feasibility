@@ -7,9 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-
-    // Atlas/Realm dependencies
-    id("io.realm.kotlin") version "1.16.0"
+    alias(libs.plugins.googleServices)
 }
 
 kotlin {
@@ -64,8 +62,10 @@ kotlin {
             // Atlas/realm dependencies
             implementation(libs.library.base)
             implementation(libs.library.sync)
-//            implementation(libs.messagebarcompose)
-//            implementation("com.github.stevdza-san:OneTapCompose:1.0.0")
+
+            // Firebase auth SDK
+//            implementation("com.google.firebase:firebase-auth:21.0.0")
+            implementation("dev.gitlive:firebase-auth:1.12.0")
         }
     }
 }
