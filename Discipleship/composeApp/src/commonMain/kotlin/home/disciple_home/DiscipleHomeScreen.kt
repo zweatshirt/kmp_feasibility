@@ -1,7 +1,7 @@
 package home.disciple_home
 
-import Meeting
-import Tool
+import meetings.Meeting
+import tools.Tool
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,13 +16,14 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import disciple.Disciple
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.BottomBar
-import home.MeetingSection
-import home.ToolsSection
 import home.TopBar
+import calendar.CalendarPage
+import user.Disciple
+import meetings.MeetingSection
+import tools.ToolsSection
 import home.discipler_home.disciplesList
 import navigation.ScreenData
 import ui.theme.backgroundLight

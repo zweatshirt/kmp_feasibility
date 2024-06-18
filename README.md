@@ -46,4 +46,5 @@ Gradle
 	- Compose for Web is in alpha, may be unstable
 - large changes are being made all the time, there is a lot to learn (both good and bad)
 - Navigation across application screens is still in an experimental phase, deep links are not supported. Also cannot override default back handling (what button or gesture to use for going to previous Composable)
-
+- generally a lack of documentation
+- Permissions still need to be managed on the individual platforms (you can create a package to handle the permissions across the different platforms yourself but it is an initial time consuming process)

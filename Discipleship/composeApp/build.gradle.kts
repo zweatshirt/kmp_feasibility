@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.googleServices)
 }
 
 kotlin {
@@ -27,7 +28,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         
         androidMain.dependencies {
@@ -44,22 +45,27 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
-            implementation("io.github.wojciechosak:calendar:1.0.1")
+            implementation(libs.calendar)
             implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
 
             // Navigator
-            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+            implementation(libs.voyager.navigator)
             // Screen Model
-            implementation("cafe.adriel.voyager:voyager-screenmodel:$voyagerVersion")
+            implementation(libs.voyager.screenmodel)
             // BottomSheetNavigator
-            implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
+            implementation(libs.voyager.bottom.sheet.navigator)
             // TabNavigator
-            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
+            implementation(libs.voyager.tab.navigator)
             // Transitions
-            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+            implementation(libs.voyager.transitions)
 
+            // Atlas/realm dependencies
+            implementation(libs.library.base)
+            implementation(libs.library.sync)
 
-
+            // Firebase auth SDK
+//            implementation("com.google.firebase:firebase-auth:21.0.0")
+            implementation("dev.gitlive:firebase-auth:1.12.0")
         }
     }
 }

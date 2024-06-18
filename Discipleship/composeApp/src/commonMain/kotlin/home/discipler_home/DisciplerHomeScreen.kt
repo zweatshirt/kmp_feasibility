@@ -1,8 +1,8 @@
 package home.discipler_home
 
-import disciple.Disciple
-import Meeting
-import Tool
+import user.Disciple
+import meetings.Meeting
+import tools.Tool
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,8 +18,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.BottomBar
-import home.MeetingSection
-import home.ToolsSection
+import meetings.MeetingSection
+import tools.ToolsSection
 import home.TopBar
 import navigation.ScreenData
 import ui.theme.backgroundLight
