@@ -35,7 +35,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.painterResource
 import discipleship.composeapp.generated.resources.crulogo
-import home.disciple_home.DiscipleHomeScreen
 import org.jetbrains.compose.resources.DrawableResource
 import ui.theme.backgroundLight
 import ui.theme.onPrimaryContainerLight
