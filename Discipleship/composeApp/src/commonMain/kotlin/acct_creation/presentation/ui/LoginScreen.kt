@@ -1,5 +1,6 @@
-package acct_creation.presentation
+package acct_creation.presentation.ui
 
+import acct_creation.presentation.viewmodel.UserLoginViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -50,6 +51,10 @@ class LoginScreen: Screen {
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
         val navigator = LocalNavigator.currentOrThrow
+        var email: String? = null
+        var password: String? = null
+        var loginViewModel = UserLoginViewModel()
+        var loginSuccess: Boolean = false
 
         // Container for everything on the screen
         // This screen only needs to be displayed if the user
@@ -100,8 +105,8 @@ class LoginScreen: Screen {
                     )
 
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = loginViewModel.email,
+                        onValueChange = { email -> loginViewModel.updateEmail(email)},
                         colors = TextFieldDefaults.textFieldColors(
                             textColor = primaryLight,
                             focusedIndicatorColor = primaryContainerLight,
@@ -115,8 +120,8 @@ class LoginScreen: Screen {
                     Spacer(modifier = Modifier.padding(8.dp))
 
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = loginViewModel.password,
+                        onValueChange = { password -> loginViewModel.updatePassword(password) },
                         colors = TextFieldDefaults.textFieldColors(
                             textColor = primaryLight,
                             focusedIndicatorColor = primaryContainerLight,
@@ -137,7 +142,12 @@ class LoginScreen: Screen {
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
                         .width(100.dp),
-                    onClick = {navigator.push(DorDScreen())},
+//                    onClick = {navigator.push(DorDScreen())},
+                    onClick = {
+                        if (email != null && password != null) {
+                            loginSuccess = loginViewModel.firebaseAuth()
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = primaryContainerLight, contentColor = secondaryLight
                     ),

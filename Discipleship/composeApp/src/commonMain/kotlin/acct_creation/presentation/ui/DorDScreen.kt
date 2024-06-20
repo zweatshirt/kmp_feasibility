@@ -1,4 +1,4 @@
-package acct_creation.presentation
+package acct_creation.presentation.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -34,8 +34,6 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import acct_creation.presentation.introQuestions.DiscipleForm
-import acct_creation.presentation.introQuestions.DisciplerForm
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.onSecondaryContainerLight

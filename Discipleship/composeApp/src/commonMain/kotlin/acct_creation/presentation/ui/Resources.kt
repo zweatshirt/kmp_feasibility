@@ -1,4 +1,4 @@
-package acct_creation.presentation
+package acct_creation.presentation.ui
 
 data class Resources(
     val resourceName: String,
