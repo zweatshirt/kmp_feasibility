@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -46,7 +45,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
             implementation(libs.calendar)
-            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
+            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.2")
 
             // Navigator
             implementation(libs.voyager.navigator)

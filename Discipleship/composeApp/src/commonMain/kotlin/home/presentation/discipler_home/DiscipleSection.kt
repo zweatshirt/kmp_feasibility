@@ -27,7 +27,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import user.Disciple
+import profile.data.user.Disciple
 import home.presentation.SectionTitle
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.primaryContainerLight

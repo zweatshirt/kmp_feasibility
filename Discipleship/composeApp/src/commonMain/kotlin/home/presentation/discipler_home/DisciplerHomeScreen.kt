@@ -1,6 +1,6 @@
 package home.presentation.discipler_home
 
-import user.Disciple
+import profile.data.user.Disciple
 import calendar.domain.model.Meeting
 import home.domain.model.Tool
 import androidx.compose.foundation.background
