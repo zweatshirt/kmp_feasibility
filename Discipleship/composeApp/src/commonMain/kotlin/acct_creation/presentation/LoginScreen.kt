@@ -1,5 +1,6 @@
 package acct_creation.presentation
 
+import acct_creation.presentation.signup.presentation.SignupScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
