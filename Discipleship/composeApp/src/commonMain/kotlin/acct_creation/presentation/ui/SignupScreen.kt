@@ -84,6 +84,7 @@ class SignupScreen: Screen {
                         OutlinedTextField(value = signupScreenViewModel.firstName, onValueChange = {
                             firstName ->
                                 signupScreenViewModel.updateFirstName(firstName)
+                                Logger.i("First name: $firstName")
                         },
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = primaryLight, focusedIndicatorColor = primaryContainerLight
@@ -96,6 +97,7 @@ class SignupScreen: Screen {
                         OutlinedTextField(value = signupScreenViewModel.lastName, onValueChange = {
                             lastName ->
                                 signupScreenViewModel.updateLastName(lastName)
+                                Logger.i("First name: $lastName")
                         },
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = primaryLight, focusedIndicatorColor = primaryContainerLight
@@ -111,6 +113,7 @@ class SignupScreen: Screen {
                         OutlinedTextField(value = signupScreenViewModel.email, onValueChange = {
                             email ->
                                 signupScreenViewModel.updateEmail(email)
+                                Logger.i("Email: $email")
                         },
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = primaryLight, focusedIndicatorColor = primaryContainerLight
@@ -125,6 +128,7 @@ class SignupScreen: Screen {
                         OutlinedTextField(value = signupScreenViewModel.password, onValueChange = {
                             password ->
                                 signupScreenViewModel.updatePassword(password)
+                                Logger.i("Password: $password")
                         },
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = primaryLight, focusedIndicatorColor = primaryContainerLight
@@ -132,7 +136,11 @@ class SignupScreen: Screen {
                             label = {
                                 Text(text = "Password", color = secondaryLight)
                             })
-                        OutlinedTextField(value = "", onValueChange = {},
+                        OutlinedTextField(value = signupScreenViewModel.confirmPassword, onValueChange = {
+                            confirmPass ->
+                                signupScreenViewModel.updateConfirmPassword(confirmPass)
+                                Logger.i("Confirmation pass: $confirmPass")
+                        },
                             colors = TextFieldDefaults.textFieldColors(
                                 textColor = primaryLight, focusedIndicatorColor = primaryContainerLight
                             ),

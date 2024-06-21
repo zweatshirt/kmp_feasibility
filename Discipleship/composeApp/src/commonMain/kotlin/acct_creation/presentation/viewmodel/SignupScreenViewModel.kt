@@ -56,7 +56,7 @@ class SignupScreenViewModel: ViewModel() {
     }
 
     fun isPassMinLength(): Boolean {
-        return password.length > 8
+        return password.length >= 8
     }
 
     fun firebaseAuth(): FirebaseUser? {
