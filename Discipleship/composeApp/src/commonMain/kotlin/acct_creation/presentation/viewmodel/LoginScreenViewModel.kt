@@ -27,19 +27,19 @@ class LoginScreenViewModel: ViewModel() {
         private set
     var password by mutableStateOf("")
         private set
-
     fun updateEmail(input: String) {
         email = input
     }
     fun updatePassword(input: String) {
         password = input
     }
+
     fun firebaseAuth(): FirebaseUser? {
         var currentUser = auth.currentUser
         scope.launch {
             try {
                 // this is fine for now but it needs to go to the signup page soon instead
-                val result = auth.signInWithEmailAndPassword(email, password)
+                auth.signInWithEmailAndPassword(email, password)
                 Logger.i("Made it to login try")
                 Logger.i("Value of firebase user ${auth.currentUser}")
             }

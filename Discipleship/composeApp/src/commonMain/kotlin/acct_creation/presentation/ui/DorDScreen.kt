@@ -46,7 +46,7 @@ import ui.theme.secondaryLight
 * This screen asks a user whether they are a disciple or discipler upon first sign up
  */
 
-class DorDScreen: Screen {
+class DorDScreen(screenData: ScreenData): Screen {
     @Composable
     override fun Content() {
         val fSize = 30.sp // font size for all font on screen
