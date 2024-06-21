@@ -16,11 +16,10 @@ import kotlinx.coroutines.launch
 * We also want the class to populate the User object with backend user data
 * We may use Firebase for this.
 * We should try to typecast the User to a Disciple or Discipler object
-
 * */
 class LoginScreenViewModel: ViewModel() {
-    var auth = Firebase.auth
-    val scope = viewModelScope
+    private var auth = Firebase.auth
+    private val scope = viewModelScope
     var firebaseUser: FirebaseUser? = null
     var userSignedIn = false
     var email by mutableStateOf("")
@@ -35,7 +34,7 @@ class LoginScreenViewModel: ViewModel() {
     }
 
     fun firebaseAuth(): FirebaseUser? {
-        var currentUser = auth.currentUser
+        val currentUser = auth.currentUser
         scope.launch {
             try {
                 // this is fine for now but it needs to go to the signup page soon instead
