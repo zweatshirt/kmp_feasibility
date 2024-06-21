@@ -1,5 +1,6 @@
 package acct_creation.presentation.ui
 
+import acct_creation.presentation.viewmodel.SignupScreenViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import dev.gitlive.firebase.auth.FirebaseUser
 import ui.theme.backgroundLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
@@ -41,10 +47,11 @@ class SignupScreen: Screen {
     @Composable
     override fun Content(){
         val navigator = LocalNavigator.currentOrThrow
+        var signupScreenViewModel = SignupScreenViewModel()
+        var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
 
         // Container for everything on the screen
         Scaffold {
-
             Column(
                 modifier = Modifier
                     .background(

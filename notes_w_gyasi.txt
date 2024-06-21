@@ -3,3 +3,7 @@ implement login functionality via cross platform to see how that goes
 - do this after UI 
 - look into design patterns: model, view projects the model, controller changes the state between the two - we want to find out how to handle the data 
 - functionality for sending or receiving data stays in its own folder/module/package
+
+For Authorization you have a couple options:
+
+You can use Atlas Services SDK and the open source Koltin Firebase SDK

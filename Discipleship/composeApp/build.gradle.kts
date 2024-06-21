@@ -69,6 +69,9 @@ kotlin {
             // Arrow for data handling
             implementation(libs.arrow.core)
             implementation(libs.arrow.fx.coroutines)
+
+            // Logging library
+            implementation("co.touchlab:kermit:2.0.4")
         }
     }
 }
