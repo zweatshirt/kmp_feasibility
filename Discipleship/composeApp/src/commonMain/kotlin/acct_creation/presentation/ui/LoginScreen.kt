@@ -50,9 +50,8 @@ import ui.theme.secondaryLight
 import viewmodel.ScreenData
 
 /* Author: Zachery Linscott
-*
 * This is the primary login screen for the application.
-* TODO: Change color of input fields to blue or something other than purple
+* TODO: Complete "Forgot password?" functionality, notifying user upon incorrect login info, etc
 * */
 class LoginScreen: Screen {
     @Composable
@@ -187,7 +186,7 @@ class LoginScreen: Screen {
                 }
             }
             else {
-                navigator.push(DiscipleHomeScreen(screenData = ScreenData(currentUser)))
+                navigator.push(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
             }
         }
     }

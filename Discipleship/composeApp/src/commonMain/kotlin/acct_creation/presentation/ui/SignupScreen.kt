@@ -40,7 +40,6 @@ import ui.theme.primaryLight
 import ui.theme.secondaryLight
 
 /* Author: Zachery Linscott
-* TODO: Change color of input fields to blue or something other than purple
 * */
 
 class SignupScreen: Screen {

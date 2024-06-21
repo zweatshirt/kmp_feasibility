@@ -11,6 +11,13 @@ import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
 
+
+/* Author: Zachery Linscott
+* This class handles user signup and authentication in that regard
+* It should also instantiate the User object and populate our DB, their first name, last name,
+* etc should be maintained, and the rest of the data such as their image will be null until
+* they fill out our forms
+* */
 class SignupScreenViewModel: ViewModel() {
     var auth = Firebase.auth
     val scope = viewModelScope
