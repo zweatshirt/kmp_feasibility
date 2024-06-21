@@ -24,6 +24,10 @@ Device Emulator (Subject to change)
 Gradle
 - 8.4.1
 
+## Authorization library in use:
+Open source Firebase Kotlin SDK + Firebase Authentication
+- Another option we had was Atlas Device SDKs by MongoDB (previously known as Realm)
+
 ## Zach's positive and negative notes:
 ### Positives
 - The ability to compile to many different targets (for example, Apple watches, iOS, Android, Web, Native)
