@@ -18,11 +18,13 @@ import kotlinx.coroutines.launch
 * etc should be maintained, and the rest of the data such as their image will be null until
 * they fill out our forms
 * */
+
+// TODO: CODE NEEDS TO BE WRITTEN TO POPULATE USER OBJECT :>
 class SignupScreenViewModel: ViewModel() {
     var auth = Firebase.auth
     val scope = viewModelScope
-    var firebaseUser: FirebaseUser? = null
-    var userSignedIn = false
+//    var firebaseUser: FirebaseUser? = null
+//    var userSignedIn = false
     var email by mutableStateOf("")
         private set
     var password by mutableStateOf("")
@@ -62,7 +64,7 @@ class SignupScreenViewModel: ViewModel() {
         scope.launch {
             try {
                 // this is fine for now but it needs to go to the signup page soon instead
-                auth.signInWithEmailAndPassword(email, password)
+                auth.createUserWithEmailAndPassword(email, password)
                 Logger.i("Made it to login try")
                 Logger.i("Value of firebase user ${auth.currentUser}")
             }
@@ -72,6 +74,7 @@ class SignupScreenViewModel: ViewModel() {
                 Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
             }
         }
+
         Logger.i("currentUser value: $currentUser")
         return currentUser
     }
