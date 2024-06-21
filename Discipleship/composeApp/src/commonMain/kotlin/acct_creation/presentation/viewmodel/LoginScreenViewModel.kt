@@ -11,6 +11,13 @@ import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
 
+/* Author: Zachery Linscott
+* This class handles user authentication
+* We also want the class to populate the User object with backend user data
+* We may use Firebase for this.
+* We should try to typecast the User to a Disciple or Discipler object
+
+* */
 class LoginScreenViewModel: ViewModel() {
     var auth = Firebase.auth
     val scope = viewModelScope

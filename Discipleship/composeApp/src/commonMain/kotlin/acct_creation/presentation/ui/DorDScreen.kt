@@ -130,7 +130,7 @@ class DorDScreen: Screen {
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
-                                val screenData = ScreenData(null)
+                                val screenData = ScreenData(false, null)
                                 navigator.push(DiscipleForm(screenData))
                             }, // Needs to route to the disciple intro screens
                         border = BorderStroke(2.dp, primaryLight),
@@ -176,7 +176,7 @@ class DorDScreen: Screen {
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
-                                val screenData = ScreenData(null)
+                                val screenData = ScreenData(false,null)
                                 navigator.push(DisciplerForm(screenData))
                             }, // needs to route to discipler intro screens
                         border = BorderStroke(2.dp, primaryLight),
