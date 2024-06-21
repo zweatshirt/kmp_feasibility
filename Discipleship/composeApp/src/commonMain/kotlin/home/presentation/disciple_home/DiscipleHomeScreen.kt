@@ -20,7 +20,7 @@ import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.presentation.BottomBar
 import home.presentation.TopBar
-import profile.data.user.Disciple
+import profile.domain.model.Disciple
 import home.presentation.MeetingSection
 import home.presentation.ToolsSection
 import home.presentation.discipler_home.disciplesList

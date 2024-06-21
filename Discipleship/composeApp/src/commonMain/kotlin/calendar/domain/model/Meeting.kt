@@ -1,6 +1,6 @@
 package calendar.domain.model
 
-import profile.data.user.Disciple
+import profile.domain.model.Disciple
 
 data class Meeting(
     val date: String?,

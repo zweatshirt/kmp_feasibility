@@ -67,8 +67,11 @@ kotlin {
             implementation("dev.gitlive:firebase-auth:1.12.0")
 
             // Arrow for data handling
-            implementation("io.arrow-kt:arrow-core:1.2.4")
-            implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
+            implementation(libs.arrow.core)
+            implementation(libs.arrow.fx.coroutines)
+
+            // Logging library
+            implementation("co.touchlab:kermit:2.0.4")
         }
     }
 }
@@ -118,5 +121,6 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.core)
+    implementation(libs.firebase.common.ktx)
 }
 

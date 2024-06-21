@@ -1,4 +1,4 @@
-package profile.data.user
+package profile.domain.model
 
 import org.jetbrains.compose.resources.DrawableResource
 

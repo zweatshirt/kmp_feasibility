@@ -1,23 +1,29 @@
-package acct_creation.presentation.introQuestions
+package acct_creation.presentation.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,22 +35,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import home.presentation.disciple_home.DiscipleHomeScreen
+import home.presentation.discipler_home.DisciplerHomeScreen
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.primaryDark
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 
-data class DiscipleForm(val screenData: ScreenData): Screen {
+data class DisciplerForm(val screenData: ScreenData): Screen {
     @Composable
     override fun Content() {
         var bibleKnowledge by remember { mutableStateOf(0f) }
+        var years by remember { mutableStateOf("") }
 
         val experience = setOf("None", "Some", "Decent", "A Lot")
         val selectedExperience = remember { mutableStateListOf<String>() }
@@ -55,6 +63,7 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
         val navigator = LocalNavigator.currentOrThrow
 
         Scaffold {
+
             Column(
                 modifier = Modifier
                     .background(
@@ -62,9 +71,10 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                     )
                     .padding(24.dp)
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    text = "Disciple",
+                    text = "Discipler",
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     fontSize = 46.sp,
                     fontWeight = FontWeight.Bold,
@@ -75,7 +85,8 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                 HorizontalDivider(thickness = 8.dp, color = primaryDark)
                 Spacer(modifier = Modifier.padding(8.dp))
 
-                Text(text = "Have you been discipled before?")
+
+                Text(text = "Have you discipled someone before?")
                 Row {
                     options.forEach {
                         Column(
@@ -93,6 +104,42 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                         }
                     }
                 }
+
+                Spacer(modifier = Modifier.padding(8.dp))
+                HorizontalDivider(thickness = 2.dp, color = primaryDark)
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                Text(text = "How many years of experience do you have discipling?")
+                Row(
+                    modifier = Modifier.padding(12.dp)
+                ) {
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .weight(2f)
+                            .align(Alignment.CenterVertically),
+                        value = years,
+                        onValueChange = { years = it },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number
+                        ),
+                        colors = TextFieldDefaults.textFieldColors(
+                            focusedIndicatorColor = secondaryLight,
+                            focusedLabelColor = secondaryLight,
+                            cursorColor = secondaryLight,
+                            backgroundColor = backgroundLight
+                        )
+                    )
+                    Text(
+                        text = "years",
+                        style = MaterialTheme.typography.caption,
+                        modifier = Modifier
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
+                            .padding(12.dp),
+                        fontSize = 16.sp,
+                    )
+                }
+
 
                 Spacer(modifier = Modifier.padding(8.dp))
                 HorizontalDivider(thickness = 2.dp, color = primaryDark)
@@ -122,6 +169,8 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
 
                 Text("Select your experience level sharing your faith")
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     experience.forEach {
@@ -149,7 +198,7 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                 Spacer(modifier = Modifier.padding(8.dp))
 
                 Button(
-                    onClick = {navigator.replaceAll(DiscipleHomeScreen(screenData))},
+                    onClick = {navigator.replaceAll(DisciplerHomeScreen(screenData))},
                     modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = primaryLight,
