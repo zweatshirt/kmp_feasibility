@@ -1,4 +1,4 @@
-package home.presentation.discipler_home
+package home.presentation.ui.discipler_home
 
 import profile.domain.model.Disciple
 import calendar.domain.model.Meeting
@@ -17,10 +17,10 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
-import home.presentation.BottomBar
-import home.presentation.MeetingSection
-import home.presentation.ToolsSection
-import home.presentation.TopBar
+import home.presentation.ui.home_composables.BottomBar
+import home.presentation.ui.home_composables.MeetingSection
+import home.presentation.ui.home_composables.ToolsSection
+import home.presentation.ui.home_composables.TopBar
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 

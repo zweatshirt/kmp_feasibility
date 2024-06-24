@@ -1,4 +1,4 @@
-package home.presentation
+package home.presentation.ui.home_composables
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

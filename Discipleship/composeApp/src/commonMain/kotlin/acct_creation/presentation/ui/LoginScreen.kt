@@ -42,7 +42,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
-import home.presentation.disciple_home.DiscipleHomeScreen
+import home.presentation.ui.disciple_home.DiscipleHomeScreen
 import ui.theme.backgroundLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight

@@ -1,4 +1,4 @@
-package home.presentation.discipler_home
+package home.presentation.ui.discipler_home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,7 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import profile.domain.model.Disciple
-import home.presentation.SectionTitle
+import home.presentation.ui.home_composables.SectionTitle
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
