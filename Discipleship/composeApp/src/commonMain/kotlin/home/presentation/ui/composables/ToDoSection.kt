@@ -1,4 +1,4 @@
-package home.presentation.ui.disciple_home
+package home.presentation.ui.composables
 
 import home.domain.model.Tool
 import androidx.compose.foundation.background
@@ -25,8 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import home.presentation.ui.home_composables.ButtonBox
-import home.presentation.ui.home_composables.SectionTitle
+import home.presentation.ui.disciple_home.toDoList
 import ui.theme.primaryCheck
 import ui.theme.primaryLight
 

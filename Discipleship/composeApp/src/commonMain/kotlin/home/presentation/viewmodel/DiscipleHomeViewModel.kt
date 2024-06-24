@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import home.domain.repository.ToolsRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 /* Author: Zach */
@@ -14,9 +15,11 @@ import kotlinx.coroutines.launch
 class DiscipleHomeViewModel constructor(
     private val toolsRepository: ToolsRepository
 ): ViewModel() {
-    val scope = viewModelScope
+//    private val _state = MutableStateFlow()
+    private val _scope = viewModelScope
+
     fun getTools() {
-        scope.launch {
+        _scope.launch {
             // returns Either<NetworkError, List<Tool>>
             toolsRepository.getTools()
                 .onRight { tools ->

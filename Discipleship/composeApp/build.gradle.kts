@@ -58,15 +58,11 @@ kotlin {
             // Transitions
             implementation(libs.voyager.transitions)
 
-            // Atlas/realm dependencies
-            implementation(libs.library.base)
-            implementation(libs.library.sync)
-
             // Firebase auth SDK
 //            implementation("com.google.firebase:firebase-auth:21.0.0")
             implementation("dev.gitlive:firebase-auth:1.12.0")
 
-            // Arrow for data handling
+            // Arrow for data and error handling
             implementation(libs.arrow.core)
             implementation(libs.arrow.fx.coroutines)
 

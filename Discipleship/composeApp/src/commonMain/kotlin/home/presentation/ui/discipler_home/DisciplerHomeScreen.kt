@@ -17,10 +17,11 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
-import home.presentation.ui.home_composables.BottomBar
-import home.presentation.ui.home_composables.MeetingSection
-import home.presentation.ui.home_composables.ToolsSection
-import home.presentation.ui.home_composables.TopBar
+import home.presentation.ui.composables.BottomBar
+import home.presentation.ui.composables.DiscipleSection
+import home.presentation.ui.composables.MeetingSection
+import home.presentation.ui.composables.ToolsSection
+import home.presentation.ui.composables.TopBar
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 
@@ -53,8 +54,8 @@ val disciplesList = mutableListOf(
         email = "Zach2",
         image = null,
         bio = "I like food"
-    ),
     )
+)
 
 // will eventually be populated dynamically
 val meetingsList = mutableListOf(
