@@ -26,9 +26,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.hoc081098.kmp.viewmodel.compose.kmpViewModel
+import com.hoc081098.kmp.viewmodel.viewModelFactory
 import ui.theme.backgroundLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
@@ -43,6 +46,9 @@ class SignupScreen: Screen {
     @Composable
     override fun Content(){
         val navigator = LocalNavigator.currentOrThrow
+
+        // validation info
+        val signupViewModel = SignupViewModel()
 
         // Container for everything on the screen
         Scaffold {

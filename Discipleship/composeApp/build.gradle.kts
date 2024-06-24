@@ -47,6 +47,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.calendar)
             implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0-alpha03")
+            implementation("io.github.hoc081098:kmp-viewmodel-compose:0.8.0")
 
             // Navigator
             implementation(libs.voyager.navigator)
