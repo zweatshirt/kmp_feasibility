@@ -35,6 +35,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
+import home.presentation.viewmodel.DiscipleHomeScreenState
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.primaryDark

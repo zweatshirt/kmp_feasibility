@@ -43,13 +43,14 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
+import home.presentation.viewmodel.DiscipleHomeScreenState
 import ui.theme.backgroundLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 import viewmodel.ScreenData
 
-/* Author: Zachery Linscott
+/* Author: Zach and Josh
 * This is the primary login screen for the application.
 * TODO: Complete "Forgot password?" functionality, notifying user upon incorrect login info, etc
 * */

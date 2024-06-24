@@ -1,4 +1,4 @@
-package home.presentation.ui.home_composables
+package home.presentation.ui.composables
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding

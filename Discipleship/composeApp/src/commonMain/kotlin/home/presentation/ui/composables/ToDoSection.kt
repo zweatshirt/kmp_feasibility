@@ -1,4 +1,4 @@
-package home.presentation.ui.disciple_home
+package home.presentation.ui.composables
 
 import home.domain.model.Tool
 import androidx.compose.foundation.background
@@ -25,8 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import home.presentation.ui.home_composables.ButtonBox
-import home.presentation.ui.home_composables.SectionTitle
+import home.presentation.ui.disciple_home.toDoList
 import ui.theme.primaryCheck
 import ui.theme.primaryLight
 
@@ -63,7 +62,7 @@ private fun ToDoCard(tool: Tool) {
 
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 36.dp ),
-                    text = tool.toolName, // replace with dynamic loading
+                    text = tool.name, // replace with dynamic loading
                     fontSize = 20.sp,
                     color = primaryLight,
                     fontWeight = FontWeight.SemiBold

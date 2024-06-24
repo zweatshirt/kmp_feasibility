@@ -20,12 +20,13 @@ import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.data.remote.ToolsApi
 import home.data.repository.ToolsRepoImplementation
-import home.domain.repository.ToolsRepository
-import home.presentation.ui.home_composables.BottomBar
-import home.presentation.ui.home_composables.TopBar
+import home.presentation.ui.composables.BottomBar
+import home.presentation.ui.composables.FinishedStudiesSection
+import home.presentation.ui.composables.TopBar
 import profile.domain.model.Disciple
-import home.presentation.ui.home_composables.MeetingSection
-import home.presentation.ui.home_composables.ToolsSection
+import home.presentation.ui.composables.MeetingSection
+import home.presentation.ui.composables.ToDoSection
+import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.discipler_home.disciplesList
 import home.presentation.viewmodel.DiscipleHomeViewModel
 import viewmodel.ScreenData
@@ -34,6 +35,7 @@ import ui.theme.backgroundLight
 /* Author: Zachery Linscott */
 
 // Will eventually be dynamically loaded
+// needs to be fetched from DiscipleHomeScreenState
 val disciplerList = mutableListOf(
     Disciple(
         firstName = "Zach",
@@ -78,66 +80,79 @@ val discipleMeetingsList = mutableListOf(
 // will eventually be populated dynamically
 val toDoList = mutableListOf(
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "100"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "100000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
 )
 
 val finishedList = listOf(
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
 )
 
-data class DiscipleHomeScreen(val screenData: ScreenData) : Screen {
+
+data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        // initialize the disciple view model, passing in the tools repository that fetches from
+        // the GodTools/KnowGod.com API by use of the ToolsApi
         val discipleHomeViewModel = DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
-            ToolsApi()
+            ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
+            // from our DB, occasionally updating it from this API
         ))
-        discipleHomeViewModel.getTools()
+        val tools = discipleHomeViewModel.getTools() // returns successful but need to convert JSON data
+
         Scaffold(
             topBar = {
                 TopBar(navigator = navigator, title = "Christ Companions")
@@ -153,6 +168,8 @@ data class DiscipleHomeScreen(val screenData: ScreenData) : Screen {
                     .padding(padding)
                     .verticalScroll(rememberScrollState())
             ) {
+                // pass in lists for each section as arguments eventually
+                // eg ToDoSection(toDoList)
                 MeetingSection()
                 Spacer(modifier = Modifier.padding(12.dp))
                 ToDoSection()

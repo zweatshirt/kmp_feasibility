@@ -25,8 +25,8 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
-
     }
+
 }
 
 include(":composeApp")
