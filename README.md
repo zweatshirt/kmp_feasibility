@@ -5,7 +5,6 @@ Zach and Josh @ Cru Kotlin feasability testing repository
 ### Problems:
 - Xcode and MacOS is required to fully utilize Kotlin Multiplatform Compose development.
 
-"
 ### Recommendations:
 - "In general, write your implementation as common code whenever possible instead of duplicating functionality in platform-specific source sets."
 - "Generally the consensus seems to be that you use Jetpack Compose for your Android UI layer, swift UI for your iOS UI layer, and then Kotlin Multiplatform for your data layer and potentially your view models as well if you want to share code between the two."
@@ -52,3 +51,6 @@ Open source Firebase Kotlin SDK + Firebase Authentication
 - Navigation across application screens is still in an experimental phase, deep links are not supported. Also cannot override default back handling (what button or gesture to use for going to previous Composable)
 - generally a lack of documentation
 - Permissions still need to be managed on the individual platforms (you can create a package to handle the permissions across the different platforms yourself but it is an initial time consuming process)
+- Dependency injection is a bit of a pain it seems but not terrible (a good option is Koin)
+- User auth is doable but there is no official library for it as far as we are aware.
+
