@@ -71,7 +71,10 @@ kotlin {
             implementation(libs.arrow.fx.coroutines)
 
             // Logging library
-            implementation("co.touchlab:kermit:2.0.4")
+            implementation(libs.kermit)
+
+            // for API requests (GET, POST, etc)
+            implementation(libs.ktor.client.core)
         }
     }
 }

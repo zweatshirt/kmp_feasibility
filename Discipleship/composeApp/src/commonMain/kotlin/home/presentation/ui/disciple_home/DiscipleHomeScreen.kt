@@ -1,4 +1,4 @@
-package home.presentation.disciple_home
+package home.presentation.ui.disciple_home
 
 import calendar.domain.model.Meeting
 import home.domain.model.Tool
@@ -18,12 +18,16 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
-import home.presentation.BottomBar
-import home.presentation.TopBar
+import home.data.remote.ToolsApi
+import home.data.repository.ToolsRepoImplementation
+import home.domain.repository.ToolsRepository
+import home.presentation.ui.home_composables.BottomBar
+import home.presentation.ui.home_composables.TopBar
 import profile.domain.model.Disciple
-import home.presentation.MeetingSection
-import home.presentation.ToolsSection
-import home.presentation.discipler_home.disciplesList
+import home.presentation.ui.home_composables.MeetingSection
+import home.presentation.ui.home_composables.ToolsSection
+import home.presentation.ui.discipler_home.disciplesList
+import home.presentation.viewmodel.DiscipleHomeViewModel
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 
@@ -130,6 +134,10 @@ data class DiscipleHomeScreen(val screenData: ScreenData) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val discipleHomeViewModel = DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
+            ToolsApi()
+        ))
+        discipleHomeViewModel.getTools()
         Scaffold(
             topBar = {
                 TopBar(navigator = navigator, title = "Christ Companions")

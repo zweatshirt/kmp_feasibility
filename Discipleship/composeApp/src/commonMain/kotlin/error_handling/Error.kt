@@ -1,6 +1,6 @@
 package error_handling
-enum class Error {
-    // NetworkError("Network Error")
-//    UnknownResponse("")
-//    UnknownError("")
+
+enum class Error(val message: String) {
+    NetworkError("Network Error"),
+    UnknownError("Unknown Error")
 }

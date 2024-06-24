@@ -1,4 +1,4 @@
-package home.presentation
+package home.presentation.ui.home_composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import calendar.domain.model.Meeting
-import home.presentation.discipler_home.meetingsList
+import home.presentation.ui.discipler_home.meetingsList
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight

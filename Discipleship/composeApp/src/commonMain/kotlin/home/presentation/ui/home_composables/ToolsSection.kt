@@ -1,4 +1,4 @@
-package home.presentation
+package home.presentation.ui.home_composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import home.presentation.discipler_home.toolsList
+import home.presentation.ui.discipler_home.toolsList
 import home.domain.model.Tool
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight

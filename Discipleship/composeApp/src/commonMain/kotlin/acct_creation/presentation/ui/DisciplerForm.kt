@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import home.presentation.discipler_home.DisciplerHomeScreen
+import home.presentation.ui.discipler_home.DisciplerHomeScreen
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.primaryDark

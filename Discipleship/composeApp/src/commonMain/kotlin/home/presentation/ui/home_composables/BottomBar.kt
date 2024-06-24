@@ -1,4 +1,4 @@
-package home.presentation
+package home.presentation.ui.home_composables
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -17,8 +17,8 @@ import cafe.adriel.voyager.navigator.Navigator
 import calendar.CalendarPage
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.social
-import home.presentation.disciple_home.DiscipleHomeScreen
-import home.presentation.discipler_home.DisciplerHomeScreen
+import home.presentation.ui.disciple_home.DiscipleHomeScreen
+import home.presentation.ui.discipler_home.DisciplerHomeScreen
 import viewmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
 import profile.presentation.AccountProfile

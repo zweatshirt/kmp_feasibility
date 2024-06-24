@@ -31,9 +31,9 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import home.presentation.BottomBar
-import home.presentation.TopBar
-import home.presentation.discipler_home.disciplesList
+import home.presentation.ui.home_composables.BottomBar
+import home.presentation.ui.home_composables.TopBar
+import home.presentation.ui.discipler_home.disciplesList
 import viewmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.backgroundLight

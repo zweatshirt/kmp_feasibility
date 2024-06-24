@@ -32,8 +32,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import calendar.domain.model.CalendarUiState
 import calendar.dateTime.YearMonth
 import calendar.dateTime.printMonthYear
-import home.presentation.BottomBar
-import home.presentation.TopBar
+import home.presentation.ui.home_composables.BottomBar
+import home.presentation.ui.home_composables.TopBar
 import viewmodel.ScreenData
 
 
