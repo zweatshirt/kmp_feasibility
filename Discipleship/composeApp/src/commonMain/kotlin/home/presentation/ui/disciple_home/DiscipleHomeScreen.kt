@@ -28,7 +28,6 @@ import home.presentation.ui.composables.MeetingSection
 import home.presentation.ui.composables.ToDoSection
 import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.discipler_home.disciplesList
-import home.presentation.viewmodel.DiscipleHomeScreenState
 import home.presentation.viewmodel.DiscipleHomeViewModel
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
@@ -81,55 +80,63 @@ val discipleMeetingsList = mutableListOf(
 // will eventually be populated dynamically
 val toDoList = mutableListOf(
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "100"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "100000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
 )
 
 val finishedList = listOf(
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
     Tool(
-        toolName = "Four Spiritual Laws",
-        toolDescription = "This is a cool tool.",
+        100,
+        name = "Four Spiritual Laws",
+        description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        languageList = listOf("English", "German")
+        totalViews = "1000000"
     ),
 )
 

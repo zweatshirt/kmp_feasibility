@@ -58,7 +58,7 @@ private fun FinishedStudyCard(tool: Tool) {
 
             Text(
                 modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 36.dp ),
-                text = tool.toolName, // replace with dynamic loading
+                text = tool.name, // replace with dynamic loading
                 fontSize = 20.sp,
                 color = primaryLight,
                 fontWeight = FontWeight.SemiBold

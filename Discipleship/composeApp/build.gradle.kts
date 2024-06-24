@@ -71,6 +71,9 @@ kotlin {
 
             // for API requests (GET, POST, etc)
             implementation(libs.ktor.client.core)
+
+            // for serialization
+            implementation(libs.kotlinx.serialization.json)
         }
     }
 }

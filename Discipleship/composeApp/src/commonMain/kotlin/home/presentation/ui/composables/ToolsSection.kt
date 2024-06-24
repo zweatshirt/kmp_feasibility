@@ -46,7 +46,7 @@ fun ToolsSection() {
 // e.g. a disciple.Disciple object
 @Composable
 fun ToolCard(tool: Tool) {
-    val tName = tool.toolName
+    val tName = tool.name
     Card(
         modifier = Modifier
             .width(240.dp)

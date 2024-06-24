@@ -11,6 +11,7 @@ import io.ktor.client.statement.HttpResponse
 /* Author: Zach */
 // make call to GodTools/KnowGod.com API from here using Ktor lib
 class ToolsApi {
+
     suspend fun getTools(): List<Tool> {
         val client = HttpClient()
         // Switch the constant and any other string constants to Res.value.string vars soon
@@ -23,7 +24,9 @@ class ToolsApi {
         // https://knowgod.com/en/kgp/0
         // where 'kgp' is the abbreviation attribute of the JSON object
 
+
+
         // This a dummy return... it's dumb I know... but just for now
-        return listOf(Tool("w", "w", "w", listOf("w")))
+        return listOf(Tool(109,"w", "w", "w", "100"))
     }
 }
