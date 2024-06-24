@@ -35,6 +35,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
 import ui.theme.backgroundLight
+import ui.theme.errorLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
@@ -49,7 +50,7 @@ class SignupScreen: Screen {
     @Composable
     override fun Content(){
         val navigator = LocalNavigator.currentOrThrow
-        var signupScreenViewModel = SignupScreenViewModel()
+        val signupScreenViewModel = SignupScreenViewModel()
         var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
 
         if (currentUser == null) {
@@ -61,7 +62,7 @@ class SignupScreen: Screen {
                             backgroundLight
                         )
                         .fillMaxSize()
-                        .padding(8.dp),
+                        .padding(24.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
@@ -94,6 +95,15 @@ class SignupScreen: Screen {
                             }
                         )
 
+                        if (signupScreenViewModel.signupValidation.firstNameValidationResult.errorMessage != null) {
+                            Text(
+                                text = "${signupScreenViewModel.signupValidation.firstNameValidationResult.errorMessage}",
+                                color = errorLight
+                            )
+                        } else {
+                            //Spacer(modifier = Modifier.padding(8.dp))
+                        }
+
                         OutlinedTextField(value = signupScreenViewModel.lastName, onValueChange = {
                             lastName ->
                                 signupScreenViewModel.updateLastName(lastName)
@@ -106,6 +116,15 @@ class SignupScreen: Screen {
                                 Text(text = "Last name", color = secondaryLight)
                             }
                         )
+
+                        if (signupScreenViewModel.signupValidation.lastNameValidationResult.errorMessage != null) {
+                            Text(
+                                text = "${signupScreenViewModel.signupValidation.lastNameValidationResult.errorMessage}",
+                                color = errorLight
+                            )
+                        } else {
+                            //Spacer(modifier = Modifier.padding(8.dp))
+                        }
 
                         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -123,6 +142,15 @@ class SignupScreen: Screen {
                             }
                         )
 
+                        if (signupScreenViewModel.signupValidation.emailValidationResult.errorMessage != null) {
+                            Text(
+                                text = "${signupScreenViewModel.signupValidation.emailValidationResult.errorMessage}",
+                                color = errorLight
+                            )
+                        } else {
+                            //Spacer(modifier = Modifier.padding(8.dp))
+                        }
+
                         Spacer(modifier = Modifier.padding(8.dp))
 
                         OutlinedTextField(value = signupScreenViewModel.password, onValueChange = {
@@ -136,6 +164,15 @@ class SignupScreen: Screen {
                             label = {
                                 Text(text = "Password", color = secondaryLight)
                             })
+                        if (signupScreenViewModel.signupValidation.passwordValidationResult.errorMessage != null) {
+                            Text(
+                                text = "${signupScreenViewModel.signupValidation.passwordValidationResult.errorMessage}",
+                                color = errorLight
+                            )
+                        } else {
+                            //Spacer(modifier = Modifier.padding(8.dp))
+                        }
+
                         OutlinedTextField(value = signupScreenViewModel.confirmPassword, onValueChange = {
                             confirmPass ->
                                 signupScreenViewModel.updateConfirmPassword(confirmPass)
@@ -147,6 +184,13 @@ class SignupScreen: Screen {
                             label = {
                                 Text(text = "Confirm password", color = secondaryLight)
                             })
+                        if (signupScreenViewModel.signupValidation.confirmPasswordValidationResult.errorMessage != null) {
+                            Text(
+                                modifier = Modifier.padding(12.dp),
+                                text = "${signupScreenViewModel.signupValidation.confirmPasswordValidationResult.errorMessage}",
+                                color = errorLight
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.padding(16.dp))
@@ -157,9 +201,13 @@ class SignupScreen: Screen {
                         .width(180.dp),
                         onClick = {
                             Logger.i("Login button click success")
-                            currentUser = signupScreenViewModel.firebaseAuth()
-                            Logger.i("currentUser value update: $currentUser")
-                                  },
+                            signupScreenViewModel.validationOnSubmit()
+                            if (signupScreenViewModel.signupValidation.isValidated) {
+                                currentUser = signupScreenViewModel.firebaseAuth()
+                                Logger.i("currentUser value update: $currentUser")
+                                navigator.push(DorDScreen(ScreenData(false, currentUser)))
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = primaryContainerLight, contentColor = primaryLight
                         ),

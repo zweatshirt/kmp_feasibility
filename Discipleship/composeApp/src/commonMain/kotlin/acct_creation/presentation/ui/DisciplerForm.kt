@@ -1,5 +1,6 @@
 package acct_creation.presentation.ui
 
+import acct_creation.presentation.viewmodel.DisciplerFormViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,6 +45,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import home.presentation.ui.discipler_home.DisciplerHomeScreen
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
+import ui.theme.errorLight
 import ui.theme.primaryDark
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
@@ -52,8 +54,7 @@ import ui.theme.secondaryLight
 data class DisciplerForm(val screenData: ScreenData): Screen {
     @Composable
     override fun Content() {
-        var bibleKnowledge by remember { mutableStateOf(0f) }
-        var years by remember { mutableStateOf("") }
+        var bibleKnowledge by remember { mutableStateOf(1f) }
 
         val experience = setOf("None", "Some", "Decent", "A Lot")
         val selectedExperience = remember { mutableStateListOf<String>() }
@@ -62,6 +63,7 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
         var discipledBefore by remember { mutableStateOf("") }
 
         val navigator = LocalNavigator.currentOrThrow
+        val disciplerScreenViewModel = DisciplerFormViewModel()
 
         Scaffold {
 
@@ -96,7 +98,10 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                         ) {
                             RadioButton(
                                 selected = discipledBefore == it,
-                                onClick = { discipledBefore = it },
+                                onClick = {
+                                    discipledBefore = it
+                                    disciplerScreenViewModel.updateHaveDisicpled(it)
+                                },
                                 colors = RadioButtonDefaults.colors(
                                     selectedColor = secondaryLight
                                 )
@@ -104,6 +109,12 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                             Text(text = it, style = MaterialTheme.typography.caption)
                         }
                     }
+                }
+                if (disciplerScreenViewModel.haveDiscipledResult.errorMessage != null) {
+                    Text(
+                        text = "${disciplerScreenViewModel.haveDiscipledResult.errorMessage}",
+                        color = errorLight
+                    )
                 }
 
                 Spacer(modifier = Modifier.padding(8.dp))
@@ -118,8 +129,10 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                         modifier = Modifier
                             .weight(2f)
                             .align(Alignment.CenterVertically),
-                        value = years,
-                        onValueChange = { years = it },
+                        value = disciplerScreenViewModel.yearsOfExperience,
+                        onValueChange = {
+                            disciplerScreenViewModel.updateYearsOfExperience(it)
+                        },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number
                         ),
@@ -140,6 +153,12 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                         fontSize = 16.sp,
                     )
                 }
+                if (disciplerScreenViewModel.yearsOfExperienceResult.errorMessage != null) {
+                    Text(
+                        text = "${disciplerScreenViewModel.yearsOfExperienceResult.errorMessage}",
+                        color = errorLight
+                    )
+                }
 
 
                 Spacer(modifier = Modifier.padding(8.dp))
@@ -150,14 +169,17 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                 Column {
                     Slider(
                         value = bibleKnowledge,
-                        onValueChange = { bibleKnowledge = it },
+                        onValueChange = {
+                            bibleKnowledge = it
+                            disciplerScreenViewModel.updateBibleKnowledge(it.toInt())
+                        },
                         colors = SliderDefaults.colors(
                             thumbColor = secondaryLight,
                             activeTrackColor = secondaryLight,
                             inactiveTickColor = secondaryLight,
                         ),
                         steps = 9,
-                        valueRange = 0f..10f
+                        valueRange = 1f..10f
 
                     )
                     Text(text = bibleKnowledge.toInt().toString())
@@ -183,7 +205,11 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                                 checked = selectedExperience.contains(it),
                                 onCheckedChange = { unchecked ->
                                     if (!unchecked) selectedExperience.remove(it)
-                                    else selectedExperience.add(it)
+                                    else {
+                                        selectedExperience.removeAll(selectedExperience)
+                                        selectedExperience.add(it)
+                                        disciplerScreenViewModel.updateEvangalismExperience(it)
+                                    }
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = secondaryLight
@@ -193,13 +219,23 @@ data class DisciplerForm(val screenData: ScreenData): Screen {
                         }
                     }
                 }
+                if (disciplerScreenViewModel.evanglismExperienceResult.errorMessage != null) {
+                    Text(
+                        text = "${disciplerScreenViewModel.evanglismExperienceResult.errorMessage}",
+                        color = errorLight
+                    )
+                }
 
                 Spacer(modifier = Modifier.padding(8.dp))
                 HorizontalDivider(thickness = 2.dp, color = primaryDark)
                 Spacer(modifier = Modifier.padding(8.dp))
 
                 Button(
-                    onClick = {navigator.replaceAll(DisciplerHomeScreen(screenData))},
+                    onClick = {
+                        if (disciplerScreenViewModel.disciplerFormIsValid()) {
+                            navigator.replaceAll(DisciplerHomeScreen(screenData))
+                        }
+                    },
                     modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = primaryLight,

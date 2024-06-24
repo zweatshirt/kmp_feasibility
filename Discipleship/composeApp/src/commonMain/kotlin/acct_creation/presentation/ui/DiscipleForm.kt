@@ -1,6 +1,8 @@
 package acct_creation.presentation.ui
 
+import acct_creation.presentation.viewmodel.DiscipleFormViewModel
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +40,7 @@ import home.presentation.ui.disciple_home.DiscipleHomeScreen
 import home.presentation.viewmodel.DiscipleHomeScreenState
 import viewmodel.ScreenData
 import ui.theme.backgroundLight
+import ui.theme.errorLight
 import ui.theme.primaryDark
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
@@ -55,6 +58,7 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
         var discipledBefore by remember { mutableStateOf("") }
 
         val navigator = LocalNavigator.currentOrThrow
+        val discipleScreenViewModel = DiscipleFormViewModel()
 
         Scaffold {
             Column(
@@ -86,7 +90,10 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                         ) {
                             RadioButton(
                                 selected = discipledBefore == it,
-                                onClick = { discipledBefore = it },
+                                onClick = {
+                                    discipledBefore = it
+                                    discipleScreenViewModel.updateHaveDisicpled(it)
+                                },
                                 colors = RadioButtonDefaults.colors(
                                     selectedColor = secondaryLight
                                 )
@@ -94,6 +101,12 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                             Text(text = it, style = MaterialTheme.typography.caption)
                         }
                     }
+                }
+                if (discipleScreenViewModel.haveBeenDiscipledResult.errorMessage != null) {
+                    Text(
+                        text = "${discipleScreenViewModel.haveBeenDiscipledResult.errorMessage}",
+                        color = errorLight
+                    )
                 }
 
                 Spacer(modifier = Modifier.padding(8.dp))
@@ -104,7 +117,10 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                 Column {
                     Slider(
                         value = bibleKnowledge,
-                        onValueChange = { bibleKnowledge = it },
+                        onValueChange = {
+                            bibleKnowledge = it
+                            discipleScreenViewModel.updateBibleKnowledge(it.toInt())
+                        },
                         colors = SliderDefaults.colors(
                             thumbColor = secondaryLight,
                             activeTrackColor = secondaryLight,
@@ -115,7 +131,6 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
 
                     )
                     Text(text = bibleKnowledge.toInt().toString())
-
                 }
 
                 Spacer(modifier = Modifier.padding(8.dp))
@@ -124,6 +139,8 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
 
                 Text("Select your experience level sharing your faith")
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     experience.forEach {
@@ -135,7 +152,11 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                                 checked = selectedExperience.contains(it),
                                 onCheckedChange = { unchecked ->
                                     if (!unchecked) selectedExperience.remove(it)
-                                    else selectedExperience.add(it)
+                                    else {
+                                        selectedExperience.removeAll(selectedExperience)
+                                        selectedExperience.add(it)
+                                        discipleScreenViewModel.updateEvangalismExperience(it)
+                                    }
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = secondaryLight
@@ -145,13 +166,23 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                         }
                     }
                 }
+                if (discipleScreenViewModel.evanglismExperienceResult.errorMessage != null) {
+                    Text(
+                        text = "${discipleScreenViewModel.evanglismExperienceResult.errorMessage}",
+                        color = errorLight
+                    )
+                }
 
                 Spacer(modifier = Modifier.padding(8.dp))
                 HorizontalDivider(thickness = 2.dp, color = primaryDark)
                 Spacer(modifier = Modifier.padding(8.dp))
 
                 Button(
-                    onClick = {navigator.replaceAll(DiscipleHomeScreen(screenData))},
+                    onClick = {
+                        if (discipleScreenViewModel.discipleFormIsValid()) {
+                            navigator.replaceAll(DiscipleHomeScreen(screenData))
+                        }
+                    },
                     modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = primaryLight,
