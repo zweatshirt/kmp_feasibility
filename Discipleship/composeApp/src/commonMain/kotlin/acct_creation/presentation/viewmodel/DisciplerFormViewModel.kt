@@ -4,18 +4,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 
 class DisciplerFormViewModel: ViewModel() {
-    val scope = viewModelScope
-
-    var haveDiscipled by mutableStateOf("")
+    private var haveDiscipled by mutableStateOf("")
 
     var yearsOfExperience by mutableStateOf("")
 
-    var bibleKnowledge by mutableStateOf(0)
+    private var bibleKnowledge by mutableStateOf(0)
 
-    var evangalismExperience by mutableStateOf("")
+    private var evangalismExperience by mutableStateOf("")
 
     var haveDiscipledResult by mutableStateOf( ValidationResult(false, null))
     var yearsOfExperienceResult by mutableStateOf( ValidationResult(false, null))

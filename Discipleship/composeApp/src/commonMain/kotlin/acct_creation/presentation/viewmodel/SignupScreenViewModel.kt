@@ -2,7 +2,6 @@ package acct_creation.presentation.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,6 @@ import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
-import kotlin.math.sign
 
 
 /* Author: Zachery Linscott
@@ -23,8 +21,8 @@ import kotlin.math.sign
 
 // TODO: CODE NEEDS TO BE WRITTEN TO POPULATE USER OBJECT :>
 class SignupScreenViewModel: ViewModel() {
-    var auth = Firebase.auth
-    val scope = viewModelScope
+    private var auth = Firebase.auth
+    private val scope = viewModelScope
 //    var firebaseUser: FirebaseUser? = null
 //    var userSignedIn = false
     var email by mutableStateOf("")
@@ -182,7 +180,7 @@ class SignupScreenViewModel: ViewModel() {
     }
 
     fun firebaseAuth(): FirebaseUser? {
-        var currentUser = auth.currentUser
+        val currentUser = auth.currentUser
         scope.launch {
             try {
                 // this is fine for now but it needs to go to the signup page soon instead

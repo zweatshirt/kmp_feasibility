@@ -1,3 +1,4 @@
+import acct_creation.presentation.ui.DiscipleForm
 import acct_creation.presentation.ui.DisciplerForm
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
@@ -28,7 +29,7 @@ fun App() {
         // to go directly to login page instead.
         // We would have to cache something saying they've used
         // our app.
-        Navigator(DisciplerForm(ScreenData(false, null))) { navigator ->
+        Navigator(DiscipleForm(ScreenData(false, null))) { navigator ->
             SlideTransition(navigator)
         }
     //}
