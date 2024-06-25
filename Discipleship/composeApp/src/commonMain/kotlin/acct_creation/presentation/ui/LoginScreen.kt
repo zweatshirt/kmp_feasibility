@@ -59,7 +59,7 @@ class LoginScreen: Screen {
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
         val navigator = LocalNavigator.currentOrThrow
-        var loginViewModel = LoginScreenViewModel()
+        val loginViewModel = LoginScreenViewModel()
         var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
 
         // Container for everything on the screen
