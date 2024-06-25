@@ -70,11 +70,11 @@ val meetingsList = mutableListOf(
 // will eventually be populated dynamically
 val toolsList = mutableListOf(
     Tool(
-        100,
+        "100",
         name = "Four Spiritual Laws",
         description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000000"
+        totalViews = 1000000
     )
 )
 

@@ -7,6 +7,9 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.googleServices)
+    kotlin("plugin.serialization")
+    id("com.google.devtools.ksp") version "2.0.0-1.0.22"
+    id("de.jensklingenberg.ktorfit") version "2.0.0"
 }
 
 kotlin {
@@ -29,13 +32,11 @@ kotlin {
     }
 
     sourceSets {
-        
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            val voyagerVersion = "1.1.0-beta02"
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -74,6 +75,17 @@ kotlin {
 
             // for serialization
             implementation(libs.kotlinx.serialization.json)
+            // Ktor
+            implementation(libs.ktor.client.cio) // Engine
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            // Ktorfit stuff for better handling JSON
+            implementation(libs.ktorfit.lib)
+            implementation(libs.ktorfit.converters.response)
+            implementation(libs.ktorfit.converters.call)
+            implementation(libs.ktorfit.converters.flow)
+
         }
     }
 }
