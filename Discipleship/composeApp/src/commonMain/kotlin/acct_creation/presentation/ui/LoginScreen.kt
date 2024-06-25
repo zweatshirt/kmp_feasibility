@@ -134,7 +134,6 @@ class LoginScreen: Screen {
                         )
                         if (loginViewModel.emailResult.errorMessage != null) {
                             Text(
-                                modifier = Modifier.padding(12.dp),
                                 text = "${loginViewModel.emailResult.errorMessage}",
                                 color = errorLight
                             )
@@ -158,7 +157,6 @@ class LoginScreen: Screen {
                         )
                         if (loginViewModel.passwordResult.errorMessage != null) {
                             Text(
-                                modifier = Modifier.padding(12.dp),
                                 text = "${loginViewModel.passwordResult.errorMessage}",
                                 color = errorLight
                             )
