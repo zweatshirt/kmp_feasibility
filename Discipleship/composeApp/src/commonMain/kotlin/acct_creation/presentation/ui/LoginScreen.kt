@@ -45,7 +45,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
-import home.presentation.viewmodel.DiscipleHomeScreenState
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.primaryContainerLight

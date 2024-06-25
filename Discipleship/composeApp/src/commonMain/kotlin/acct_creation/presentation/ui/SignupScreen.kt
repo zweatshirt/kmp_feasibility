@@ -43,7 +43,6 @@ import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 import viewmodel.ScreenData
-import kotlin.math.sign
 
 /* Author: Zachery Linscott
 * */
