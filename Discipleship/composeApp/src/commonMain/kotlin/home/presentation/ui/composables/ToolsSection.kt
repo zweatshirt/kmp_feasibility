@@ -31,7 +31,7 @@ TODO: Fix padding at the end of the lazy rows
 
 @Composable
 fun ToolsSection() {
-    val containerPad = 16.dp
+//    val containerPad = 16.dp
     SectionTitle("Recommended tools")
     LazyRow {
         items(toolsList.size) {

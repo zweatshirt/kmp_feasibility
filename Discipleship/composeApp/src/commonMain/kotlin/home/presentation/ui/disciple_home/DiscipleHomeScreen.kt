@@ -20,6 +20,7 @@ import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.data.remote.ToolsApi
 import home.data.repository.ToolsRepoImplementation
+import home.domain.model.ResourceAttributes
 import home.presentation.ui.composables.BottomBar
 import home.presentation.ui.composables.FinishedStudiesSection
 import home.presentation.ui.composables.TopBar
@@ -77,66 +78,31 @@ val discipleMeetingsList = mutableListOf(
     )
 )
 
-// will eventually be populated dynamically
+//// will eventually be populated dynamically
 val toDoList = mutableListOf(
     Tool(
-        100,
+        "100",
         name = "Four Spiritual Laws",
         description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "100"
+        totalViews = 100
     ),
     Tool(
-        100,
+        "100",
         name = "Four Spiritual Laws",
         description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000"
-    ),
-    Tool(
-        100,
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "100000"
-    ),
-    Tool(
-        100,
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000000"
+        totalViews = 1000
     ),
 )
 
 val finishedList = listOf(
     Tool(
-        100,
+        "100",
         name = "Four Spiritual Laws",
         description = "This is a cool tool.",
         toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000000"
-    ),
-    Tool(
-        100,
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000000"
-    ),
-    Tool(
-        100,
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000000"
-    ),
-    Tool(
-        100,
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = "1000000"
+        totalViews = 1000000
     ),
 )
 

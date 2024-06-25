@@ -18,10 +18,17 @@ junit = "4.13.2"
 kermit = "2.0.4"
 kotlin = "2.0.0"
 kotlinxSerializationJson = "1.7.0"
+ktorClientCio = "2.3.12"
+ktorClientContentNegotiation = "2.3.7"
+ktorClientSerialization = "2.0.0"
+ktorfitConvertersCall = "2.0.0"
+ktorfitConvertersFlow = "2.0.0"
+ktorfitConvertersResponse = "2.0.0"
+ktorfitLib = "2.0.0"
+ktorSerializationKotlinxJson = "2.3.7"
 libraryBase = "1.16.0"
 material3Android = "1.2.1"
 core = "1.13.1"
-messagebarcompose = "1.0.5"
 places = "3.5.0"
 foundationAndroid = "1.6.7"
 composeMaterial = "1.3.1"
@@ -53,6 +60,14 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktorClientSerialization" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+ktorfit-converters-call = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-call", version.ref = "ktorfitConvertersCall" }
+ktorfit-converters-flow = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-flow", version.ref = "ktorfitConvertersFlow" }
+ktorfit-converters-response = { module = "de.jensklingenberg.ktorfit:ktorfit-converters-response", version.ref = "ktorfitConvertersResponse" }
+ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfitLib" }
 library-base = { module = "io.realm.kotlin:library-base", version.ref = "libraryBase" }
 library-sync = { module = "io.realm.kotlin:library-sync", version.ref = "libraryBase" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
@@ -68,8 +83,8 @@ voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", 
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerVersion" }
 firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-ktx", version.ref = "firebaseCommonKtx" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
