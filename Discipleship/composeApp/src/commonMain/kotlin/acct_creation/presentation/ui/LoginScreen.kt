@@ -37,14 +37,16 @@ import discipleship.composeapp.generated.resources.dove
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import  androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
-import home.presentation.viewmodel.DiscipleHomeScreenState
 import ui.theme.backgroundLight
+import ui.theme.errorLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
@@ -61,6 +63,8 @@ class LoginScreen: Screen {
         val navigator = LocalNavigator.currentOrThrow
         val loginViewModel = LoginScreenViewModel()
         var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
+        var passwordVisible by remember { mutableStateOf(false) }
+        passwordVisible = false
 
         // Container for everything on the screen
         // This screen only needs to be displayed if the user
@@ -127,6 +131,12 @@ class LoginScreen: Screen {
                                 Text(text = "Email address", color = secondaryLight)
                             }
                         )
+                        if (loginViewModel.emailResult.errorMessage != null) {
+                            Text(
+                                text = "${loginViewModel.emailResult.errorMessage}",
+                                color = errorLight
+                            )
+                        }
 
                         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -141,8 +151,15 @@ class LoginScreen: Screen {
                             ),
                             label = {
                                 Text(text = "Password", color = secondaryLight)
-                            }
+                            },
+                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         )
+                        if (loginViewModel.passwordResult.errorMessage != null) {
+                            Text(
+                                text = "${loginViewModel.passwordResult.errorMessage}",
+                                color = errorLight
+                            )
+                        }
 
                         TextButton(modifier = Modifier.align(Alignment.End), onClick = {}) {
                             Text(text = "Forgot password?", color = secondaryLight)
@@ -157,8 +174,11 @@ class LoginScreen: Screen {
     //                    onClick = {navigator.push(DorDScreen())},
                         onClick = {
                             Logger.i("Login button click success")
-                            currentUser = loginViewModel.firebaseAuth()
-                            Logger.i("currentUser value update: $currentUser")
+                            if (loginViewModel.loginIsValid()) {
+                                currentUser = loginViewModel.firebaseAuth()
+                                Logger.i("currentUser value update: $currentUser")
+                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
+                            }
                         },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = primaryContainerLight, contentColor = secondaryLight
@@ -187,7 +207,7 @@ class LoginScreen: Screen {
                 }
             }
             else {
-                navigator.push(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
+                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
             }
         }
     }

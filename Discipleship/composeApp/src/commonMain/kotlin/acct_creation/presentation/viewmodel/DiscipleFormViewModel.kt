@@ -39,8 +39,6 @@ class DiscipleFormViewModel {
         )
     }
 
-
-
     private fun validateEvangalismExperience(): ValidationResult {
         if (evangalismExperience.isBlank()) {
             return ValidationResult(

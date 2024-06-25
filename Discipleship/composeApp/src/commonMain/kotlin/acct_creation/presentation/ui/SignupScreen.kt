@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
@@ -41,7 +43,6 @@ import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 import viewmodel.ScreenData
-import kotlin.math.sign
 
 /* Author: Zachery Linscott
 * */
@@ -52,6 +53,8 @@ class SignupScreen: Screen {
         val navigator = LocalNavigator.currentOrThrow
         val signupScreenViewModel = SignupScreenViewModel()
         var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
+        var passwordVisible by remember { mutableStateOf(false) }
+        passwordVisible = false
 
         if (currentUser == null) {
         // Container for everything on the screen
@@ -163,7 +166,9 @@ class SignupScreen: Screen {
                             ),
                             label = {
                                 Text(text = "Password", color = secondaryLight)
-                            })
+                            },
+                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                            )
                         if (signupScreenViewModel.signupValidation.passwordValidationResult.errorMessage != null) {
                             Text(
                                 text = "${signupScreenViewModel.signupValidation.passwordValidationResult.errorMessage}",
@@ -183,7 +188,9 @@ class SignupScreen: Screen {
                             ),
                             label = {
                                 Text(text = "Confirm password", color = secondaryLight)
-                            })
+                            },
+                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                            )
                         if (signupScreenViewModel.signupValidation.confirmPasswordValidationResult.errorMessage != null) {
                             Text(
                                 modifier = Modifier.padding(12.dp),

@@ -29,7 +29,7 @@ fun App() {
         // to go directly to login page instead.
         // We would have to cache something saying they've used
         // our app.
-        Navigator(DiscipleForm(ScreenData(false, null))) { navigator ->
+        Navigator(WelcomeScreen()) { navigator ->
             SlideTransition(navigator)
         }
     //}
