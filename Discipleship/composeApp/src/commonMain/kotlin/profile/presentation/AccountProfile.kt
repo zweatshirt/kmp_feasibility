@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -22,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
@@ -38,6 +40,7 @@ import viewmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.backgroundLight
 import ui.theme.primaryContainerLight
+import ui.theme.primaryDark
 import ui.theme.primaryLight
 import ui.theme.tertiaryLight
 
@@ -109,7 +112,8 @@ data class AccountProfile(val screenData: ScreenData): Screen {
 
                 OutlinedTextField(
                     value = user.email,
-                    onValueChange = { /*TODO("I need to do this")*/},
+                    onValueChange = {},
+                    enabled = false,
                     label = {
                         Text(
                             text = "Email"
@@ -121,6 +125,12 @@ data class AccountProfile(val screenData: ScreenData): Screen {
                             contentDescription = "Email"
                         )
                     },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        unfocusedBorderColor = primaryLight,
+                        unfocusedLabelColor = primaryLight,
+                        leadingIconColor = primaryLight,
+                        textColor = primaryLight
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
