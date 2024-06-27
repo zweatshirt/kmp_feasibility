@@ -2,6 +2,8 @@ package home.data.remote
 
 import co.touchlab.kermit.Logger
 import de.jensklingenberg.ktorfit.Ktorfit
+import de.jensklingenberg.ktorfit.http.GET
+import de.jensklingenberg.ktorfit.http.Query
 import global_consts.Constants
 import home.domain.model.Tool
 import home.domain.model.ToolData
@@ -24,26 +26,30 @@ class ToolsApi {
     suspend fun getTools(): List<Tool> {
         val client = HttpClient(CIO) // change to different engines for iOS and Android
         // make the urlString a constant soon
-//        val ktorfit = Ktorfit.Builder().baseUrl(Constants.TOOLS_API).build()
-
 
         Logger.i("In ToolsApi.getTools()\nREQUEST TO: ${Constants.TOOLS_API}")
         val response: HttpResponse = client.request(Constants.TOOLS_API)
         val responseBody: String = response.body()
-        Logger.i("RESPONSE BODY: $responseBody")
+//        val responseBodyClean: String = responseBody.replace("-", "")
 
         val tools: ToolData
         val toolsObjs = mutableListOf<Tool>()
-        // Switch the constant and any other string constants to Res.value.string vars soon
+
         try {
             val json = Json {
-                ignoreUnknownKeys = true
+                 ignoreUnknownKeys = true
             }
+
+            Logger.i(responseBody)
+            // This is really bad code...
             tools = json.decodeFromString(responseBody)
-            Logger.i("DATA: $tools")
+
+            // Moving on...
             tools.data.forEach { tool ->
-                val toolLink = "https://knowgod.com/en/${tool.attributes?.abbreviation}/0"
-                if (tool.type == "tract") {
+                Logger.i("${tool.attributes.resourceType}")
+                val resType = tool.attributes.resourceType
+                if (resType.equals("tract") || resType.equals("lesson")) {
+                    val toolLink = "https://knowgod.com/en/${tool.attributes.abbreviation}/0"
                     toolsObjs.add(
                         Tool(
                             tool.id,
@@ -54,7 +60,6 @@ class ToolsApi {
                         )
                     )
                 }
-                Logger.i(toolsObjs.toString())
             }
         }
         catch (e: IllegalArgumentException) {
@@ -63,18 +68,22 @@ class ToolsApi {
         catch (e: SerializationException) {
             Logger.e("$e")
         }
-
-
+        catch(e: Exception) {
+            Logger.e("$e")
+        }
 
         // Only take objects with attribute resource-type: "tract"
         // the link to the tool will be like this:
         // https://knowgod.com/en/kgp/0
         // where 'kgp' is the abbreviation attribute of the JSON object
 
-
-
         // This a dummy return... it's dumb I know... but just for now
 //        return listOf(Tool(109,"w", "w", "w", "100"))
         return toolsObjs
     }
+
+//    suspend fun getTool(id: String) {
+//        TODO()
+//    }
+
 }

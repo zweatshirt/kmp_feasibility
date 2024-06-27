@@ -1,9 +1,11 @@
 package home.data.repository
 
 import arrow.core.Either
+import de.jensklingenberg.ktorfit.Ktorfit
 import de.jensklingenberg.ktorfit.http.GET
 import error_handling.NetworkError
 import error_handling.toNetworkError
+import global_consts.Constants
 import home.data.remote.ToolsApi
 import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
@@ -13,6 +15,10 @@ import home.domain.repository.ToolsRepository
 class ToolsRepoImplementation(
     private val toolsApi: ToolsApi
 ): ToolsRepository {
+//    override suspend fun getTool(id: String): Either<NetworkError, Tool> {
+//        TODO("Not yet implemented")
+//    }
+
     // requests and fetches data from the
     override suspend fun getTools(): Either<NetworkError, List<Tool>> {
         return Either.catch {
