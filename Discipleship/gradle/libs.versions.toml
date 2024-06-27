@@ -15,6 +15,7 @@ auth = "23.0.0"
 calendar = "1.0.1"
 compose-plugin = "1.6.10"
 firebaseAuth = "1.12.0"
+firebaseDatabase = "1.13.0"
 junit = "4.13.2"
 kermit = "2.0.4"
 kotlin = "2.0.0"
@@ -28,6 +29,7 @@ ktorfitConvertersResponse = "2.0.0"
 ktorfitLib = "2.0.0"
 ktorSerializationKotlinxJson = "2.3.7"
 libraryBase = "1.16.0"
+lifecycleViewmodel = "2.8.2"
 material3Android = "1.2.1"
 core = "1.13.1"
 places = "3.5.0"
@@ -43,11 +45,13 @@ ktor = "2.3.12"
 coroutines = "1.8.1"
 
 [libraries]
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowCore" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrowCore" }
 auth = { module = "com.google.firebase:auth", version.ref = "auth" }
 calendar = { module = "io.github.wojciechosak:calendar", version.ref = "calendar" }
 firebase-auth = { module = "dev.gitlive:firebase-auth" }
+firebase-database = { module = "dev.gitlive:firebase-database", version.ref = "firebaseDatabase" }
 gitlive-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

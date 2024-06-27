@@ -22,4 +22,8 @@ class ToolsRepoImplementation(
         }.mapLeft { it.toNetworkError() }
     }
 
+    override suspend fun writeToolsToDb(tools: List<Tool>) {
+        toolsApi.writeToolsToDb(tools)
+    }
+
 }

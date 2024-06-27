@@ -3,6 +3,7 @@ package home.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
+import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -20,6 +21,7 @@ class DiscipleHomeViewModel constructor(
 
     fun getTools() {
         _scope.launch {
+            var toolObjects: List<Tool> = mutableListOf()
             // returns Either<NetworkError, List<Tool>>
             toolsRepository.getTools()
                 .onRight { tools ->
@@ -28,10 +30,18 @@ class DiscipleHomeViewModel constructor(
                         Logger.i(it.name)
                     }
                     Logger.i("Successful Tools API request in DiscipleHomeViewModel")
+                    toolObjects = tools
                 } // successful request, returns list of tools
                 .onLeft {
                     Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
                 } // unsuccessful request, throws NetworkError
+
+            if (toolObjects.isNotEmpty()) {
+                toolsRepository.writeToolsToDb(toolObjects)
+            }
+            else {
+                Logger.e("toolObjects failed to populate")
+            }
         }
     }
 }

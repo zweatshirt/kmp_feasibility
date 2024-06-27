@@ -1,6 +1,8 @@
 package home.data.remote
 
 import co.touchlab.kermit.Logger
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.database.database
 import global_consts.Constants
 import home.domain.model.Tool
 import home.domain.model.ToolData
@@ -14,11 +16,11 @@ import kotlinx.serialization.json.Json
 // make call to GodTools/KnowGod.com API from here using Ktor lib
 class ToolsApi {
     private val client = HttpClient()
+    val db = Firebase.database.reference()
+    val DB_TOOLS = "tools"
 
     // Request to KnowingGod.com API
     suspend fun getTools(): List<Tool> {
-        // change to different engines for iOS and Android
-
         // make the urlString a constant soon
         Logger.i("In ToolsApi.getTools()\nREQUEST TO: ${Constants.TOOLS_API}")
         val response: HttpResponse = client.request(Constants.TOOLS_API) // get
@@ -51,6 +53,12 @@ class ToolsApi {
             }
         }
         return toolsObjs
+    }
+
+    suspend fun writeToolsToDb(tools: List<Tool>) {
+        tools.forEach { tool ->
+            db.child(DB_TOOLS).child(tool.id).setValue(tool)
+        }
     }
 
 }

@@ -18,4 +18,8 @@ interface ToolsRepository {
     // For getting tools from external KnowingGod.com API
     suspend fun getTools(): Either<NetworkError, List<Tool>>
 
+    suspend fun writeToolsToDb(tools: List<Tool>)
+
+    // Create getter for individual tools from DB
+
 }

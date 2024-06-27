@@ -5,9 +5,13 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 
-// This class is meant to serve as a container
+/* Author: Zach */
+// This ToolData class is meant to serve as a container
 // for any GodTools tools/data we collect from the API
 // chances are it will need to be changed significantly
+// It all gets converted into a Tool object, which contains significantly less data
+// The Tool object is what we actually want to display in app.
+// The extra data from ToolData may prove useful in the future, though.
 
 @Serializable
 data class ToolData(

@@ -50,8 +50,12 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
+
+            // Calendar lib
             implementation(libs.calendar)
-            implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.2")
+
+            // ViewModel lib
+            implementation(libs.androidx.lifecycle.viewmodel)
 
             // Navigator
             implementation(libs.voyager.navigator)
@@ -64,11 +68,13 @@ kotlin {
             // Transitions
             implementation(libs.voyager.transitions)
 
-            // Firebase auth SDK
-//            implementation("com.google.firebase:firebase-auth:21.0.0")
+            // Firebase auth librarty
             implementation(libs.gitlive.firebase.auth)
 
-            // Couroutines
+            // Firebase RealTime Database
+            implementation(libs.firebase.database)
+
+            // Coroutines
             implementation(libs.kotlinx.coroutines.core)
 
             // Arrow for data and error handling
@@ -81,6 +87,7 @@ kotlin {
             // For API/DB requests (GET, POST, etc)
             // JSON serialization
             implementation(libs.kotlinx.serialization.json)
+
             // Ktor
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.cio) // Engine

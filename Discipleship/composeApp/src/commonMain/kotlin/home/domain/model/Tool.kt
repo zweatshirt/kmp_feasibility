@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 // for any GodTools tools/data we collect from the API
 // chances are it will need to be changed significantly
 
+@Serializable
 data class Tool(
     val id: String,
     val name: String,
