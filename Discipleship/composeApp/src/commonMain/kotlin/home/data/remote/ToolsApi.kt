@@ -6,7 +6,6 @@ import home.domain.model.Tool
 import home.domain.model.ToolData
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import kotlinx.serialization.json.Json
@@ -14,11 +13,11 @@ import kotlinx.serialization.json.Json
 /* Author: Zach */
 // make call to GodTools/KnowGod.com API from here using Ktor lib
 class ToolsApi {
+    private val client = HttpClient()
 
     // Request to KnowingGod.com API
     suspend fun getTools(): List<Tool> {
         // change to different engines for iOS and Android
-        val client = HttpClient(CIO)
 
         // make the urlString a constant soon
         Logger.i("In ToolsApi.getTools()\nREQUEST TO: ${Constants.TOOLS_API}")

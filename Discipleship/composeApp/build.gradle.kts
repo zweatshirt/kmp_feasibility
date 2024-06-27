@@ -35,6 +35,11 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.kotlinx.coroutines.android)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -61,7 +66,10 @@ kotlin {
 
             // Firebase auth SDK
 //            implementation("com.google.firebase:firebase-auth:21.0.0")
-            implementation("dev.gitlive:firebase-auth:1.12.0")
+            implementation(libs.gitlive.firebase.auth)
+
+            // Couroutines
+            implementation(libs.kotlinx.coroutines.core)
 
             // Arrow for data and error handling
             implementation(libs.arrow.core)
@@ -70,17 +78,16 @@ kotlin {
             // Logging library
             implementation(libs.kermit)
 
-            // for API requests (GET, POST, etc)
-            implementation(libs.ktor.client.core)
-
-            // for serialization
+            // For API/DB requests (GET, POST, etc)
+            // JSON serialization
             implementation(libs.kotlinx.serialization.json)
             // Ktor
+            implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.cio) // Engine
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
-            // Ktorfit stuff for better handling JSON
+            // Ktorfit stuff for better handling requests (not currently used)
             implementation(libs.ktorfit.lib)
             implementation(libs.ktorfit.converters.response)
             implementation(libs.ktorfit.converters.call)

@@ -43,7 +43,7 @@ data class ResourceAttributes @OptIn(ExperimentalSerializationApi::class) constr
 )
 
 @Serializable
-data class ResourceRelationships(
+data class ResourceRelationships @OptIn(ExperimentalSerializationApi::class) constructor(
     val system: RelationshipItem? = null,
     val metatool: RelationshipItem? = null,
     @JsonNames("latest-translations")
