@@ -17,7 +17,6 @@ import kotlinx.serialization.json.Json
 class ToolsApi {
     private val client = HttpClient()
     val db = Firebase.database.reference()
-    val DB_TOOLS = "tools"
 
     // Request to KnowingGod.com API
     suspend fun getTools(): List<Tool> {
@@ -57,7 +56,7 @@ class ToolsApi {
 
     suspend fun writeToolsToDb(tools: List<Tool>) {
         tools.forEach { tool ->
-            db.child(DB_TOOLS).child(tool.id).setValue(tool)
+            db.child(Constants.DB_TOOLS_NAME).child(tool.id).setValue(tool)
         }
     }
 
