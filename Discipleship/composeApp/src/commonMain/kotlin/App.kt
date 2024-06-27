@@ -11,7 +11,6 @@ import viewmodel.ScreenData
 @Composable
 @Preview
 fun App() {
-
     // Go to home screen if user is logged in
     // In the future when the user logic is more defined we need to
     // take them to either the DiscipleHomeScreen or DisciplerHomeScreen

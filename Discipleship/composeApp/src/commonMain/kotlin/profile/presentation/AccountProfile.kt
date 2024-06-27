@@ -149,7 +149,6 @@ data class AccountProfile(val screenData: ScreenData): Screen {
 //                    )
 //                }
             }
-
         }
     }
 }
