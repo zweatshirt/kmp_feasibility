@@ -24,7 +24,9 @@ class DiscipleHomeViewModel constructor(
             toolsRepository.getTools()
                 .onRight { tools ->
                     // update state with the tools
-                    Logger.i(tools.toString())
+                    tools.forEach {
+                        Logger.i(it.name)
+                    }
                     Logger.i("Successful Tools API request in DiscipleHomeViewModel")
                 } // successful request, returns list of tools
                 .onLeft {
