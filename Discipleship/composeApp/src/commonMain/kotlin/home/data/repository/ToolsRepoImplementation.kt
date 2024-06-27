@@ -1,11 +1,8 @@
 package home.data.repository
 
 import arrow.core.Either
-import de.jensklingenberg.ktorfit.Ktorfit
-import de.jensklingenberg.ktorfit.http.GET
 import error_handling.NetworkError
 import error_handling.toNetworkError
-import global_consts.Constants
 import home.data.remote.ToolsApi
 import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
@@ -22,8 +19,19 @@ class ToolsRepoImplementation(
         }.mapLeft { it.toNetworkError() }
     }
 
+    // Needs proper exception handling.
     override suspend fun writeToolsToDb(tools: List<Tool>) {
         toolsApi.writeToolsToDb(tools)
+    }
+
+    override suspend fun writeToolToDb(tool: Tool) {
+        toolsApi.writeToolToDb(tool)
+    }
+
+    override  suspend fun readToolsFromDb(): Either<NetworkError, List<Tool>> {
+        return Either.catch {
+            toolsApi.readToolsFromDb()
+        }.mapLeft { it.toNetworkError() }
     }
 
 }

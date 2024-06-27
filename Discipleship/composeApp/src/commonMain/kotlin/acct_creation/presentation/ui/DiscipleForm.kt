@@ -166,9 +166,9 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                         }
                     }
                 }
-                if (discipleScreenViewModel.evanglismExperienceResult.errorMessage != null) {
+                if (discipleScreenViewModel.evangalismExperienceResult.errorMessage != null) {
                     Text(
-                        text = "${discipleScreenViewModel.evanglismExperienceResult.errorMessage}",
+                        text = "${discipleScreenViewModel.evangalismExperienceResult.errorMessage}",
                         color = errorLight
                     )
                 }

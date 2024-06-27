@@ -25,6 +25,8 @@ class DiscipleHomeViewModel constructor(
             // returns Either<NetworkError, List<Tool>>
             toolsRepository.getTools()
                 .onRight { tools ->
+                    // this is for testing
+                    toolsRepository.readToolsFromDb()
                     // update state with the tools
                     tools.forEach {
                         Logger.i(it.name)
