@@ -21,6 +21,7 @@ import home.presentation.ui.disciple_home.DiscipleHomeScreen
 import home.presentation.ui.discipler_home.DisciplerHomeScreen
 import viewmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
+import co.touchlab.kermit.Logger
 import profile.presentation.AccountProfile
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryLight
@@ -37,7 +38,13 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
     ) {
         NavigationBarItem(
             selected = true,
-            onClick = {navigator.push(AccountProfile(screenData))},
+            onClick = {
+//                navigator.items.forEach {
+//                    println("$it")
+//                }
+                //if (navigator.items.contains(AccountProfile()))
+                navigator.push(AccountProfile(screenData))
+            },
             icon = {
                 Icon(
                     modifier = Modifier.size(25.dp),
@@ -55,6 +62,7 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             onClick = {
                 if (currentScreen != "Home") {
                     if (screenData.isDisciple) {
+                        Logger.i("test")
                         navigator.push(DiscipleHomeScreen(screenData))
                     } else {
                         navigator.push(DisciplerHomeScreen(screenData))
