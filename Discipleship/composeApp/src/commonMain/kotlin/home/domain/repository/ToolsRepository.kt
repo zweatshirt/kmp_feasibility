@@ -14,5 +14,8 @@ interface ToolsRepository {
 //    ): Either<NetworkError, Tool>
 //
 //    @GET(Constants.TOOLS_API)
+
+    // For getting tools from external KnowingGod.com API
     suspend fun getTools(): Either<NetworkError, List<Tool>>
+
 }

@@ -15,10 +15,6 @@ import home.domain.repository.ToolsRepository
 class ToolsRepoImplementation(
     private val toolsApi: ToolsApi
 ): ToolsRepository {
-//    override suspend fun getTool(id: String): Either<NetworkError, Tool> {
-//        TODO("Not yet implemented")
-//    }
-
     // requests and fetches data from the
     override suspend fun getTools(): Either<NetworkError, List<Tool>> {
         return Either.catch {
