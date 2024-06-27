@@ -52,5 +52,5 @@ Open source Firebase Kotlin SDK + Firebase Authentication
 - generally a lack of documentation
 - Permissions still need to be managed on the individual platforms (you can create a package to handle the permissions across the different platforms yourself but it is an initial time consuming process)
 - Dependency injection is a bit of a pain it seems but not terrible (a good option is Koin)
-- User auth is doable but there is no official library for it as far as we are aware.
+- User auth is doable but there is no official library for it as far as we are aware. There is an open source Firebase SDK that offers user auth, and it works well.
 
