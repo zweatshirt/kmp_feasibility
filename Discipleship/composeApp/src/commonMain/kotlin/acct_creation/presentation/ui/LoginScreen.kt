@@ -177,7 +177,7 @@ class LoginScreen: Screen {
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.firebaseAuth()
                                 Logger.i("currentUser value update: $currentUser")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
+                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser)))
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
