@@ -9,5 +9,5 @@ class Discipler(
     email: String,
     image: DrawableResource?,
     bio: String):
-        User(uID,firstName, lastName, email, image, bio)
+        User(uID, firstName, lastName, email, image, bio)
 
