@@ -39,7 +39,7 @@ import ui.theme.backgroundLight
 // needs to be fetched from DiscipleHomeScreenState
 val disciplerList = mutableListOf(
     Disciple(
-        "20",
+        uID = "20",
         firstName = "Zach",
         lastName = "Linscott",
         email = "zach7307@gmail.com",
@@ -47,7 +47,7 @@ val disciplerList = mutableListOf(
         bio = "I like food"
     ),
     Disciple(
-        "20",
+        uID = "20",
         firstName = "Josh",
         lastName = "Ward",
         email = "idk",
@@ -55,7 +55,7 @@ val disciplerList = mutableListOf(
         bio = "I like food too"
     ),
     Disciple(
-        "20",
+        uID = "20",
         firstName = "Meep",
         lastName = "Moop",
         email = "meepmoop",
@@ -63,7 +63,7 @@ val disciplerList = mutableListOf(
         bio = "I like food"
     ),
     Disciple(
-        "20",
+        uID = "20",
         firstName = "Z",
         lastName = "L",
         email = "Zach2",

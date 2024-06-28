@@ -28,7 +28,7 @@ import ui.theme.backgroundLight
 // Will eventually be dynamically loaded
 val disciplesList = mutableListOf(
     Disciple(
-        "2",
+        uID = "20",
         firstName = "Zach",
         lastName = "Linscott",
         email = "zach7307@gmail.com",
@@ -36,7 +36,7 @@ val disciplesList = mutableListOf(
         bio = "I like food"
     ),
     Disciple(
-        "2",
+        uID = "20",
         firstName = "Josh",
         lastName = "Ward",
         email = "idk",
@@ -44,7 +44,7 @@ val disciplesList = mutableListOf(
         bio = "I like food too"
     ),
     Disciple(
-        "2",
+        uID = "20",
         firstName = "Meep",
         lastName = "Moop",
         email = "meepmoop",
@@ -52,7 +52,7 @@ val disciplesList = mutableListOf(
         bio = "I like food"
     ),
     Disciple(
-        "2",
+        uID = "20",
         firstName = "Z",
         lastName = "L",
         email = "Zach2",
