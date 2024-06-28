@@ -112,6 +112,7 @@ val finishedList = listOf(
 
 
 data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
+    override val key = "DiscipleHome"
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow

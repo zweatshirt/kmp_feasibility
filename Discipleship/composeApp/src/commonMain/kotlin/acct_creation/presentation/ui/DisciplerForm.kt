@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import home.presentation.ui.discipler_home.DisciplerHomeScreen
@@ -52,6 +53,7 @@ import ui.theme.secondaryLight
 
 /* Author: Josh */
 data class DisciplerForm(val screenData: ScreenData): Screen {
+    override val key: ScreenKey = "DisciplerFormScreen"
     @Composable
     override fun Content() {
         var bibleKnowledge by remember { mutableStateOf(1f) }

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import viewmodel.ScreenData
@@ -47,6 +48,7 @@ import ui.theme.secondaryLight
  */
 
 class DorDScreen(screenData: ScreenData): Screen {
+    override val key: ScreenKey = "DorDScreen"
     @Composable
     override fun Content() {
         val fSize = 30.sp // font size for all font on screen

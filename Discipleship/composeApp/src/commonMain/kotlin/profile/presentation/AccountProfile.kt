@@ -45,6 +45,7 @@ import ui.theme.primaryLight
 import ui.theme.tertiaryLight
 
 data class AccountProfile(val screenData: ScreenData): Screen {
+    override val key = "Profile"
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow

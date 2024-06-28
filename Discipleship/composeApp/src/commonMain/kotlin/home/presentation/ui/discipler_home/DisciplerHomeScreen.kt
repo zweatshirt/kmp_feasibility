@@ -83,6 +83,7 @@ val toolsList = mutableListOf(
 )
 
 data class DisciplerHomeScreen(val screenData: ScreenData): Screen {
+    override val key = "DisciplerHome"
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
