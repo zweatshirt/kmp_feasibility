@@ -23,8 +23,6 @@ import kotlinx.coroutines.launch
 class SignupScreenViewModel: ViewModel() {
     private var auth = Firebase.auth
     private val scope = viewModelScope
-//    var firebaseUser: FirebaseUser? = null
-//    var userSignedIn = false
     var email by mutableStateOf("")
         private set
     var password by mutableStateOf("")
@@ -57,14 +55,6 @@ class SignupScreenViewModel: ViewModel() {
     }
     fun updateLastName(input: String) {
         lastName = input
-    }
-
-    fun passwordsMatch(): Boolean {
-        return password == confirmPassword
-    }
-
-    fun isPassMinLength(): Boolean {
-        return password.length >= 8
     }
 
     // Validation Functions
@@ -190,11 +180,9 @@ class SignupScreenViewModel: ViewModel() {
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
-//                auth.createUserWithEmailAndPassword(email, password)
                 Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
             }
         }
-
         Logger.i("currentUser value: $currentUser")
         return currentUser
     }

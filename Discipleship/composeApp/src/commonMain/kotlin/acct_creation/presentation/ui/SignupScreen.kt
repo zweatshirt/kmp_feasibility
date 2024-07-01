@@ -237,7 +237,8 @@ class SignupScreen: Screen {
                     }
                 }
             }
-        } else {
+        }
+        else {
             navigator.push(DorDScreen(ScreenData(false, currentUser)))
         }
     }

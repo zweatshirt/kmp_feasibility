@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.googleServices)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.room)
     kotlin("plugin.serialization")
     id("de.jensklingenberg.ktorfit") version "2.0.0"
 }
@@ -98,11 +98,12 @@ kotlin {
             implementation(libs.ktorfit.converters.flow)
 
             // Room database
-            implementation(libs.androidx.room.gradle.plugin)
-            implementation(libs.room.runtime)
-            implementation(libs.room.compiler)
-            implementation(libs.androidx.sqlite)
-            implementation(libs.sqlite.bundled)
+//            implementation(libs.androidx.room.gradle.plugin)
+//
+//            implementation(libs.room.compiler)
+////            implementation(libs.androidx.sqlite)
+//            implementation(libs.sqlite.bundled)
+////            implementation(libs.room.runtime)
 
         }
     }
@@ -145,9 +146,9 @@ android {
     }
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
-}
+//room {
+//    schemaDirectory("$projectDir/schemas")
+//}
 
 dependencies {
     implementation(libs.androidx.material3.android)
@@ -159,5 +160,5 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.core)
     implementation(libs.firebase.common.ktx)
-    ksp(libs.room.compiler)
+//    ksp(libs.room.compiler)
 }

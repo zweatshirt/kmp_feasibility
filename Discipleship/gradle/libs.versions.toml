@@ -44,11 +44,10 @@ gservices = "4.4.2"
 firebaseCommonKtx = "21.0.0"
 ktor = "2.3.12"
 coroutines = "1.8.1"
-firebaseDatabaseKtx = "21.0.0"
-room = "2.7.0-alpha04"
+room = "2.6.1"
+roomRuntime = "2.7.0"
 ksp = "2.0.0-1.0.22"
-sqlite = "2.5.0-SNAPSHOT"
-kapt = "2.6.1"
+sqlite = "2.5.0-alpha04"
 
 [libraries]
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
@@ -103,8 +102,7 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
-firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 room-runtime-android = { module = "androidx.room:room-runtime-android", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
