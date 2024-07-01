@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -37,7 +35,6 @@ TODO: Fix padding at the end of the lazy rows
 
 @Composable
 fun MeetingSection() {
-    val containerPad = 16.dp
     SectionTitle("Upcoming meeting")
     Row(modifier = Modifier.fillMaxWidth()) {
         MeetingCard(meetingsList[0])
