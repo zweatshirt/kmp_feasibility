@@ -1,6 +1,7 @@
 package acct_creation.presentation.ui
 
 import acct_creation.presentation.viewmodel.LoginScreenViewModel
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,8 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -25,10 +30,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -39,6 +46,9 @@ import discipleship.composeapp.generated.resources.dove
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import  androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import cafe.adriel.voyager.core.screen.Screen
@@ -48,6 +58,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
+import kotlinx.coroutines.launch
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.primaryContainerLight
@@ -61,6 +72,7 @@ import viewmodel.ScreenData
 * */
 class LoginScreen: Screen {
     override val key: ScreenKey = "LoginScreen"
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
@@ -69,6 +81,7 @@ class LoginScreen: Screen {
         var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
+
 
         // Container for everything on the screen
         // This screen only needs to be displayed if the user
@@ -134,7 +147,7 @@ class LoginScreen: Screen {
                             ),
                             label = {
                                 Text(text = "Email address", color = secondaryLight)
-                            }
+                            },
                         )
                         if (loginViewModel.emailResult.errorMessage != null) {
                             Text(
@@ -173,10 +186,6 @@ class LoginScreen: Screen {
 
                     // Login button
                     Button(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(12.dp))
-                            .width(100.dp),
-    //                    onClick = {navigator.push(DorDScreen())},
                         onClick = {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
@@ -216,5 +225,4 @@ class LoginScreen: Screen {
             }
         }
     }
-
 }

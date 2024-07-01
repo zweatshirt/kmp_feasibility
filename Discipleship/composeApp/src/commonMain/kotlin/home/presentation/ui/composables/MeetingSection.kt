@@ -52,8 +52,7 @@ fun MeetingSection() {
 fun MeetingCard(meeting: Meeting) {
     val meetDisc = meeting.disciple
     Card(modifier = Modifier
-
-        .width(240.dp)
+        .fillMaxWidth()
         .height(180.dp)
         .padding(start = 16.dp, end = 8.dp, bottom = 16.dp)
         .clickable {},
