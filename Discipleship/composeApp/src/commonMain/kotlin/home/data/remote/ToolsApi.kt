@@ -2,7 +2,6 @@ package home.data.remote
 
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.database.database
 import global_consts.Constants
 import home.domain.model.Tool
 import home.domain.model.ToolData
@@ -16,7 +15,7 @@ import kotlinx.serialization.json.Json
 // make call to GodTools/KnowGod.com API from here using Ktor lib
 class ToolsApi {
     private val client = HttpClient()
-    private val db = Firebase.database.reference()
+//    private val db = Firebase.database.reference()
 
     // Request to KnowingGod.com API
     suspend fun getTools(): List<Tool> {
@@ -27,7 +26,6 @@ class ToolsApi {
         val json = Json {
              ignoreUnknownKeys = true
         }
-        Logger.i(responseBody)
         val tools: ToolData = json.decodeFromString(responseBody) // Response String to JSON
         return toolDataToObjects(tools) // converts JSON object to needed Tool objects
     }
@@ -36,7 +34,6 @@ class ToolsApi {
     private fun toolDataToObjects(tools: ToolData): List<Tool> {
         val toolsObjs = mutableListOf<Tool>()
         tools.data.forEach { tool ->
-            Logger.i("${tool.attributes.resourceType}")
             val resType = tool.attributes.resourceType
             if (resType.equals("tract") || resType.equals("lesson")) {
                 val toolLink = "https://knowgod.com/en/${tool.attributes.abbreviation}/0"
@@ -61,13 +58,12 @@ class ToolsApi {
     }
 
     suspend fun writeToolToDb(tool: Tool) {
-        db.child(Constants.DB_TOOLS_NAME).child(tool.id).setValue(tool)
+//        db.child(Constants.DB_TOOLS_NAME).child(tool.id).setValue(tool)
     }
 
     // Create read tools from DB function
     suspend fun readToolsFromDb(): List<Tool> {
-        val toolsQuery = db.child(Constants.DB_TOOLS_NAME)
-        Logger.i(toolsQuery.toString())
+//        val toolsRef = db.child(Constants.DB_TOOLS_NAME)
         return listOf(Tool("2", "2", "2", "2", 2))
     }
 

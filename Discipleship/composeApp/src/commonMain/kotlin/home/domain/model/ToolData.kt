@@ -19,7 +19,7 @@ data class ToolData(
 )
 
 @Serializable
-data class ToolJSON(
+data class ToolJSON (
     val id: String,
     val type: String,
     val attributes: ResourceAttributes,
@@ -64,7 +64,7 @@ data class ResourceRelationships @OptIn(ExperimentalSerializationApi::class) con
 )
 
 @Serializable
-data class TranslatedAttributes(
+data class TranslatedAttributes (
     val data: List<DataItem>? = null
 )
 

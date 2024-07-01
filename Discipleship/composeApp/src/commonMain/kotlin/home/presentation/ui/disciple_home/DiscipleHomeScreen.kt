@@ -122,7 +122,7 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
             ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
             // from our DB, occasionally updating it from this API
         ))
-        //val tools = discipleHomeViewModel.getTools() // returns successful but need to convert JSON data
+        val tools = discipleHomeViewModel.getTools() // returns successful but need to convert JSON data
 
         Scaffold(
             topBar = {

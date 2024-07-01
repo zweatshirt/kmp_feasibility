@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -37,12 +35,9 @@ TODO: Fix padding at the end of the lazy rows
 
 @Composable
 fun MeetingSection() {
-    val containerPad = 16.dp
-    SectionTitle("Upcoming meetings")
-    LazyRow() {
-        items(meetingsList.size) {
-            MeetingCard(meetingsList[it])
-        }
+    SectionTitle("Upcoming meeting")
+    Row(modifier = Modifier.fillMaxWidth()) {
+        MeetingCard(meetingsList[0])
     }
 }
 
@@ -52,10 +47,10 @@ fun MeetingSection() {
 fun MeetingCard(meeting: Meeting) {
     val meetDisc = meeting.disciple
     Card(modifier = Modifier
-
-        .width(240.dp)
-        .height(180.dp)
-        .padding(start = 16.dp, end = 8.dp, bottom = 16.dp)
+        .fillMaxWidth()
+//        .width(240.dp)
+        .height(200.dp)
+        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
         .clickable {},
         elevation = 12.dp
     ) {
@@ -66,7 +61,7 @@ fun MeetingCard(meeting: Meeting) {
             ) {
                 Text(
                     text = "${meeting.time} ${meeting.date}",
-                    fontSize = 16.sp,
+                    fontSize = 18.sp,
                     color = secondaryLight,
                     fontWeight = FontWeight.Bold
                 )
@@ -99,8 +94,14 @@ fun MeetingCard(meeting: Meeting) {
                         .padding(4.dp)
                 ) {
                     Text(
-                        text = "meetings.Meeting with ${meetDisc.firstName} ${meetDisc.lastName}",
-                        fontSize = 16.sp,
+                        text = "Meeting with ${meetDisc.firstName} ${meetDisc.lastName}",
+                        fontSize = 18.sp,
+                        color = primaryLight,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "${meeting.note}",
+                        fontSize = 18.sp,
                         color = primaryLight,
                         fontWeight = FontWeight.Bold
                     )

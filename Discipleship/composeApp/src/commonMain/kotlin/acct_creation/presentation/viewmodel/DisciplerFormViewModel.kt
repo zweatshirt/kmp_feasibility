@@ -85,12 +85,13 @@ class DisciplerFormViewModel: ViewModel() {
         yearsOfExperienceResult = validateYearsOfExperience()
         evanglismExperienceResult = validateEvangalismExperience()
 
-        if (haveDiscipledResult.successful &&
-            yearsOfExperienceResult.successful &&
-            evanglismExperienceResult.successful) {
-            return true
-        }
-        return false
+        if (!haveDiscipledResult.successful)
+            return false
+        if (!yearsOfExperienceResult.successful)
+            return false
+        if (!evanglismExperienceResult.successful)
+            return false
+        return true
     }
 
 }

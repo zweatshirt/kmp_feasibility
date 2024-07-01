@@ -9,10 +9,10 @@ class DiscipleFormViewModel {
 
     private var bibleKnowledge by mutableStateOf(0)
 
-    private var evangalismExperience by mutableStateOf("")
+    private var evangelismExperience by mutableStateOf("")
 
     var haveBeenDiscipledResult by mutableStateOf( ValidationResult(false, null))
-    var evangalismExperienceResult by mutableStateOf( ValidationResult(false, null))
+    var evangelismExperienceResult by mutableStateOf( ValidationResult(false, null))
 
     fun updateHaveDisicpled(input: String) {
         haveBeenDiscipled = input
@@ -23,7 +23,7 @@ class DiscipleFormViewModel {
     }
 
     fun updateEvangalismExperience(input: String) {
-        evangalismExperience = input
+        evangelismExperience = input
     }
 
     private fun validateHaveDiscipled(): ValidationResult {
@@ -40,7 +40,7 @@ class DiscipleFormViewModel {
     }
 
     private fun validateEvangalismExperience(): ValidationResult {
-        if (evangalismExperience.isBlank()) {
+        if (evangelismExperience.isBlank()) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "Pick Experience Level"
@@ -54,10 +54,10 @@ class DiscipleFormViewModel {
 
     fun discipleFormIsValid(): Boolean {
         haveBeenDiscipledResult = validateHaveDiscipled()
-        evangalismExperienceResult = validateEvangalismExperience()
+        evangelismExperienceResult = validateEvangalismExperience()
         if (!haveBeenDiscipledResult.successful)
             return false
-        if (!evangalismExperienceResult.successful)
+        if (!evangelismExperienceResult.successful)
             return false
         return true
     }

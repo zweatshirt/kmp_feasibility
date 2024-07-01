@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.googleServices)
     kotlin("plugin.serialization")
-    id("com.google.devtools.ksp") version "2.0.0-1.0.22"
     id("de.jensklingenberg.ktorfit") version "2.0.0"
 }
 
@@ -68,11 +67,8 @@ kotlin {
             // Transitions
             implementation(libs.voyager.transitions)
 
-            // Firebase auth librarty
+            // Firebase auth library
             implementation(libs.gitlive.firebase.auth)
-
-            // Firebase RealTime Database
-            implementation(libs.firebase.database)
 
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
@@ -90,7 +86,6 @@ kotlin {
 
             // Ktor
             implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.cio) // Engine
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
@@ -99,7 +94,6 @@ kotlin {
             implementation(libs.ktorfit.converters.response)
             implementation(libs.ktorfit.converters.call)
             implementation(libs.ktorfit.converters.flow)
-
         }
     }
 }
@@ -152,4 +146,3 @@ dependencies {
     implementation(libs.androidx.compose.material.core)
     implementation(libs.firebase.common.ktx)
 }
-
