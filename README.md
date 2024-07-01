@@ -1,7 +1,7 @@
 # compose_feasability
 Zach and Josh @ Cru Kotlin feasability testing repository
 
-## [Helpful repo for libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries?tab=readme-ov-file#storage)
+## [Helpful repo for libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries?tab=readme-ov-file)
 
 ### Problems:
 - Xcode and MacOS is required to fully utilize Kotlin Multiplatform Compose development.
