@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
@@ -48,6 +49,7 @@ import viewmodel.ScreenData
 * */
 
 class SignupScreen: Screen {
+    override val key: ScreenKey = "SignupScreen"
     @Composable
     override fun Content(){
         val navigator = LocalNavigator.currentOrThrow

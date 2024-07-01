@@ -12,7 +12,7 @@ import home.domain.repository.ToolsRepository
 class ToolsRepoImplementation(
     private val toolsApi: ToolsApi
 ): ToolsRepository {
-    // requests and fetches data from the
+    // requests and fetches data from the API
     override suspend fun getTools(): Either<NetworkError, List<Tool>> {
         return Either.catch {
             toolsApi.getTools()

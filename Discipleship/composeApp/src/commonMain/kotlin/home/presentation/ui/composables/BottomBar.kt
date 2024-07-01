@@ -13,6 +13,8 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import calendar.CalendarPage
 import discipleship.composeapp.generated.resources.Res
@@ -39,11 +41,14 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
         NavigationBarItem(
             selected = true,
             onClick = {
-//                navigator.items.forEach {
-//                    println("$it")
-//                }
-                //if (navigator.items.contains(AccountProfile()))
-                navigator.push(AccountProfile(screenData))
+                val screens = mutableListOf<Screen>()
+                navigator.items.forEach {
+                    if (it.key != "Profile") {
+                        screens.add(it)
+                    }
+                }
+                screens.add(AccountProfile(screenData))
+                navigator.replaceAll(screens)
             },
             icon = {
                 Icon(
@@ -62,10 +67,23 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             onClick = {
                 if (currentScreen != "Home") {
                     if (screenData.isDisciple) {
-                        Logger.i("test")
-                        navigator.push(DiscipleHomeScreen(screenData))
+                        val screens = mutableListOf<Screen>()
+                        navigator.items.forEach {
+                            if (it.key != "DiscipleHome") {
+                                screens.add(it)
+                            }
+                        }
+                        screens.add(DiscipleHomeScreen(screenData))
+                        navigator.replaceAll(screens)
                     } else {
-                        navigator.push(DisciplerHomeScreen(screenData))
+                        val screens = mutableListOf<Screen>()
+                        navigator.items.forEach {
+                            if (it.key != "DisciplerHome") {
+                                screens.add(it)
+                            }
+                        }
+                        screens.add(DisciplerHomeScreen(screenData))
+                        navigator.replaceAll(screens)
                     }
                 }
             },
@@ -84,7 +102,14 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             selected = true,
             onClick = {
                 if (currentScreen != "Calendar") {
-                    navigator.push(CalendarPage(screenData))
+                    val screens = mutableListOf<Screen>()
+                    navigator.items.forEach {
+                        if (it.key != "Calendar") {
+                            screens.add(it)
+                        }
+                    }
+                    screens.add(CalendarPage(screenData))
+                    navigator.replaceAll(screens)
                 }
             },
             icon = {

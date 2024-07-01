@@ -1,6 +1,7 @@
 # compose_feasability
 Zach and Josh @ Cru Kotlin feasability testing repository
 
+## [Helpful repo for libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries?tab=readme-ov-file)
 
 ### Problems:
 - Xcode and MacOS is required to fully utilize Kotlin Multiplatform Compose development.
@@ -53,4 +54,5 @@ Open source Firebase Kotlin SDK + Firebase Authentication
 - Permissions still need to be managed on the individual platforms (you can create a package to handle the permissions across the different platforms yourself but it is an initial time consuming process)
 - Dependency injection is a bit of a pain it seems but not terrible (a good option is Koin)
 - User auth is doable but there is no official library for it as far as we are aware. There is an open source Firebase SDK that offers user auth, and it works well.
+- Extremely challenging trying to find a cloud database library that works well. First we are tried Atlas Device SDK (Realm) but moved to Firebase due to the complexity of Realm, and the common code capabilities were limited with Firebase RealTime Database. We are trying Room, which has dependency issues, and may return to Atlas Device SDK
 
