@@ -7,8 +7,9 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
     kotlin("plugin.serialization")
-    id("com.google.devtools.ksp") version "2.0.0-1.0.22"
     id("de.jensklingenberg.ktorfit") version "2.0.0"
 }
 
@@ -68,11 +69,8 @@ kotlin {
             // Transitions
             implementation(libs.voyager.transitions)
 
-            // Firebase auth librarty
+            // Firebase auth library
             implementation(libs.gitlive.firebase.auth)
-
-            // Firebase RealTime Database
-            implementation(libs.firebase.database)
 
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
@@ -90,7 +88,6 @@ kotlin {
 
             // Ktor
             implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.cio) // Engine
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
@@ -99,6 +96,13 @@ kotlin {
             implementation(libs.ktorfit.converters.response)
             implementation(libs.ktorfit.converters.call)
             implementation(libs.ktorfit.converters.flow)
+
+            // Room database
+            implementation(libs.androidx.room.gradle.plugin)
+            implementation(libs.room.runtime)
+            implementation(libs.room.compiler)
+            implementation(libs.androidx.sqlite)
+            implementation(libs.sqlite.bundled)
 
         }
     }
@@ -141,6 +145,10 @@ android {
     }
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.core)
@@ -151,5 +159,5 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.core)
     implementation(libs.firebase.common.ktx)
+    ksp(libs.room.compiler)
 }
-

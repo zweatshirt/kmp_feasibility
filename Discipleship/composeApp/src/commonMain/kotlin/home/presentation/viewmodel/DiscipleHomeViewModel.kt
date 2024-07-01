@@ -3,9 +3,9 @@ package home.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
+import dev.gitlive.firebase.Firebase
 import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 /* Author: Zach */
@@ -18,7 +18,6 @@ class DiscipleHomeViewModel constructor(
 ): ViewModel() {
 //    private val _state = MutableStateFlow()
     private val _scope = viewModelScope
-
     fun getTools() {
         _scope.launch {
             var toolObjects: List<Tool> = mutableListOf()
@@ -28,9 +27,6 @@ class DiscipleHomeViewModel constructor(
                     // this is for testing
                     toolsRepository.readToolsFromDb()
                     // update state with the tools
-                    tools.forEach {
-                        Logger.i(it.name)
-                    }
                     Logger.i("Successful Tools API request in DiscipleHomeViewModel")
                     toolObjects = tools
                 } // successful request, returns list of tools
@@ -44,6 +40,7 @@ class DiscipleHomeViewModel constructor(
             else {
                 Logger.e("toolObjects failed to populate")
             }
+
         }
     }
 }

@@ -33,5 +33,4 @@ class ToolsRepoImplementation(
             toolsApi.readToolsFromDb()
         }.mapLeft { it.toNetworkError() }
     }
-
 }

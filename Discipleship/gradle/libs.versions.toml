@@ -14,6 +14,7 @@ arrowCore = "1.2.4"
 auth = "23.0.0"
 calendar = "1.0.1"
 compose-plugin = "1.6.10"
+daggerCompiler = "2.51.1"
 firebaseAuth = "1.12.0"
 firebaseDatabase = "1.13.0"
 junit = "4.13.2"
@@ -43,13 +44,21 @@ gservices = "4.4.2"
 firebaseCommonKtx = "21.0.0"
 ktor = "2.3.12"
 coroutines = "1.8.1"
+firebaseDatabaseKtx = "21.0.0"
+room = "2.7.0-alpha04"
+ksp = "2.0.0-1.0.22"
+sqlite = "2.5.0-SNAPSHOT"
+kapt = "2.6.1"
 
 [libraries]
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+androidx-room-gradle-plugin = { module = "androidx.room:room-gradle-plugin" }
+androidx-sqlite = { module = "androidx.sqlite:sqlite" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowCore" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrowCore" }
 auth = { module = "com.google.firebase:auth", version.ref = "auth" }
 calendar = { module = "io.github.wojciechosak:calendar", version.ref = "calendar" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
 firebase-auth = { module = "dev.gitlive:firebase-auth" }
 firebase-database = { module = "dev.gitlive:firebase-database", version.ref = "firebaseDatabase" }
 gitlive-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
@@ -94,6 +103,11 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-runtime-android = { module = "androidx.room:room-runtime-android", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -103,3 +117,5 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "gservices" }
 serialization = { id = "plugin.serialization", version.ref = "kotlinxSerializationJson" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
