@@ -10,6 +10,7 @@ import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
+import profile.domain.model.User
 
 
 /* Author: Zachery Linscott
@@ -65,6 +66,17 @@ class SignupScreenViewModel: ViewModel() {
 
     fun isPassMinLength(): Boolean {
         return password.length >= 8
+    }
+
+    // User Creation
+    fun userCreation(): User {
+        val user = User(
+            uID = auth.currentUser!!.uid,
+            firstName = firstName,
+            lastName = lastName,
+            email = email
+        )
+        return user
     }
 
     // Validation Functions

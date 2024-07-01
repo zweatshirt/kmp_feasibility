@@ -40,6 +40,7 @@ import  androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
@@ -57,6 +58,7 @@ import viewmodel.ScreenData
 * TODO: Complete "Forgot password?" functionality, notifying user upon incorrect login info, etc
 * */
 class LoginScreen: Screen {
+    override val key: ScreenKey = "LoginScreen"
     @Composable
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
@@ -177,7 +179,7 @@ class LoginScreen: Screen {
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.firebaseAuth()
                                 Logger.i("currentUser value update: $currentUser")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
+                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser)))
                             }
                         },
                         colors = ButtonDefaults.buttonColors(

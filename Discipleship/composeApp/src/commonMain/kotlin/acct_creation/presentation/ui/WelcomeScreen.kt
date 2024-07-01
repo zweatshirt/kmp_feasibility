@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import discipleship.composeapp.generated.resources.Res
@@ -61,6 +62,7 @@ val resources = listOf(
 )
 
 class WelcomeScreen: Screen {
+    override val key: ScreenKey = "WelcomeScreen"
     @Composable
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo

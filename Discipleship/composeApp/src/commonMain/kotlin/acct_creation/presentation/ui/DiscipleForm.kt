@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
@@ -47,6 +48,7 @@ import ui.theme.secondaryLight
 
 /* Author: Josh */
 data class DiscipleForm(val screenData: ScreenData): Screen {
+    override val key: ScreenKey = "DiscipleFormScreen"
     @Composable
     override fun Content() {
         var bibleKnowledge by remember { mutableStateOf(0f) }

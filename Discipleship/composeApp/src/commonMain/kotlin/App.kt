@@ -5,9 +5,12 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import acct_creation.presentation.ui.WelcomeScreen
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import viewmodel.ScreenData
 
 
+@OptIn(ExperimentalVoyagerApi::class)
 @Composable
 @Preview
 fun App() {
@@ -23,13 +26,18 @@ fun App() {
 //            SlideTransition(navigator)
 //        }
 //    }
-   // else { // idk how necessary the welcome screen is
-        // but preferably we can find a way for recurring users
-        // to go directly to login page instead.
-        // We would have to cache something saying they've used
-        // our app.
-        Navigator(WelcomeScreen()) { navigator ->
-            SlideTransition(navigator)
-        }
-    //}
+    // else { // idk how necessary the welcome screen is
+    // but preferably we can find a way for recurring users
+    // to go directly to login page instead.
+    // We would have to cache something saying they've used
+    // our app.
+    Navigator(WelcomeScreen())
+//    Navigator(
+//        screen = WelcomeScreen(),
+//        disposeBehavior = NavigatorDisposeBehavior(disposeSteps = false)
+//    ) { navigator ->
+//        SlideTransition(navigator,
+//            disposeScreenAfterTransitionEnd = true
+//        )
+//    }
 }
