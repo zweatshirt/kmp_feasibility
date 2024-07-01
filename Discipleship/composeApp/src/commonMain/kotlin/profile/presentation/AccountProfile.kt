@@ -14,7 +14,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -40,7 +39,6 @@ import viewmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.backgroundLight
 import ui.theme.primaryContainerLight
-import ui.theme.primaryDark
 import ui.theme.primaryLight
 import ui.theme.tertiaryLight
 
@@ -136,29 +134,7 @@ data class AccountProfile(val screenData: ScreenData): Screen {
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
-//                Text(
-//                    modifier = Modifier.padding(4.dp),
-//                    text = "Email",
-//                    fontSize = 20.sp,
-//                    color = primaryLight,
-//                    fontWeight = FontWeight.Bold
-//                )
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .size(40.dp)
-//                        .background(primaryContainerLight)
-//                        .padding(2.dp),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Text(
-//                        modifier = Modifier.padding(4.dp),
-//                        text = user.email,
-//                        fontSize = 18.sp,
-//                        color = onPrimaryContainerLight,
-//                        fontWeight = FontWeight.SemiBold
-//                    )
-//                }
+
             }
         }
     }
