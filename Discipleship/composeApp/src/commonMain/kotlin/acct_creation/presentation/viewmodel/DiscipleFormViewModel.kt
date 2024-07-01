@@ -12,7 +12,7 @@ class DiscipleFormViewModel {
     private var evangelismExperience by mutableStateOf("")
 
     var haveBeenDiscipledResult by mutableStateOf( ValidationResult(false, null))
-    var evangalismExperienceResult by mutableStateOf( ValidationResult(false, null))
+    var evangelismExperienceResult by mutableStateOf( ValidationResult(false, null))
 
     fun updateHaveDisicpled(input: String) {
         haveBeenDiscipled = input
@@ -54,10 +54,10 @@ class DiscipleFormViewModel {
 
     fun discipleFormIsValid(): Boolean {
         haveBeenDiscipledResult = validateHaveDiscipled()
-        evangalismExperienceResult = validateEvangalismExperience()
+        evangelismExperienceResult = validateEvangalismExperience()
         if (!haveBeenDiscipledResult.successful)
             return false
-        if (!evangalismExperienceResult.successful)
+        if (!evangelismExperienceResult.successful)
             return false
         return true
     }
