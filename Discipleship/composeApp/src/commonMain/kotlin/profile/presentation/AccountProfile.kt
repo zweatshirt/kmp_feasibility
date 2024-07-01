@@ -125,15 +125,23 @@ data class AccountProfile(val screenData: ScreenData): Screen {
                         )
                     },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                        unfocusedBorderColor = primaryLight,
-                        unfocusedLabelColor = primaryLight,
-                        leadingIconColor = primaryLight,
-                        textColor = primaryLight
+                        disabledBorderColor = primaryLight,
+                        disabledTextColor = primaryLight,
+                        disabledLabelColor = primaryLight,
+                        disabledLeadingIconColor = primaryLight
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
+
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                if (screenData.isDisciple) {
+                    DiscipleProfileInfo(user)
+                } else {
+                    DisciplerProfileInfo(user)
+                }
 
             }
         }
