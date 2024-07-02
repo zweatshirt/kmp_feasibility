@@ -33,14 +33,6 @@ class DiscipleHomeViewModel constructor(
                 .onLeft {
                     Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
                 } // unsuccessful request, throws NetworkError
-
-            if (toolObjects.isNotEmpty()) {
-                toolsRepository.writeToolsToDb(toolObjects)
-            }
-            else {
-                Logger.e("toolObjects failed to populate")
-            }
-
         }
     }
 }

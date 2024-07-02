@@ -7,8 +7,10 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.realm)
     kotlin("plugin.serialization")
     id("de.jensklingenberg.ktorfit") version "2.0.0"
+
 }
 
 kotlin {
@@ -89,18 +91,27 @@ kotlin {
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+
             // Ktorfit stuff for better handling requests (not currently used)
             implementation(libs.ktorfit.lib)
             implementation(libs.ktorfit.converters.response)
             implementation(libs.ktorfit.converters.call)
             implementation(libs.ktorfit.converters.flow)
+
+            // Realm/Atlas Device SDK
+            implementation(libs.library.base) // base lib
+            implementation(libs.library.sync) // lib for cloud sync
+
+            /* MongoDB (Realm related) */
+            // Enables conversion from Kotlin objects to MongoDB BSON data
+            implementation(libs.bson.kotlinx)
         }
     }
 }
 
 android {
     namespace = "kmp.project.discipleship"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 34
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
@@ -130,6 +141,7 @@ android {
     buildFeatures {
         compose = true
     }
+    buildToolsVersion = "34.0.0"
     dependencies {
         debugImplementation(compose.uiTooling)
     }
