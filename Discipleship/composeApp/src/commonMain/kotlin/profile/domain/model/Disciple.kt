@@ -1,5 +1,6 @@
 package profile.domain.model
 
+import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
 import org.jetbrains.compose.resources.DrawableResource
 import org.mongodb.kbson.ObjectId
@@ -13,9 +14,9 @@ class Disciple(
     bio: String):
     User(uID, firstName, lastName, email, image, bio)
 
-class RealmDisciple {
+class DiscipleEntity: RealmObject {
     @PrimaryKey
-    var _id: ObjectId = ObjectId()
-    var userId: ObjectId = ObjectId()
-    var mentorId: String = ""
+    var id: String = ""
+    var userId: String = ""
 }
+
