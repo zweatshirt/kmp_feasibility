@@ -103,11 +103,8 @@ kotlin {
             implementation(libs.library.sync) // lib for cloud sync
 
             /* MongoDB (Realm related) */
-            // Coroutine driver for MongoDB
-//            implementation(libs.mongodb.driver.kotlin.coroutine)
             // Enables conversion from Kotlin objects to MongoDB BSON data
             implementation(libs.bson.kotlinx)
-//            implementation(libs.mongodb.driver.sync)
         }
     }
 }

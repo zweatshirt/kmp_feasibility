@@ -33,7 +33,6 @@ class DiscipleHomeViewModel constructor(
                 .onLeft {
                     Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
                 } // unsuccessful request, throws NetworkError
-
         }
     }
 }
