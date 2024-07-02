@@ -18,5 +18,5 @@ class DiscipleEntity: RealmObject {
     @PrimaryKey
     var id: String = ""
     var userId: String = ""
-    var mentorId: String = ""
 }
+

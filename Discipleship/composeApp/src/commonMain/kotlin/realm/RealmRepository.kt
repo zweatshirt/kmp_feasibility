@@ -1,8 +1,6 @@
 package realm
 
 import dev.gitlive.firebase.Firebase
-import dev.gitlive.firebase.auth.FirebaseUser
-import dev.gitlive.firebase.auth.auth
 import global_consts.Constants
 import io.realm.kotlin.Realm
 import io.realm.kotlin.mongodb.App
@@ -104,5 +102,4 @@ class DisciplerDaoImpl constructor(
     override val realm: Realm = r
     override val clazz: KClass<DisciplerEntity> = DisciplerEntity::class
 }
-
 
