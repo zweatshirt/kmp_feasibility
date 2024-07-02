@@ -2,6 +2,7 @@ package home.domain.model
 
 import kotlinx.serialization.Serializable
 
+
 //import kotlinx.serialization.Serializable
 // This class is meant to serve as a container
 // for any GodTools tools/data we collect from the API
@@ -15,4 +16,5 @@ data class Tool(
     val toolLink: String,
     val totalViews: Int?
 )
+
 

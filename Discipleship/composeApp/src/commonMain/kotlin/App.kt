@@ -6,6 +6,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import acct_creation.presentation.ui.WelcomeScreen
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.jetpack.ProvideNavigatorLifecycleKMPSupport
 import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import viewmodel.ScreenData
 
@@ -31,7 +32,10 @@ fun App() {
     // to go directly to login page instead.
     // We would have to cache something saying they've used
     // our app.
-    Navigator(WelcomeScreen())
+    ProvideNavigatorLifecycleKMPSupport {
+        Navigator(WelcomeScreen())
+    }
+
 //    Navigator(
 //        screen = WelcomeScreen(),
 //        disposeBehavior = NavigatorDisposeBehavior(disposeSteps = false)

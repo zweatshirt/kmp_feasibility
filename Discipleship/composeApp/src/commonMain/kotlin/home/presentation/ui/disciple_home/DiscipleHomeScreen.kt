@@ -11,16 +11,22 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.jetpack.navigatorViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import co.touchlab.kermit.Logger
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.data.remote.ToolsApi
 import home.data.repository.ToolsRepoImplementation
-import home.domain.model.ResourceAttributes
 import home.presentation.ui.composables.BottomBar
 import home.presentation.ui.composables.FinishedStudiesSection
 import home.presentation.ui.composables.TopBar
@@ -113,16 +119,22 @@ val finishedList = listOf(
 
 data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
     override val key = "DiscipleHome"
+    @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         // initialize the disciple view model, passing in the tools repository that fetches from
         // the GodTools/KnowGod.com API by use of the ToolsApi
-        val discipleHomeViewModel = DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
-            ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
-            // from our DB, occasionally updating it from this API
-        ))
+        val discipleHomeViewModel = navigatorViewModel { DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
+            ToolsApi())) }
+//        val discipleHomeViewModel by remember { mutableStateOf(DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
+//            ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
+//            // from our DB, occasionally updating it from this API
+//        ))) }
         //val tools = discipleHomeViewModel.getTools() // returns successful but need to convert JSON data
+        //val toolList = remember { mutableStateOf(discipleHomeViewModel.discipleHomeScreenState.toolsList) }
+        discipleHomeViewModel.getTools()
+        //val toolList = discipleHomeViewModel.discipleHomeScreenState.toolsList.observeAsState()
 
         Scaffold(
             topBar = {
@@ -147,8 +159,10 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
                 Spacer(modifier = Modifier.padding(12.dp))
                 FinishedStudiesSection()
                 Spacer(modifier = Modifier.padding(12.dp))
-                ToolsSection()
+                ToolsSection(discipleHomeViewModel.discipleHomeScreenState.toolsList)
+                Logger.i("The size of tools list is: ${discipleHomeViewModel.discipleHomeScreenState.toolsList.size}")
             }
         }
     }
 }
+

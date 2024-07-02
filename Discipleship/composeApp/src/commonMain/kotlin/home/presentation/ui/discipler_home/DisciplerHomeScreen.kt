@@ -110,7 +110,7 @@ data class DisciplerHomeScreen(val screenData: ScreenData): Screen {
             ) {
                 MeetingSection()
                 DiscipleSection()
-                ToolsSection()
+                ToolsSection(toolsList)
             }
         }
     }

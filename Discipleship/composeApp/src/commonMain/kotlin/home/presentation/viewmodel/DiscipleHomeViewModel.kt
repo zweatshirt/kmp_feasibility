@@ -1,11 +1,13 @@
 package home.presentation.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 /* Author: Zach */
@@ -19,9 +21,12 @@ class DiscipleHomeViewModel constructor(
 //    private val _state = MutableStateFlow()
     private val _scope = viewModelScope
 
+    var discipleHomeScreenState by mutableStateOf(DiscipleHomeScreenState())
+
     fun getTools() {
+        var toolObjects: List<Tool> = mutableListOf()
         _scope.launch {
-            var toolObjects: List<Tool> = mutableListOf()
+
             // returns Either<NetworkError, List<Tool>>
             toolsRepository.getTools()
                 .onRight { tools ->
@@ -37,13 +42,8 @@ class DiscipleHomeViewModel constructor(
                 .onLeft {
                     Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
                 } // unsuccessful request, throws NetworkError
-
-            if (toolObjects.isNotEmpty()) {
-                toolsRepository.writeToolsToDb(toolObjects)
-            }
-            else {
-                Logger.e("toolObjects failed to populate")
-            }
+            discipleHomeScreenState.toolsList = toolObjects
+            Logger.i("The size of the tool list is: ${discipleHomeScreenState.toolsList.size}")
         }
     }
 }

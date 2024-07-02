@@ -51,6 +51,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
 
+
             // Calendar lib
             implementation(libs.calendar)
 
@@ -67,6 +68,8 @@ kotlin {
             implementation(libs.voyager.tab.navigator)
             // Transitions
             implementation(libs.voyager.transitions)
+            // KMP
+            implementation("cafe.adriel.voyager:voyager-lifecycle-kmp:1.1.0-beta02")
 
             // Firebase auth librarty
             implementation(libs.gitlive.firebase.auth)

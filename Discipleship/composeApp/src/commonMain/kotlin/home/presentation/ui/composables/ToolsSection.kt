@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import home.presentation.ui.discipler_home.toolsList
 import home.domain.model.Tool
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
@@ -30,12 +29,12 @@ TODO: Fix padding at the end of the lazy rows
 */
 
 @Composable
-fun ToolsSection() {
+fun ToolsSection(toolList: List<Tool>) {
 //    val containerPad = 16.dp
     SectionTitle("Recommended tools")
     LazyRow {
-        items(toolsList.size) {
-            ToolCard(toolsList[it])
+        items(toolList.size) {
+            ToolCard(toolList[it])
         }
     }
 }
