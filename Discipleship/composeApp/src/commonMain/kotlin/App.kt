@@ -1,13 +1,8 @@
-import acct_creation.presentation.ui.DiscipleForm
-import acct_creation.presentation.ui.DisciplerForm
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import androidx.compose.runtime.Composable
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.transitions.SlideTransition
 import acct_creation.presentation.ui.WelcomeScreen
+import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
-import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
-import viewmodel.ScreenData
+import cafe.adriel.voyager.navigator.Navigator
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @OptIn(ExperimentalVoyagerApi::class)

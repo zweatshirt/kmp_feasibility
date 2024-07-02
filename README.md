@@ -55,4 +55,4 @@ Open source Firebase Kotlin SDK + Firebase Authentication
 - Dependency injection is a bit of a pain it seems but not terrible (a good option is Koin)
 - User auth is doable but there is no official library for it as far as we are aware. There is an open source Firebase SDK that offers user auth, and it works well.
 - Extremely challenging trying to find a cloud database library that works well. First we are tried Atlas Device SDK (Realm) but moved to Firebase due to the complexity of Realm, and the common code capabilities were limited with Firebase RealTime Database. We are trying Room, which has dependency issues, and may return to Atlas Device SDK
-
+- A lot of MongoDB and Realm/Atlas Device SDK plugins/dependencies are not yet compatible with Kotlin 2.0.0

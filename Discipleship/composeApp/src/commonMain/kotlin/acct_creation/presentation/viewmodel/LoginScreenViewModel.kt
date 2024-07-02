@@ -10,6 +10,7 @@ import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
+//import realm.RealmRepository
 
 /* Author: Zachery Linscott
 * This class handles user authentication
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 * */
 class LoginScreenViewModel: ViewModel() {
     private var auth = Firebase.auth
+//    private val realmRepo = RealmRepository()
     private val scope = viewModelScope
     var firebaseUser: FirebaseUser? = null
     var userSignedIn = false
