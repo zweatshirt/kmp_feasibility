@@ -35,7 +35,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.onSecondaryContainerLight
 import ui.theme.primaryContainerLight

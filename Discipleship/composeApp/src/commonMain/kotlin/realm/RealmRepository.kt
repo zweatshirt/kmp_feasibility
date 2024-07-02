@@ -1,29 +1,23 @@
 package realm
 
-import dev.gitlive.firebase.Firebase
-import global_consts.Constants
 import io.realm.kotlin.Realm
-import io.realm.kotlin.mongodb.App
-import io.realm.kotlin.mongodb.AppConfiguration
-import io.realm.kotlin.mongodb.sync.SyncConfiguration
+import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.notifications.ResultsChange
 import io.realm.kotlin.query.RealmResults
 import io.realm.kotlin.types.RealmObject
 import kotlinx.coroutines.flow.Flow
-import profile.domain.model.Disciple
 import profile.domain.model.DiscipleEntity
-import profile.domain.model.User
-import profile.domain.model.Discipler
 import profile.domain.model.DisciplerEntity
 import profile.domain.model.UserEntity
 import kotlin.reflect.KClass
 
 class RealmRepository {
-    private val schemaClass = setOf(User::class, Disciple::class, Discipler::class)
-    private val appService by lazy {
-        val appConfiguration = AppConfiguration.Builder(appId = Constants.ATLAS_APP_ID).build()
-        App.create(appConfiguration)
-    }
+
+    private val schemaClass = setOf(UserEntity::class, DiscipleEntity::class, DisciplerEntity::class)
+    private val config = RealmConfiguration.create(
+        schema = schemaClass
+    )
+    val realm = Realm.open(config)
 }
 
 interface RealmDao<T : RealmObject> {

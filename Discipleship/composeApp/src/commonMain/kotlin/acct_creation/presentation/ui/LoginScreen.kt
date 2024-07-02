@@ -51,7 +51,7 @@ import ui.theme.errorLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 
 /* Author: Zach and Josh
 * This is the primary login screen for the application.

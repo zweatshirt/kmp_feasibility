@@ -20,7 +20,6 @@ import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.data.remote.ToolsApi
 import home.data.repository.ToolsRepoImplementation
-import home.domain.model.ResourceAttributes
 import home.presentation.ui.composables.BottomBar
 import home.presentation.ui.composables.FinishedStudiesSection
 import home.presentation.ui.composables.TopBar
@@ -30,7 +29,7 @@ import home.presentation.ui.composables.ToDoSection
 import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.discipler_home.disciplesList
 import home.presentation.viewmodel.DiscipleHomeViewModel
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 
 /* Author: Zachery Linscott */

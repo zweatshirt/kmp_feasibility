@@ -43,7 +43,7 @@ import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 
 /* Author: Zachery Linscott
 * */
