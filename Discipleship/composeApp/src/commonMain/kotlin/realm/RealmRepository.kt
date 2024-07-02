@@ -18,8 +18,8 @@ class RealmRepository {
         App.create(appConfiguration)
     }
 
-    private val realm by lazy {
-//        val user = io.realm.kotlin.mongodb.User
-        val config = SyncConfiguration.Builder(user, schemaClass).name("users")
-    }
+//    private val realm by lazy {
+////        val user = io.realm.kotlin.mongodb.User
+//        val config = SyncConfiguration.Builder(user, schemaClass).name("users")
+//    }
 }
