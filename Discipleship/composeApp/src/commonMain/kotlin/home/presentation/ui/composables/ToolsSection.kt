@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,13 +48,19 @@ fun ToolsSection(toolList: List<Tool>) {
 @Composable
 fun ToolCard(tool: Tool) {
     val tName = tool.name
+    val tDescription = tool.description
+    val uriHandler = LocalUriHandler.current
+    val url = tool.toolLink
+
     Card(
         modifier = Modifier
             .width(240.dp)
-            .height(140.dp)
+            .height(175.dp)
             .padding(start = 16.dp, end = 8.dp, bottom = 16.dp)
             .background(primaryContainerLight)
-            .clickable {},
+            .clickable {
+                uriHandler.openUri(url)
+            },
         elevation = 12.dp
     ) {
         Column(modifier = Modifier
@@ -65,12 +73,22 @@ fun ToolCard(tool: Tool) {
             ) {
                 Text(
                     text = tName,
-                    fontSize = 26.sp,
+                    fontSize = 24.sp,
                     color = primaryLight,
                     fontWeight = FontWeight.SemiBold
                 )
             }
 
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            if (tDescription != null) {
+                Text(
+                    text = tDescription,
+                    fontSize = 12.sp,
+                    color = primaryLight,
+                    fontWeight = FontWeight.Medium
+                )
+            }
         }
     }
 }
