@@ -131,10 +131,9 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
 //            ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
 //            // from our DB, occasionally updating it from this API
 //        ))) }
-        //val tools = discipleHomeViewModel.getTools() // returns successful but need to convert JSON data
         //val toolList = remember { mutableStateOf(discipleHomeViewModel.discipleHomeScreenState.toolsList) }
         discipleHomeViewModel.getTools()
-        //val toolList = discipleHomeViewModel.discipleHomeScreenState.toolsList.observeAsState()
+        val toolList = discipleHomeViewModel.toolList
 
         Scaffold(
             topBar = {
@@ -159,8 +158,8 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
                 Spacer(modifier = Modifier.padding(12.dp))
                 FinishedStudiesSection()
                 Spacer(modifier = Modifier.padding(12.dp))
-                ToolsSection(discipleHomeViewModel.discipleHomeScreenState.toolsList)
-                Logger.i("The size of tools list is: ${discipleHomeViewModel.discipleHomeScreenState.toolsList.size}")
+                ToolsSection(toolList)
+                Logger.i("The size of tools list is: $toolList")
             }
         }
     }

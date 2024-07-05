@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /* Author: Zach */
@@ -22,6 +24,11 @@ class DiscipleHomeViewModel constructor(
     private val _scope = viewModelScope
 
     var discipleHomeScreenState by mutableStateOf(DiscipleHomeScreenState())
+        private set
+
+    var toolList: List<Tool> by mutableStateOf(mutableListOf<Tool>())
+        private set
+
 
     fun getTools() {
         var toolObjects: List<Tool> = mutableListOf()
@@ -42,7 +49,8 @@ class DiscipleHomeViewModel constructor(
                 .onLeft {
                     Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
                 } // unsuccessful request, throws NetworkError
-            discipleHomeScreenState.toolsList = toolObjects
+            //discipleHomeScreenState.toolsList = toolObjects
+            toolList = toolObjects
             Logger.i("The size of the tool list is: ${discipleHomeScreenState.toolsList.size}")
         }
     }
