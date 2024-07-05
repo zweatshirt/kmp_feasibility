@@ -37,6 +37,12 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
+import home.data.remote.ToolsApi
+import home.data.repository.ToolsRepoImplementation
+import home.presentation.viewmodel.DiscipleHomeViewModel
+import realm.data.remote.RealmApi
+import realm.data.repository.RealmRepoImpl
+import realm.domain.repository.RealmRepository
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.inverseSurfaceLight
@@ -50,11 +56,18 @@ import screenmodel.ScreenData
 
 class SignupScreen: Screen {
     override val key: ScreenKey = "SignupScreen"
+
+
     @Composable
     override fun Content(){
         val navigator = LocalNavigator.currentOrThrow
-        val signupScreenViewModel = SignupScreenViewModel()
-        var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
+        val signupScreenViewModel =
+            SignupScreenViewModel(
+                realmRepository = RealmRepoImpl(
+                    RealmApi()
+                )
+            )
+        var currentUser: io.realm.kotlin.mongodb.User? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
 
@@ -212,9 +225,14 @@ class SignupScreen: Screen {
                             Logger.i("Login button click success")
                             signupScreenViewModel.validationOnSubmit()
                             if (signupScreenViewModel.signupValidation.isValidated) {
-                                currentUser = signupScreenViewModel.firebaseAuth()
+                                currentUser = signupScreenViewModel.atlasAuth()
                                 Logger.i("currentUser value update: $currentUser")
-                                navigator.push(DorDScreen(ScreenData(false, currentUser)))
+                                if (currentUser != null) {
+                                    signupScreenViewModel.createUserObject()
+                                    signupScreenViewModel.writeUserToDb()
+                                }
+                                navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
+
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -241,7 +259,7 @@ class SignupScreen: Screen {
             }
         }
         else {
-            navigator.push(DorDScreen(ScreenData(false, currentUser)))
+            navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
         }
     }
 }

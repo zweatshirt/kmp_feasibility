@@ -1,6 +1,7 @@
 package acct_creation.presentation.ui
 
 import acct_creation.presentation.viewmodel.LoginScreenViewModel
+import acct_creation.presentation.viewmodel.SignupScreenViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -46,6 +47,9 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.auth.FirebaseUser
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
+import realm.data.remote.RealmApi
+import realm.data.repository.RealmRepoImpl
+import realm.domain.repository.RealmRepository
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.primaryContainerLight
@@ -63,8 +67,12 @@ class LoginScreen: Screen {
     override fun Content() {
         val cru: DrawableResource = Res.drawable.crulogo // image of the Cru logo
         val navigator = LocalNavigator.currentOrThrow
-        val loginViewModel = LoginScreenViewModel()
-        var currentUser: FirebaseUser? by remember { mutableStateOf(null) }
+        val loginViewModel = LoginScreenViewModel(
+            realmRepository = RealmRepoImpl(
+                RealmApi()
+            )
+        )
+        var currentUser: io.realm.kotlin.mongodb.User? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
 
@@ -177,9 +185,9 @@ class LoginScreen: Screen {
                         onClick = {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
-                                currentUser = loginViewModel.firebaseAuth()
+                                currentUser = loginViewModel.atlasAuth()
                                 Logger.i("currentUser value update: $currentUser")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser)))
+                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser, null)))
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -209,7 +217,7 @@ class LoginScreen: Screen {
                 }
             }
             else {
-                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
+                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser, null)))
             }
         }
     }

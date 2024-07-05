@@ -117,10 +117,13 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
         val navigator = LocalNavigator.currentOrThrow
         // initialize the disciple view model, passing in the tools repository that fetches from
         // the GodTools/KnowGod.com API by use of the ToolsApi
-        val discipleHomeViewModel = DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
-            ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
+        val discipleHomeViewModel = DiscipleHomeViewModel(
+            // we want this API to be stored in our DB, and in the future we will pull
             // from our DB, occasionally updating it from this API
-        ))
+            toolsRepository = ToolsRepoImplementation(
+                ToolsApi()
+            )
+        )
         val tools = discipleHomeViewModel.getTools() // returns successful but need to convert JSON data
 
         Scaffold(

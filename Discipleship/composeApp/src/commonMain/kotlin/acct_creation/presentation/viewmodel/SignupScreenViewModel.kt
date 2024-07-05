@@ -9,8 +9,18 @@ import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import global_consts.Constants
+import home.data.remote.ToolsApi
+import home.data.repository.ToolsRepoImplementation
+import home.presentation.viewmodel.DiscipleHomeViewModel
+import io.realm.kotlin.mongodb.App
+import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import profile.domain.model.User
+import realm.data.remote.RealmApi
+import realm.domain.model.UserEntity
+import realm.domain.repository.RealmRepository
 
 
 /* Author: Zachery Linscott
@@ -21,8 +31,9 @@ import profile.domain.model.User
 * */
 
 // TODO: CODE NEEDS TO BE WRITTEN TO POPULATE USER OBJECT :>
-class SignupScreenViewModel: ViewModel() {
-    private var auth = Firebase.auth
+class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
+    // Database/Realm API
+    val app = realmRepository.getAppInstance()
     private val scope = viewModelScope
     var email by mutableStateOf("")
         private set
@@ -59,14 +70,28 @@ class SignupScreenViewModel: ViewModel() {
     }
 
     // User Creation
-    fun userCreation(): User {
+    fun createUserObject(): User {
         val user = User(
-            uID = auth.currentUser!!.uid,
+            uID = app.currentUser!!.id,
             firstName = firstName,
             lastName = lastName,
             email = email
         )
         return user
+    }
+
+    fun writeUserToDb() {
+        scope.launch {
+            Logger.i("Attempting to write user to Realm")
+            // Create database object
+            val userEntity = UserEntity().apply {
+                id = app.currentUser!!.id
+                email
+                firstName
+                lastName
+            }
+            realmRepository.writeUser(userEntity)
+        }
     }
 
     // Validation Functions
@@ -181,14 +206,17 @@ class SignupScreenViewModel: ViewModel() {
         }
     }
 
-    fun firebaseAuth(): FirebaseUser? {
-        val currentUser = auth.currentUser
+    fun atlasAuth(): io.realm.kotlin.mongodb.User? {
+        var currentUser: io.realm.kotlin.mongodb.User? = null
+        // maybe do in runBlocking {}
         scope.launch {
             try {
                 // this is fine for now but it needs to go to the signup page soon instead
-                auth.createUserWithEmailAndPassword(email, password)
+                app.emailPasswordAuth.registerUser(email, password)
                 Logger.i("Made it to login try")
-                Logger.i("Value of firebase user ${auth.currentUser}")
+                Logger.i("Value of Atlas user ${app.currentUser}")
+                val emailPasswordCredentials = Credentials.emailPassword(email, password)
+                currentUser = app.login(emailPasswordCredentials)
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
@@ -196,6 +224,7 @@ class SignupScreenViewModel: ViewModel() {
             }
         }
         Logger.i("currentUser value: $currentUser")
+
         return currentUser
     }
 }

@@ -9,7 +9,10 @@ import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
+import realm.domain.repository.RealmRepository
+
 //import realm.RealmRepository
 
 /* Author: Zachery Linscott
@@ -18,12 +21,11 @@ import kotlinx.coroutines.launch
 * We may use Firebase for this.
 * We should try to typecast the User to a Disciple or Discipler object
 * */
-class LoginScreenViewModel: ViewModel() {
-    private var auth = Firebase.auth
-//    private val realmRepo = RealmRepository()
+class LoginScreenViewModel(realmRepository: RealmRepository): ViewModel() {
+    private var app = realmRepository.getAppInstance()
     private val scope = viewModelScope
-    var firebaseUser: FirebaseUser? = null
     var userSignedIn = false
+
 
     var email by mutableStateOf("")
         private set
@@ -102,22 +104,33 @@ class LoginScreenViewModel: ViewModel() {
         return false
     }
 
-    fun firebaseAuth(): FirebaseUser? {
-        val currentUser = auth.currentUser
+    fun atlasAuth(): io.realm.kotlin.mongodb.User? {
+        var currentUser: io.realm.kotlin.mongodb.User? = null
         scope.launch {
             try {
                 // this is fine for now but it needs to go to the signup page soon instead
-                auth.signInWithEmailAndPassword(email, password)
+                val emailPasswordCredentials = Credentials.emailPassword(email, password)
+                currentUser = app.login(emailPasswordCredentials)
                 Logger.i("Made it to login try")
-                Logger.i("Value of firebase user ${auth.currentUser}")
+                Logger.i("Value of firebase user ${currentUser}")
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
-//                auth.createUserWithEmailAndPassword(email, password)
                 Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
             }
         }
         Logger.i("currentUser value: $currentUser")
         return currentUser
     }
+
+    // logout function:
+//    val app: App = App.create(YOUR_APP_ID) // Replace this with your App ID
+//    runBlocking {
+//        val user = app.login(credentials)
+//        // ... work with logged-in user ...
+//        // Ensure all local updates are uploaded
+//        // before logging out
+//        user.logOut()
+//    }
+
 }
