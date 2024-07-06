@@ -13,6 +13,7 @@ import realm.domain.model.DiscipleEntity
 import realm.domain.model.DisciplerEntity
 import realm.domain.model.UserEntity
 
+/* Author: Zach */
 class RealmApi {
     object AtlasApp {
         val app = App.create(Constants.ATLAS_APP_ID)
@@ -20,6 +21,9 @@ class RealmApi {
     private val schemaClass = setOf(UserEntity::class, DiscipleEntity::class, DisciplerEntity::class)
     object RealmInstance {
         var realm: Realm? = null
+        val closeRealm = {
+            realm?.close()
+        }
     }
 
     @OptIn(ExperimentalFlexibleSyncApi::class)

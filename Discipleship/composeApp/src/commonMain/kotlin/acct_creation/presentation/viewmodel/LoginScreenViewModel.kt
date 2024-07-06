@@ -110,12 +110,21 @@ class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
         var currentUser: io.realm.kotlin.mongodb.User? = null
         runBlocking { // force this to execute before anything else happens
             try {
+                app.currentUser?.logOut()
                 // this is fine for now but it needs to go to the signup page soon instead
                 val emailPasswordCredentials = Credentials.emailPassword(email, password)
                 currentUser = app.login(emailPasswordCredentials)
                 Logger.i("Made it to login try")
-                Logger.i("Value of firebase user ${currentUser}")
-                realmRepository.initRealm()
+                Logger.i("Value of firebase user $currentUser")
+                if (currentUser != null) {
+                    realmRepository.initRealm()
+                    val UserEntity = realmRepository.readUser(currentUser!!.id)
+                    // Build User object from User Entity:
+                    Logger.i(currentUser!!.id)
+                }
+                else {
+                    throw Exception("Login failed, current user is null")
+                }
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
