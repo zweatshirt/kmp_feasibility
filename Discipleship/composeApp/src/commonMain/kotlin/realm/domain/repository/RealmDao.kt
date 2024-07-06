@@ -1,6 +1,9 @@
 package realm.domain.repository
 
 import io.realm.kotlin.Realm
+import io.realm.kotlin.mongodb.annotations.ExperimentalFlexibleSyncApi
+import io.realm.kotlin.mongodb.ext.subscribe
+import io.realm.kotlin.mongodb.syncSession
 import io.realm.kotlin.notifications.ResultsChange
 import io.realm.kotlin.query.RealmResults
 import io.realm.kotlin.types.RealmObject
@@ -31,8 +34,9 @@ interface RealmDao<T : RealmObject> {
         }
     }
 
+    @OptIn(ExperimentalFlexibleSyncApi::class)
     suspend fun findAll(): RealmResults<T> {
-        return realm.query(clazz).find()
+        return realm.query(clazz).find().subscribe()
     }
 
     suspend fun findById(id: String): T? {

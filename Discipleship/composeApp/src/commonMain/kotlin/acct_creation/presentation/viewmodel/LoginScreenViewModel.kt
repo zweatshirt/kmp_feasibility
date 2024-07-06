@@ -11,6 +11,8 @@ import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import realm.data.remote.RealmApi
 import realm.domain.repository.RealmRepository
 
 //import realm.RealmRepository
@@ -21,8 +23,8 @@ import realm.domain.repository.RealmRepository
 * We may use Firebase for this.
 * We should try to typecast the User to a Disciple or Discipler object
 * */
-class LoginScreenViewModel(realmRepository: RealmRepository): ViewModel() {
-    private var app = realmRepository.getAppInstance()
+class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
+    private var app = RealmApi.AtlasApp.app
     private val scope = viewModelScope
     var userSignedIn = false
 
@@ -106,13 +108,14 @@ class LoginScreenViewModel(realmRepository: RealmRepository): ViewModel() {
 
     fun atlasAuth(): io.realm.kotlin.mongodb.User? {
         var currentUser: io.realm.kotlin.mongodb.User? = null
-        scope.launch {
+        runBlocking { // force this to execute before anything else happens
             try {
                 // this is fine for now but it needs to go to the signup page soon instead
                 val emailPasswordCredentials = Credentials.emailPassword(email, password)
                 currentUser = app.login(emailPasswordCredentials)
                 Logger.i("Made it to login try")
                 Logger.i("Value of firebase user ${currentUser}")
+                realmRepository.initRealm()
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
@@ -122,15 +125,4 @@ class LoginScreenViewModel(realmRepository: RealmRepository): ViewModel() {
         Logger.i("currentUser value: $currentUser")
         return currentUser
     }
-
-    // logout function:
-//    val app: App = App.create(YOUR_APP_ID) // Replace this with your App ID
-//    runBlocking {
-//        val user = app.login(credentials)
-//        // ... work with logged-in user ...
-//        // Ensure all local updates are uploaded
-//        // before logging out
-//        user.logOut()
-//    }
-
 }

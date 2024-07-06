@@ -17,6 +17,7 @@ import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.mongodb.kbson.BsonObjectId
 import profile.domain.model.User
 import realm.data.remote.RealmApi
 import realm.domain.model.UserEntity
@@ -33,7 +34,7 @@ import realm.domain.repository.RealmRepository
 // TODO: CODE NEEDS TO BE WRITTEN TO POPULATE USER OBJECT :>
 class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
     // Database/Realm API
-    val app = realmRepository.getAppInstance()
+    val app = RealmApi.AtlasApp.app
     private val scope = viewModelScope
     var email by mutableStateOf("")
         private set
@@ -84,13 +85,19 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
         scope.launch {
             Logger.i("Attempting to write user to Realm")
             // Create database object
-            val userEntity = UserEntity().apply {
-                id = app.currentUser!!.id
-                email
-                firstName
-                lastName
+            try {
+                val userEntity = UserEntity().apply {
+                    _id = app.currentUser!!.id
+                    bio
+                    email
+                    firstName
+                    lastName
+                }
+                realmRepository.writeUser(userEntity)
             }
-            realmRepository.writeUser(userEntity)
+            catch (e: Exception) {
+                Logger.e("Failed to sync user")
+            }
         }
     }
 
@@ -209,18 +216,21 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
     fun atlasAuth(): io.realm.kotlin.mongodb.User? {
         var currentUser: io.realm.kotlin.mongodb.User? = null
         // maybe do in runBlocking {}
-        scope.launch {
+        runBlocking { // force execution of sign up auth
             try {
+                app.currentUser?.logOut() // bad code, just in case a user is cached
                 // this is fine for now but it needs to go to the signup page soon instead
                 app.emailPasswordAuth.registerUser(email, password)
                 Logger.i("Made it to login try")
-                Logger.i("Value of Atlas user ${app.currentUser}")
                 val emailPasswordCredentials = Credentials.emailPassword(email, password)
                 currentUser = app.login(emailPasswordCredentials)
+                Logger.i("Value of Atlas user ${app.currentUser}")
+                if (currentUser != null) realmRepository.initRealm()
+                else throw Exception("Failed to initialize Realm, app user is null")
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
-                Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
+                Logger.e("Exception found in atlasAuth, likely user doesn't exist")
             }
         }
         Logger.i("currentUser value: $currentUser")

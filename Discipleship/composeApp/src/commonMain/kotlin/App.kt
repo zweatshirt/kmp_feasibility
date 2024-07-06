@@ -3,8 +3,13 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.navigator.Navigator
 import global_consts.Constants
+import io.realm.kotlin.Realm
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import io.realm.kotlin.mongodb.App
+import io.realm.kotlin.mongodb.sync.SyncConfiguration
+import realm.domain.model.DiscipleEntity
+import realm.domain.model.DisciplerEntity
+import realm.domain.model.UserEntity
 
 
 @OptIn(ExperimentalVoyagerApi::class)
@@ -22,6 +27,7 @@ fun App() {
     // We would have to cache something saying they've used
     // our app.
     Navigator(WelcomeScreen())
+
 //    Navigator(
 //        screen = WelcomeScreen(),
 //        disposeBehavior = NavigatorDisposeBehavior(disposeSteps = false)

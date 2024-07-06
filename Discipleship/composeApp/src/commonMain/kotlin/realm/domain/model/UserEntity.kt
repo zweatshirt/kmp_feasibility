@@ -2,13 +2,17 @@ package realm.domain.model
 
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
+import org.mongodb.kbson.BsonObjectId
 
-open class UserEntity : RealmObject {
-//    @PrimaryKey
-    var id: String = ""
-    var firstName: String = ""
-    var lastName: String = ""
-    var email: String = ""
-//    var image: RealmList<Byte> = realmListOf()
+class UserEntity : RealmObject {
+    @PrimaryKey
+    var _id: String = ""
+
     var bio: String? = null
+
+    var email: String? = null
+
+    var firstName: String? = null
+
+    var lastName: String? = null
 }

@@ -225,12 +225,14 @@ class SignupScreen: Screen {
                             Logger.i("Login button click success")
                             signupScreenViewModel.validationOnSubmit()
                             if (signupScreenViewModel.signupValidation.isValidated) {
+                                Logger.i("Signup validated")
                                 currentUser = signupScreenViewModel.atlasAuth()
-                                Logger.i("currentUser value update: $currentUser")
                                 if (currentUser != null) {
+                                    Logger.i("User authorized by Atlas successfully")
                                     signupScreenViewModel.createUserObject()
                                     signupScreenViewModel.writeUserToDb()
                                 }
+                                Logger.i("currentUser value update: $currentUser")
                                 navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
 
                             }

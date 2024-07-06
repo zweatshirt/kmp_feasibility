@@ -16,7 +16,7 @@ interface RealmRepository {
 
     suspend fun writeUser(userEntity: UserEntity)
     suspend fun readUser(id: String): UserEntity?
-    fun getAppInstance(): App
+    suspend fun initRealm()
 
     // Potentially implement later,
     // as it stands this code is done directly in the API

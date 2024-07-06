@@ -2,6 +2,7 @@ package realm.data.repository
 
 import arrow.core.raise.catch
 import co.touchlab.kermit.Logger
+import io.realm.kotlin.Realm
 import io.realm.kotlin.mongodb.App
 import realm.data.remote.RealmApi
 import realm.domain.model.UserEntity
@@ -26,7 +27,7 @@ class RealmRepoImpl(private val realmApi: RealmApi): RealmRepository {
         return realmApi.readUser(id)
     }
 
-    override fun getAppInstance(): App {
-        return realmApi.getAppInstance()
+    override suspend fun initRealm(){
+        return realmApi.initRealm()
     }
 }
