@@ -13,6 +13,7 @@ import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import realm.data.remote.RealmApi
+import realm.domain.model.UserEntity
 import realm.domain.repository.RealmRepository
 
 //import realm.RealmRepository
@@ -115,23 +116,51 @@ class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
                 val emailPasswordCredentials = Credentials.emailPassword(email, password)
                 currentUser = app.login(emailPasswordCredentials)
                 Logger.i("Made it to login try")
-                Logger.i("Value of firebase user $currentUser")
+                Logger.i("Value of Atlas user $currentUser")
                 if (currentUser != null) {
                     realmRepository.initRealm()
-                    val UserEntity = realmRepository.readUser(currentUser!!.id)
-                    // Build User object from User Entity:
-                    Logger.i(currentUser!!.id)
                 }
                 else {
-                    throw Exception("Login failed, current user is null")
+                    throw NullPointerException("Login failed, current user is null")
                 }
             }
-            catch(e: Exception) {
+            catch(e: NullPointerException) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
                 Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
+                if (e.message != null) Logger.e(e.message!!)
+            }
+            catch(e: Exception) {
+                Logger.e("Exception in atlasAuth()")
             }
         }
         Logger.i("currentUser value: $currentUser")
         return currentUser
+    }
+
+    fun fetchUserData(currentUser: io.realm.kotlin.mongodb.User?): UserEntity? {
+        var userEntity: UserEntity? = null
+        scope.launch {
+            try {
+                if (currentUser == null) {
+                    throw NullPointerException(
+                        "Fetching user data failed in fetchUserData()," +
+                                " Atlas User object is null"
+                    )
+                }
+                if (RealmApi.RealmInstance.realm == null)
+                    throw NullPointerException("Realm is not open, failed to" +
+                            "fetch user data in fetchUserData()")
+                userEntity = realmRepository.readUser(currentUser.id)
+                // Build User object from User Entity:
+            }
+            catch (nullP: NullPointerException) {
+                if (nullP.message != null)
+                    Logger.e(nullP.message!!)
+            }
+            catch (e: Exception) {
+                Logger.e("Exception in fetchUserData()")
+            }
+        }
+        return userEntity
     }
 }

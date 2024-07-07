@@ -186,7 +186,8 @@ class LoginScreen: Screen {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.atlasAuth()
-                                Logger.i("currentUser value update: $currentUser")
+                                val userEntity = loginViewModel.fetchUserData(currentUser)
+                                Logger.i("userEntity value update: $userEntity")
                                 navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser, null)))
                             }
                         },
