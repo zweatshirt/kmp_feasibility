@@ -189,6 +189,7 @@ class LoginScreen: Screen {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.atlasAuth()
+                                Logger.i("$currentUser in LoginScreen")
                             }
                             try {
                                 if (currentUser != null) {
@@ -197,8 +198,11 @@ class LoginScreen: Screen {
                                     if (userEntity?.isDisciple == true) {
                                         navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
                                     }
-                                    else {
+                                    else if (userEntity?.isDisciple == false) {
                                         navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
+                                    }
+                                    else {
+                                        navigator.replaceAll(DorDScreen(screenData = ScreenData(userEntity)))
                                     }
                                 }
                                 else throw NullPointerException("Atlas User is null in LoginScreen, " +

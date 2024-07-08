@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import realm.data.remote.RealmApi
 import realm.domain.model.UserEntity
 import realm.domain.repository.RealmRepository
@@ -105,7 +106,7 @@ class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     fun atlasAuth(): io.realm.kotlin.mongodb.User? {
         var currentUser: io.realm.kotlin.mongodb.User? = null
-        scope.launch { // force this to execute before anything else happens with runBlocking
+        runBlocking { // force this to execute before anything else happens with runBlocking
             // if needed
             try {
                 app.currentUser?.logOut()
@@ -123,11 +124,10 @@ class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
             }
             catch(e: NullPointerException) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
-                Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
                 if (e.message != null) Logger.e(e.message!!)
             }
             catch(e: Exception) {
-                Logger.e("Exception in atlasAuth()")
+                Logger.e("Exception in LoginScreenViewModel.atlasAuth()")
             }
         }
         Logger.i("currentUser value: $currentUser")
