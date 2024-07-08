@@ -32,7 +32,7 @@ import home.presentation.ui.composables.ToDoSection
 import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.discipler_home.disciplesList
 import home.presentation.viewmodel.DiscipleHomeViewModel
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 
 /* Author: Zachery Linscott */
@@ -130,7 +130,6 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
         //val toolList = remember { mutableStateOf(discipleHomeViewModel.discipleHomeScreenState.toolsList) }
         discipleHomeViewModel.getTools()
         val toolList = discipleHomeViewModel.toolList
-
         Scaffold(
             topBar = {
                 TopBar(navigator = navigator, title = "Christ Companions")

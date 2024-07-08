@@ -10,4 +10,3 @@ class Discipler(
     image: DrawableResource?,
     bio: String):
         User(uID, firstName, lastName, email, image, bio)
-

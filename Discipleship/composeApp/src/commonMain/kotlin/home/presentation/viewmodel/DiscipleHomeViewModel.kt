@@ -6,13 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
+import dev.gitlive.firebase.Firebase
 import home.domain.model.Tool
 import home.domain.repository.ToolsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-/* Author: Zach */
+/* Author: Zach and Josh */
 // the constructor is supposed to be injected
 // with the @Inject annotation
 // but I currently don't know how to do that
@@ -29,20 +30,15 @@ class DiscipleHomeViewModel constructor(
     var toolList: List<Tool> by mutableStateOf(mutableListOf<Tool>())
         private set
 
-
     fun getTools() {
         var toolObjects: List<Tool> = mutableListOf()
         _scope.launch {
-
             // returns Either<NetworkError, List<Tool>>
             toolsRepository.getTools()
                 .onRight { tools ->
                     // this is for testing
                     toolsRepository.readToolsFromDb()
                     // update state with the tools
-                    tools.forEach {
-                        Logger.i(it.name)
-                    }
                     Logger.i("Successful Tools API request in DiscipleHomeViewModel")
                     toolObjects = tools
                 } // successful request, returns list of tools
@@ -52,6 +48,7 @@ class DiscipleHomeViewModel constructor(
             //discipleHomeScreenState.toolsList = toolObjects
             toolList = toolObjects
             Logger.i("The size of the tool list is: ${discipleHomeScreenState.toolsList.size}")
+
         }
     }
 }

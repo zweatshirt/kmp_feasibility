@@ -22,7 +22,7 @@ import home.presentation.ui.composables.DiscipleSection
 import home.presentation.ui.composables.MeetingSection
 import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.composables.TopBar
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 
 // Will eventually be dynamically loaded

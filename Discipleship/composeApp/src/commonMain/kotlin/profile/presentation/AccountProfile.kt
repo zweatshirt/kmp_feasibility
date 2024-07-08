@@ -35,7 +35,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import home.presentation.ui.composables.BottomBar
 import home.presentation.ui.composables.TopBar
 import home.presentation.ui.discipler_home.disciplesList
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.backgroundLight
 import ui.theme.primaryContainerLight

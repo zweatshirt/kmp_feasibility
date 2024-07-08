@@ -34,7 +34,7 @@ import calendar.dateTime.YearMonth
 import calendar.dateTime.printMonthYear
 import home.presentation.ui.composables.BottomBar
 import home.presentation.ui.composables.TopBar
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 
 
 /**

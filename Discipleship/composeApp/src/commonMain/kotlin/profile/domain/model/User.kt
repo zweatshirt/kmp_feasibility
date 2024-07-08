@@ -9,6 +9,4 @@ open class User(
     val email: String,
     val image: DrawableResource? = null,
     val bio: String? = null
-) {
-
-}
+)

@@ -14,16 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import calendar.CalendarPage
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.social
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
 import home.presentation.ui.discipler_home.DisciplerHomeScreen
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
-import co.touchlab.kermit.Logger
 import profile.presentation.AccountProfile
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryLight

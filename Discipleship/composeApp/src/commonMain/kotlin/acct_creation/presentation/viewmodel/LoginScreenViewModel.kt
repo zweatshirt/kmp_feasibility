@@ -9,7 +9,14 @@ import co.touchlab.kermit.Logger
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import realm.data.remote.RealmApi
+import realm.domain.model.UserEntity
+import realm.domain.repository.RealmRepository
+
+//import realm.RealmRepository
 
 /* Author: Zachery Linscott
 * This class handles user authentication
@@ -17,11 +24,11 @@ import kotlinx.coroutines.launch
 * We may use Firebase for this.
 * We should try to typecast the User to a Disciple or Discipler object
 * */
-class LoginScreenViewModel: ViewModel() {
-    private var auth = Firebase.auth
+class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
+    private var app = RealmApi.AtlasApp.app
     private val scope = viewModelScope
-    var firebaseUser: FirebaseUser? = null
     var userSignedIn = false
+
 
     var email by mutableStateOf("")
         private set
@@ -100,22 +107,60 @@ class LoginScreenViewModel: ViewModel() {
         return false
     }
 
-    fun firebaseAuth(): FirebaseUser? {
-        val currentUser = auth.currentUser
-        scope.launch {
+    fun atlasAuth(): io.realm.kotlin.mongodb.User? {
+        var currentUser: io.realm.kotlin.mongodb.User? = null
+        runBlocking { // force this to execute before anything else happens
             try {
+                app.currentUser?.logOut()
                 // this is fine for now but it needs to go to the signup page soon instead
-                auth.signInWithEmailAndPassword(email, password)
+                val emailPasswordCredentials = Credentials.emailPassword(email, password)
+                currentUser = app.login(emailPasswordCredentials)
                 Logger.i("Made it to login try")
-                Logger.i("Value of firebase user ${auth.currentUser}")
+                Logger.i("Value of Atlas user $currentUser")
+                if (currentUser != null) {
+                    realmRepository.initRealm()
+                }
+                else {
+                    throw NullPointerException("Login failed, current user is null")
+                }
+            }
+            catch(e: NullPointerException) {
+                // eventually want to populate the UI with a Snackbar indicating inability to login
+                Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
+                if (e.message != null) Logger.e(e.message!!)
             }
             catch(e: Exception) {
-                // eventually want to populate the UI with a Snackbar indicating inability to login
-//                auth.createUserWithEmailAndPassword(email, password)
-                Logger.e("Exception found in firebaseAuth, likely user doesn't exist")
+                Logger.e("Exception in atlasAuth()")
             }
         }
         Logger.i("currentUser value: $currentUser")
         return currentUser
+    }
+
+    fun fetchUserData(currentUser: io.realm.kotlin.mongodb.User?): UserEntity? {
+        var userEntity: UserEntity? = null
+        scope.launch {
+            try {
+                if (currentUser == null) {
+                    throw NullPointerException(
+                        "Fetching user data failed in fetchUserData()," +
+                                " Atlas User object is null"
+                    )
+                }
+                if (RealmApi.RealmInstance.realm == null)
+                    throw NullPointerException("Realm is not open, failed to" +
+                            "fetch user data in fetchUserData()")
+                userEntity = realmRepository.readUser(currentUser.id)
+                // Build User object from User Entity:
+            }
+            catch (nullP: NullPointerException) {
+                if (nullP.message != null)
+                    Logger.e(nullP.message!!)
+            }
+            catch (e: Exception) {
+                Logger.e("Exception in fetchUserData()")
+            }
+        }
+        return userEntity
     }
 }

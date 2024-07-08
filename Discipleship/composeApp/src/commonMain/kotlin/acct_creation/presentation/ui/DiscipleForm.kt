@@ -40,7 +40,7 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
-import viewmodel.ScreenData
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.primaryDark
@@ -170,9 +170,9 @@ data class DiscipleForm(val screenData: ScreenData): Screen {
                         }
                     }
                 }
-                if (discipleScreenViewModel.evangalismExperienceResult.errorMessage != null) {
+                if (discipleScreenViewModel.evangelismExperienceResult.errorMessage != null) {
                     Text(
-                        text = "${discipleScreenViewModel.evangalismExperienceResult.errorMessage}",
+                        text = "${discipleScreenViewModel.evangelismExperienceResult.errorMessage}",
                         color = errorLight
                     )
                 }
