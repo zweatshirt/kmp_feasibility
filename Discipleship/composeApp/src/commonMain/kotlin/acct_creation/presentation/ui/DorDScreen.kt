@@ -36,6 +36,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import co.touchlab.kermit.Logger
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.internal.getIdentifierOrNull
@@ -53,7 +54,7 @@ import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 
-/* Author: Zachery Linscott
+/* Author: Zach
 *
 * This screen asks a user whether they are a disciple or discipler upon first sign up
  */
@@ -148,7 +149,11 @@ class DorDScreen(val screenData: ScreenData): Screen {
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
-                                val discipleEntity = dOrDScreenViewModel.initEntity(isDisciple = true)
+                                val discipleEntity =
+                                    dOrDScreenViewModel.initEntity(isDisciple = true) as DiscipleEntity
+                                Logger.i("${discipleEntity.userId}")
+                                Logger.i(RealmApi.AtlasApp.app.currentUser!!.id)
+                                dOrDScreenViewModel.updateUserEntity(discipleEntity)
                                 val screenData = ScreenData(discipleEntity)
                                 navigator.push(DiscipleForm(screenData))
                             }, // Needs to route to the disciple intro screens
@@ -195,7 +200,11 @@ class DorDScreen(val screenData: ScreenData): Screen {
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
-                                val disciplerEntity = dOrDScreenViewModel.initEntity(isDisciple = false)
+                                val disciplerEntity =
+                                    dOrDScreenViewModel.initEntity(isDisciple = false) as DisciplerEntity
+                                Logger.i("curr user ${RealmApi.AtlasApp.app.currentUser?.id}")
+                                Logger.i("discipler entity ${disciplerEntity.userId}")
+                                dOrDScreenViewModel.updateUserEntity(disciplerEntity)
                                 val screenData = ScreenData(disciplerEntity)
                                 navigator.push(DisciplerForm(screenData))
                             }, // needs to route to discipler intro screens

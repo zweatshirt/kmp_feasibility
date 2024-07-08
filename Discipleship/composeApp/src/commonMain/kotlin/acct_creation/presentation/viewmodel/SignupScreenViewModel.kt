@@ -80,10 +80,11 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
             try {
                 userEntity = UserEntity().apply {
                     _id = app.currentUser!!.id
-                    bio
+                    bio = ""
                     email = vmEmail
                     firstName = vmFirstName
                     lastName = vmLastName
+                    isDisciple = null
                 }
                 realmRepository.writeUser(userEntity!!)
             }
@@ -221,6 +222,7 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
                 Logger.e("Exception found in atlasAuth, likely user doesn't exist")
+                return@runBlocking
             }
         }
         Logger.i("currentUser value: $currentUser")

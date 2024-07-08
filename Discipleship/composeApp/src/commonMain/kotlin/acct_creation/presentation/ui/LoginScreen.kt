@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import arrow.core.raise.Null
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -183,13 +184,29 @@ class LoginScreen: Screen {
 
                     // Login button
                     Button(
+                        modifier = Modifier.clip(RoundedCornerShape(12.dp)),
                         onClick = {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.atlasAuth()
-                                userEntity = loginViewModel.fetchUserData(currentUser)
-                                Logger.i("userEntity value update: $userEntity")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
+                            }
+                            try {
+                                if (currentUser != null) {
+                                    userEntity = loginViewModel.fetchUserData(currentUser)
+                                    Logger.i("userEntity value update: $userEntity")
+                                    if (userEntity?.isDisciple == true) {
+                                        navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
+                                    }
+                                    else {
+                                        navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
+                                    }
+                                }
+                                else throw NullPointerException("Atlas User is null in LoginScreen, " +
+                                        "likely bad connection.")
+                            }
+                            catch (e: Exception) {
+                                if (e.message != null) Logger.e(e.message!!)
+                                else Logger.e("Exception $e in LoginScreen")
                             }
                         },
                         colors = ButtonDefaults.buttonColors(

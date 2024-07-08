@@ -49,8 +49,7 @@ import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
 
-/* Author: Zachery Linscott
-* */
+/* Author: Zach */
 
 class SignupScreen: Screen {
     override val key: ScreenKey = "SignupScreen"

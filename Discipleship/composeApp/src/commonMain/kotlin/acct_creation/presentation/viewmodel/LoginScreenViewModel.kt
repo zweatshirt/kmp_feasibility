@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import realm.data.remote.RealmApi
 import realm.domain.model.UserEntity
 import realm.domain.repository.RealmRepository
@@ -149,7 +148,6 @@ class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
                     throw NullPointerException("Realm is not open, failed to" +
                             "fetch user data in fetchUserData()")
                 userEntity = realmRepository.readUser(currentUser.id)
-                // Build User object from User Entity:
             }
             catch (nullP: NullPointerException) {
                 if (nullP.message != null)

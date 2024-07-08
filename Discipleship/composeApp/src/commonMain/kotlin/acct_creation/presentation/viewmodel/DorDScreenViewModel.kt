@@ -16,26 +16,40 @@ class DorDScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
     private val scope = viewModelScope
 
     fun initEntity(isDisciple: Boolean): RealmObject {
+        val entity: RealmObject
         if (isDisciple) {
-            val discipleEntity = DiscipleEntity().apply {
+            entity = DiscipleEntity().apply {
                 _id = RealmUUID.random().toString()
                 mentorId = null
                 userId = RealmApi.AtlasApp.app.currentUser!!.id
             }
-            scope.launch {
-                realmRepository.writeDisciple(discipleEntity)
-            }
-            return discipleEntity
         }
-        val disciplerEntity = DisciplerEntity().apply {
-            _id = RealmUUID.random().toString()
-            disciples = realmListOf("")
-            userId = RealmApi.AtlasApp.app.currentUser!!.id
+        else {
+            entity = DisciplerEntity().apply {
+                _id = RealmUUID.random().toString()
+                disciples = realmListOf("")
+                userId = RealmApi.AtlasApp.app.currentUser!!.id
+            }
         }
         scope.launch {
-            realmRepository.writeDiscipler(disciplerEntity)
+            if (isDisciple) {
+                realmRepository.writeDisciple(entity as DiscipleEntity)
+            }
+            else {
+                realmRepository.writeDiscipler(entity as DisciplerEntity)
+            }
         }
-        return disciplerEntity
+        return entity
+    }
 
+    fun updateUserEntity(entity: RealmObject) {
+        scope.launch {
+            if (entity is DiscipleEntity) {
+                realmRepository.updateDiscipleStatus(entity.userId!!,true)
+            }
+            if (entity is DisciplerEntity) {
+                realmRepository.updateDiscipleStatus(entity.userId!!, false)
+            }
+        }
     }
 }

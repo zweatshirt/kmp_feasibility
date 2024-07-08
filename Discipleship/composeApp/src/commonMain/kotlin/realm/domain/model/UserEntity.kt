@@ -15,4 +15,6 @@ class UserEntity : RealmObject {
     var firstName: String? = null
 
     var lastName: String? = null
+
+    var isDisciple: Boolean? = null
 }
