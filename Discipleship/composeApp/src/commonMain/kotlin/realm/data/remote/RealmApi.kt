@@ -20,6 +20,8 @@ class RealmApi {
     object AtlasApp {
         val app = App.create(Constants.ATLAS_APP_ID)
     }
+
+    // Need to add Meetings at some point
     private val schemaClass = setOf(UserEntity::class, DiscipleEntity::class, DisciplerEntity::class)
     // static singleton for Realm accessing
     object RealmInstance {
