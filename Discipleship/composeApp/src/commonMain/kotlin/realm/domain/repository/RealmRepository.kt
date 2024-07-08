@@ -16,6 +16,10 @@ interface RealmRepository {
 
     suspend fun writeUser(userEntity: UserEntity)
     suspend fun readUser(id: String): UserEntity?
+    suspend fun writeDisciple(userEntity: DiscipleEntity)
+    suspend fun readDisciple(id: String): DiscipleEntity?
+    suspend fun writeDiscipler(userEntity: DisciplerEntity)
+    suspend fun readDiscipler(id: String): DisciplerEntity?
     suspend fun initRealm()
 
     // Potentially implement later,

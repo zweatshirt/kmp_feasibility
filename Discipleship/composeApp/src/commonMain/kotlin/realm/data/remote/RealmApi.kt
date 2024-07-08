@@ -9,6 +9,9 @@ import io.realm.kotlin.mongodb.annotations.ExperimentalFlexibleSyncApi
 import io.realm.kotlin.mongodb.ext.subscribe
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import io.realm.kotlin.query.RealmQuery
+import profile.domain.model.Discipler
+import realm.data.repository.DiscipleDaoImpl
+import realm.data.repository.DisciplerDaoImpl
 import realm.data.repository.UserDaoImpl
 import realm.domain.model.DiscipleEntity
 import realm.domain.model.DisciplerEntity
@@ -56,5 +59,21 @@ class RealmApi {
 
     suspend fun readUser(id: String): UserEntity? {
         return RealmInstance.realm?.let { UserDaoImpl(it).findById(id) }
+    }
+
+    suspend fun writeDisciple(userEntity: DiscipleEntity) {
+        RealmInstance.realm?.let { DiscipleDaoImpl(it).insert(userEntity) }
+    }
+
+    suspend fun readDisciple(id: String): DiscipleEntity? {
+        return RealmInstance.realm?.let { DiscipleDaoImpl(it).findById(id) }
+    }
+
+    suspend fun writeDiscipler(disciplerEntity: DisciplerEntity) {
+        RealmInstance.realm?.let { DisciplerDaoImpl(it).insert(disciplerEntity) }
+    }
+
+    suspend fun readDiscipler(id: String): DisciplerEntity? {
+        return RealmInstance.realm?.let { DisciplerDaoImpl(it).findById(id) }
     }
 }

@@ -43,6 +43,7 @@ import io.realm.kotlin.schema.RealmStorageType
 import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmUUID
 import realm.data.remote.RealmApi
+import realm.data.repository.RealmRepoImpl
 import realm.domain.model.DiscipleEntity
 import realm.domain.model.DisciplerEntity
 import screenmodel.ScreenData
@@ -59,7 +60,11 @@ import ui.theme.secondaryLight
 
 class DorDScreen(val screenData: ScreenData): Screen {
     override val key: ScreenKey = "DorDScreen"
-    val dOrDScreenViewModel = DorDScreenViewModel()
+    val dOrDScreenViewModel = DorDScreenViewModel(
+        realmRepository = RealmRepoImpl(
+            realmApi = RealmApi()
+        )
+    )
     @Composable
     override fun Content() {
         val fSize = 30.sp // font size for all font on screen
