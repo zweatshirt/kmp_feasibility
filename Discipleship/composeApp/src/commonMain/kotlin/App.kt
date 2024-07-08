@@ -1,6 +1,9 @@
 import acct_creation.presentation.ui.WelcomeScreen
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.jetpack.ProvideNavigatorLifecycleKMPSupport
+import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
+import viewmodel.ScreenData
 import cafe.adriel.voyager.navigator.Navigator
 import global_consts.Constants
 import io.realm.kotlin.Realm
@@ -26,7 +29,10 @@ fun App() {
     // to go directly to login page instead.
     // We would have to cache something saying they've used
     // our app.
-    Navigator(WelcomeScreen())
+    ProvideNavigatorLifecycleKMPSupport {
+        Navigator(WelcomeScreen())
+    }
+
 
 //    Navigator(
 //        screen = WelcomeScreen(),

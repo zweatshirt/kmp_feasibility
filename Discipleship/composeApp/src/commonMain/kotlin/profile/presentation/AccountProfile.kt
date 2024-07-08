@@ -125,38 +125,24 @@ data class AccountProfile(val screenData: ScreenData): Screen {
                         )
                     },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                        unfocusedBorderColor = primaryLight,
-                        unfocusedLabelColor = primaryLight,
-                        leadingIconColor = primaryLight,
-                        textColor = primaryLight
+                        disabledBorderColor = primaryLight,
+                        disabledTextColor = primaryLight,
+                        disabledLabelColor = primaryLight,
+                        disabledLeadingIconColor = primaryLight
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
-//                Text(
-//                    modifier = Modifier.padding(4.dp),
-//                    text = "Email",
-//                    fontSize = 20.sp,
-//                    color = primaryLight,
-//                    fontWeight = FontWeight.Bold
-//                )
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .size(40.dp)
-//                        .background(primaryContainerLight)
-//                        .padding(2.dp),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Text(
-//                        modifier = Modifier.padding(4.dp),
-//                        text = user.email,
-//                        fontSize = 18.sp,
-//                        color = onPrimaryContainerLight,
-//                        fontWeight = FontWeight.SemiBold
-//                    )
-//                }
+
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                if (screenData.isDisciple) {
+                    DiscipleProfileInfo(user)
+                } else {
+                    DisciplerProfileInfo(user)
+                }
+
             }
         }
     }

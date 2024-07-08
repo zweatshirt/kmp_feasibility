@@ -74,14 +74,23 @@ private fun ToDoCard(tool: Tool) {
                     .background(Color.LightGray.copy(alpha = .2f))
                     .weight(1f)
             ) {
-                ButtonBox(Icons.Default.Delete, "Trash Icon", Color.Black) {  }
+                ButtonBox(
+                    Icons.Default.Delete,
+                    "Trash Icon",
+                    Color.Black,
+                    onClick = {})
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
                 ButtonBox(
                     Icons.Default.Favorite,
                     "Favorite icon",
-                    Color.Red.copy(alpha = .5f)) {  }
+                    Color.Red.copy(alpha = .5f),
+                    onClick = {})
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
-                ButtonBox(Icons.Rounded.Check, "Checkmark icon", primaryCheck) {  }
+                ButtonBox(
+                    Icons.Rounded.Check,
+                    "Checkmark icon",
+                    primaryCheck,
+                    onClick = {})
             }
 
         }

@@ -40,6 +40,11 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             selected = true,
             onClick = {
                 val screens = mutableListOf<Screen>()
+                if (screenData.isDisciple) {
+                    screens.add(DiscipleHomeScreen(screenData))
+                } else {
+                    screens.add(DisciplerHomeScreen(screenData))
+                }
                 navigator.items.forEach {
                     if (it.key != "Profile") {
                         screens.add(it)
@@ -66,6 +71,7 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
                 if (currentScreen != "Home") {
                     if (screenData.isDisciple) {
                         val screens = mutableListOf<Screen>()
+                        screens.add(DiscipleHomeScreen(screenData))
                         navigator.items.forEach {
                             if (it.key != "DiscipleHome") {
                                 screens.add(it)
@@ -75,6 +81,7 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
                         navigator.replaceAll(screens)
                     } else {
                         val screens = mutableListOf<Screen>()
+                        screens.add(DisciplerHomeScreen(screenData))
                         navigator.items.forEach {
                             if (it.key != "DisciplerHome") {
                                 screens.add(it)
@@ -101,6 +108,11 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             onClick = {
                 if (currentScreen != "Calendar") {
                     val screens = mutableListOf<Screen>()
+                    if (screenData.isDisciple) {
+                        screens.add(DiscipleHomeScreen(screenData))
+                    } else {
+                        screens.add(DisciplerHomeScreen(screenData))
+                    }
                     navigator.items.forEach {
                         if (it.key != "Calendar") {
                             screens.add(it)

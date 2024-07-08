@@ -68,6 +68,12 @@ val meetingsList = mutableListOf(
         time = "10:30AM",
         disciple = disciplesList[2],
         note = "Meep mooping"
+    ),
+    Meeting(
+        date = "7/18/2024",
+        time = "10:30AM",
+        disciple = disciplesList[2],
+        note = "Meep Mop"
     )
 )
 
@@ -104,7 +110,7 @@ data class DisciplerHomeScreen(val screenData: ScreenData): Screen {
             ) {
                 MeetingSection()
                 DiscipleSection()
-                ToolsSection()
+                ToolsSection(toolsList)
             }
         }
     }
