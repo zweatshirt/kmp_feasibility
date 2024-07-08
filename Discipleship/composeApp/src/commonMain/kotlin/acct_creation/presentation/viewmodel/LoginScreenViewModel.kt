@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import realm.data.remote.RealmApi
 import realm.domain.model.UserEntity
 import realm.domain.repository.RealmRepository
