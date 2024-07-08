@@ -196,7 +196,6 @@ class DorDScreen(val screenData: ScreenData): Screen {
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
                                 val disciplerEntity = dOrDScreenViewModel.initEntity(isDisciple = false)
-                                // write to database
                                 val screenData = ScreenData(disciplerEntity)
                                 navigator.push(DisciplerForm(screenData))
                             }, // needs to route to discipler intro screens

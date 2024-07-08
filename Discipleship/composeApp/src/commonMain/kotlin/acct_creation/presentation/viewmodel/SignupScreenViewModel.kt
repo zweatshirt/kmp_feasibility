@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import profile.domain.model.User
 import realm.data.remote.RealmApi
 import realm.domain.model.UserEntity
@@ -26,15 +27,15 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
     // Database/Realm API
     val app = RealmApi.AtlasApp.app
     private val scope = viewModelScope
-    var email by mutableStateOf("")
+    var vmEmail by mutableStateOf("")
         private set
-    var password by mutableStateOf("")
+    var vmPassword by mutableStateOf("")
         private set
     var confirmPassword by mutableStateOf("")
         private set
-    var firstName by mutableStateOf("")
+    var vmFirstName by mutableStateOf("")
         private set
-    var lastName by mutableStateOf("")
+    var vmLastName by mutableStateOf("")
 
     var signupValidation: SignupValidation by mutableStateOf(SignupValidation(
         emailValidationResult = ValidationResult(false, null),
@@ -45,50 +46,52 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
         isValidated = false )
     )
     fun updateEmail(input: String) {
-        email = input
+        vmEmail = input
     }
     fun updatePassword(input: String) {
-        password = input
+        vmPassword = input
     }
     fun updateConfirmPassword(input: String) {
         confirmPassword = input
     }
     fun updateFirstName(input: String) {
-        firstName = input
+        vmFirstName = input
     }
     fun updateLastName(input: String) {
-        lastName = input
+        vmLastName = input
     }
 
     // User Creation
     fun createUserObject(): User {
         val user = User(
             uID = app.currentUser!!.id,
-            firstName = firstName,
-            lastName = lastName,
-            email = email
+            firstName = vmFirstName,
+            lastName = vmLastName,
+            email = vmEmail
         )
         return user
     }
 
-    fun writeUserToDb() {
+    fun writeUserToDb(): UserEntity? {
+        var userEntity: UserEntity? = null
         scope.launch {
             Logger.i("Attempting to write user to Realm")
             // Create database object
             try {
-                val userEntity = UserEntity().apply {
+                userEntity = UserEntity().apply {
                     _id = app.currentUser!!.id
                     bio
-                    email
-                    firstName
-                    lastName
+                    email = vmEmail
+                    firstName = vmFirstName
+                    lastName = vmLastName
                 }
-                realmRepository.writeUser(userEntity)
+                realmRepository.writeUser(userEntity!!)
             }
             catch (e: Exception) {
                 Logger.e("Failed to sync user")
             }
         }
+        return userEntity
     }
 
     // Validation Functions
@@ -105,13 +108,13 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
     )
 
     private fun validateEmail(): ValidationResult {
-        if(email.isBlank()) {
+        if(vmEmail.isBlank()) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "Email can't be blank."
             )
         }
-        if(!email.matches(emailAddressRegex)) {
+        if(!vmEmail.matches(emailAddressRegex)) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "Not a valid email."
@@ -124,7 +127,7 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     // Validate First Name
     private fun validateFirstName(): ValidationResult {
-        val containsLetters = firstName.any { it.isLetter() }
+        val containsLetters = vmFirstName.any { it.isLetter() }
         if(!containsLetters) {
             return ValidationResult(
                 successful = false,
@@ -138,7 +141,7 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     // Validate Last Name
     private fun validateLastName(): ValidationResult {
-        val containsLetters = lastName.any { it.isLetter() }
+        val containsLetters = vmLastName.any { it.isLetter() }
         if(!containsLetters) {
             return ValidationResult(
                 successful = false,
@@ -152,13 +155,13 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     // Validate Password
     private fun validatePassword(): ValidationResult {
-        if(password.length < 8) {
+        if(vmPassword.length < 8) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "Password must contain at least 8 characters."
             )
         }
-        val containsLettersAndDigits = password.any { it.isDigit() } && password.any { it.isLetter() }
+        val containsLettersAndDigits = vmPassword.any { it.isDigit() } && vmPassword.any { it.isLetter() }
         if(!containsLettersAndDigits) {
             return ValidationResult(
                 successful = false,
@@ -172,7 +175,7 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     // Validate Repeated Password
     private fun validateConfirmPassword(): ValidationResult {
-        if(password != confirmPassword) {
+        if(vmPassword != confirmPassword) {
             return ValidationResult(
                 successful = false,
                 errorMessage = "Passwords do not match."
@@ -205,17 +208,15 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     fun atlasAuth(): io.realm.kotlin.mongodb.User? {
         var currentUser: io.realm.kotlin.mongodb.User? = null
-        scope.launch { // force execution of sign up auth with runBlocking if needed
+        runBlocking { // force execution of sign up auth with runBlocking if needed
             try {
                 app.currentUser?.logOut() // bad code, just in case a user is cached
                 // this is fine for now but it needs to go to the signup page soon instead
-                app.emailPasswordAuth.registerUser(email, password)
+                app.emailPasswordAuth.registerUser(vmEmail, vmPassword)
                 Logger.i("Made it to login try")
-                val emailPasswordCredentials = Credentials.emailPassword(email, password)
+                val emailPasswordCredentials = Credentials.emailPassword(vmEmail, vmPassword)
                 currentUser = app.login(emailPasswordCredentials)
                 Logger.i("Value of Atlas user ${app.currentUser}")
-                if (currentUser != null) realmRepository.initRealm()
-                else throw Exception("Failed to initialize Realm, app user is null")
             }
             catch(e: Exception) {
                 // eventually want to populate the UI with a Snackbar indicating inability to login
@@ -225,5 +226,11 @@ class SignupScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
         Logger.i("currentUser value: $currentUser")
 
         return currentUser
+    }
+
+    fun initRealm() {
+        scope.launch {
+            realmRepository.initRealm()
+        }
     }
 }
