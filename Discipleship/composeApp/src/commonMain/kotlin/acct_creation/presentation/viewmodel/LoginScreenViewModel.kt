@@ -106,7 +106,8 @@ class LoginScreenViewModel(val realmRepository: RealmRepository): ViewModel() {
 
     fun atlasAuth(): io.realm.kotlin.mongodb.User? {
         var currentUser: io.realm.kotlin.mongodb.User? = null
-        runBlocking { // force this to execute before anything else happens
+        scope.launch { // force this to execute before anything else happens with runBlocking
+            // if needed
             try {
                 app.currentUser?.logOut()
                 // this is fine for now but it needs to go to the signup page soon instead

@@ -1,5 +1,6 @@
 package acct_creation.presentation.ui
 
+import acct_creation.presentation.viewmodel.DorDScreenViewModel
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,6 +36,15 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import io.realm.kotlin.Realm
+import io.realm.kotlin.ext.realmListOf
+import io.realm.kotlin.internal.getIdentifierOrNull
+import io.realm.kotlin.schema.RealmStorageType
+import io.realm.kotlin.types.RealmList
+import io.realm.kotlin.types.RealmUUID
+import realm.data.remote.RealmApi
+import realm.domain.model.DiscipleEntity
+import realm.domain.model.DisciplerEntity
 import screenmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.onSecondaryContainerLight
@@ -47,8 +57,9 @@ import ui.theme.secondaryLight
 * This screen asks a user whether they are a disciple or discipler upon first sign up
  */
 
-class DorDScreen(screenData: ScreenData): Screen {
+class DorDScreen(val screenData: ScreenData): Screen {
     override val key: ScreenKey = "DorDScreen"
+    val dOrDScreenViewModel = DorDScreenViewModel()
     @Composable
     override fun Content() {
         val fSize = 30.sp // font size for all font on screen
@@ -132,7 +143,8 @@ class DorDScreen(screenData: ScreenData): Screen {
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
-                                val screenData = ScreenData(false, null, null)
+                                val discipleEntity = dOrDScreenViewModel.initEntity(isDisciple = true)
+                                val screenData = ScreenData(discipleEntity)
                                 navigator.push(DiscipleForm(screenData))
                             }, // Needs to route to the disciple intro screens
                         border = BorderStroke(2.dp, primaryLight),
@@ -178,7 +190,9 @@ class DorDScreen(screenData: ScreenData): Screen {
                             .height(180.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .clickable {
-                                val screenData = ScreenData(false,null, null)
+                                val disciplerEntity = dOrDScreenViewModel.initEntity(isDisciple = false)
+                                // write to database
+                                val screenData = ScreenData(disciplerEntity)
                                 navigator.push(DisciplerForm(screenData))
                             }, // needs to route to discipler intro screens
                         border = BorderStroke(2.dp, primaryLight),

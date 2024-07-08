@@ -23,6 +23,7 @@ import home.presentation.ui.discipler_home.DisciplerHomeScreen
 import screenmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
 import profile.presentation.AccountProfile
+import realm.domain.model.DiscipleEntity
 import ui.theme.inversePrimaryLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
@@ -40,7 +41,7 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             selected = true,
             onClick = {
                 val screens = mutableListOf<Screen>()
-                if (screenData.isDisciple) {
+                if (screenData.userEntity is DiscipleEntity) {
                     screens.add(DiscipleHomeScreen(screenData))
                 } else {
                     screens.add(DisciplerHomeScreen(screenData))
@@ -69,7 +70,7 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             selected = true,
             onClick = {
                 if (currentScreen != "Home") {
-                    if (screenData.isDisciple) {
+                    if (screenData.userEntity is DiscipleEntity) {
                         val screens = mutableListOf<Screen>()
                         screens.add(DiscipleHomeScreen(screenData))
                         navigator.items.forEach {
@@ -108,7 +109,7 @@ fun BottomBar(navigator: Navigator, currentScreen: String, screenData: ScreenDat
             onClick = {
                 if (currentScreen != "Calendar") {
                     val screens = mutableListOf<Screen>()
-                    if (screenData.isDisciple) {
+                    if (screenData.userEntity is DiscipleEntity) {
                         screens.add(DiscipleHomeScreen(screenData))
                     } else {
                         screens.add(DisciplerHomeScreen(screenData))

@@ -38,20 +38,16 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
-import dev.gitlive.firebase.auth.FirebaseUser
-import home.data.remote.ToolsApi
-import home.data.repository.ToolsRepoImplementation
-import home.presentation.viewmodel.DiscipleHomeViewModel
 import realm.data.remote.RealmApi
 import realm.data.repository.RealmRepoImpl
-import realm.domain.repository.RealmRepository
+import realm.domain.model.UserEntity
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
-import screenmodel.ScreenData
 
 /* Author: Zachery Linscott
 * */
@@ -70,6 +66,7 @@ class SignupScreen: Screen {
                 )
             )
         var currentUser: io.realm.kotlin.mongodb.User? by remember { mutableStateOf(null) }
+        val userEntity: UserEntity? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
 
@@ -236,7 +233,7 @@ class SignupScreen: Screen {
                                     signupScreenViewModel.writeUserToDb()
                                 }
                                 Logger.i("currentUser value update: $currentUser")
-                                navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
+                                navigator.push(DorDScreen(ScreenData(userEntity)))
 
                             }
                         },
@@ -264,7 +261,7 @@ class SignupScreen: Screen {
             }
         }
         else {
-            navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
+            navigator.push(DorDScreen(ScreenData(userEntity)))
         }
     }
 }

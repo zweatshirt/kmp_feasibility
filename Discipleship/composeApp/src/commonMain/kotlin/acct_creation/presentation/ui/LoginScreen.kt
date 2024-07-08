@@ -62,6 +62,7 @@ import home.presentation.ui.disciple_home.DiscipleHomeScreen
 import kotlinx.coroutines.launch
 import realm.data.remote.RealmApi
 import realm.data.repository.RealmRepoImpl
+import realm.domain.model.UserEntity
 import realm.domain.repository.RealmRepository
 import ui.theme.backgroundLight
 import ui.theme.errorLight
@@ -87,6 +88,7 @@ class LoginScreen: Screen {
             )
         )
         var currentUser: io.realm.kotlin.mongodb.User? by remember { mutableStateOf(null) }
+        var userEntity: UserEntity? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
 
@@ -95,7 +97,7 @@ class LoginScreen: Screen {
         // This screen only needs to be displayed if the user
         // is not logged in
         Scaffold {
-            if (currentUser == null) {
+//            if (currentUser == null) {
                 Column(
                     modifier = Modifier
                         .background(
@@ -198,9 +200,9 @@ class LoginScreen: Screen {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.atlasAuth()
-                                val userEntity = loginViewModel.fetchUserData(currentUser)
+                                userEntity = loginViewModel.fetchUserData(currentUser)
                                 Logger.i("userEntity value update: $userEntity")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser, null)))
+                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -228,10 +230,11 @@ class LoginScreen: Screen {
                         }
                     )
                 }
-            }
-            else {
-                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser, null)))
-            }
+            //}
+//            else {
+//                // switch to DiscipleEntity
+//                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, userEntity, null)))
+            //}
         }
     }
 }
