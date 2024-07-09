@@ -1,7 +1,5 @@
 package home.presentation.ui.disciple_home
 
-import calendar.domain.model.Meeting
-import home.domain.model.Tool
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
@@ -18,20 +17,26 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.jetpack.navigatorViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import calendar.domain.model.Meeting
 import co.touchlab.kermit.Logger
 import discipleship.composeapp.generated.resources.Res
 import discipleship.composeapp.generated.resources.avatar
 import home.data.remote.ToolsApi
 import home.data.repository.ToolsRepoImplementation
+import home.domain.model.Tool
 import home.presentation.ui.composables.BottomBar
 import home.presentation.ui.composables.FinishedStudiesSection
-import home.presentation.ui.composables.TopBar
-import profile.domain.model.Disciple
 import home.presentation.ui.composables.MeetingSection
 import home.presentation.ui.composables.ToDoSection
 import home.presentation.ui.composables.ToolsSection
+import home.presentation.ui.composables.TopBar
 import home.presentation.ui.discipler_home.disciplesList
 import home.presentation.viewmodel.DiscipleHomeViewModel
+import home.presentation.viewmodel.discipleToolsList
+import home.presentation.viewmodel.disciplerToolsList
+import home.presentation.viewmodel.toDoList
+import profile.domain.model.Disciple
+import realm.domain.model.UserEntity
 import screenmodel.ScreenData
 import ui.theme.backgroundLight
 
@@ -84,23 +89,23 @@ val discipleMeetingsList = mutableListOf(
     )
 )
 
-//// will eventually be populated dynamically
-val toDoList = mutableListOf(
-    Tool(
-        "100",
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = 100
-    ),
-    Tool(
-        "100",
-        name = "Four Spiritual Laws",
-        description = "This is a cool tool.",
-        toolLink = "https://knowgod.com/en/fourlaws/0",
-        totalViews = 1000
-    ),
-)
+////// will eventually be populated dynamically
+//val toDoList = mutableListOf(
+//    Tool(
+//        "100",
+//        name = "Four Spiritual Laws",
+//        description = "This is a cool tool.",
+//        toolLink = "https://knowgod.com/en/fourlaws/0",
+//        totalViews = 100
+//    ),
+//    Tool(
+//        "100",
+//        name = "Four Spiritual Laws",
+//        description = "This is a cool tool.",
+//        toolLink = "https://knowgod.com/en/fourlaws/0",
+//        totalViews = 1000
+//    ),
+//)
 
 val finishedList = listOf(
     Tool(
@@ -121,15 +126,14 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
         val navigator = LocalNavigator.currentOrThrow
         // initialize the disciple view model, passing in the tools repository that fetches from
         // the GodTools/KnowGod.com API by use of the ToolsApi
-        val discipleHomeViewModel = navigatorViewModel { DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
-            ToolsApi())) }
-//        val discipleHomeViewModel by remember { mutableStateOf(DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(
-//            ToolsApi() // we want this API to be stored in our DB, and in the future we will pull
-//            // from our DB, occasionally updating it from this API
-//        ))) }
-        //val toolList = remember { mutableStateOf(discipleHomeViewModel.discipleHomeScreenState.toolsList) }
+        val discipleHomeViewModel = navigatorViewModel {
+            DiscipleHomeViewModel(toolsRepository =
+            ToolsRepoImplementation(ToolsApi())
+            )
+        }
+
         discipleHomeViewModel.getTools()
-        val toolList = discipleHomeViewModel.toolList
+        toDoList.addAll(discipleToolsList)
         Scaffold(
             topBar = {
                 TopBar(navigator = navigator, title = "Christ Companions")
@@ -153,8 +157,7 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
                 Spacer(modifier = Modifier.padding(12.dp))
                 FinishedStudiesSection()
                 Spacer(modifier = Modifier.padding(12.dp))
-                ToolsSection(toolList)
-                Logger.i("The size of tools list is: $toolList")
+                ToolsSection(screenData.userEntity as UserEntity)
             }
         }
     }

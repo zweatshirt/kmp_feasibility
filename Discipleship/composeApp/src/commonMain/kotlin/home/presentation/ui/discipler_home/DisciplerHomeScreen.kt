@@ -22,6 +22,7 @@ import home.presentation.ui.composables.DiscipleSection
 import home.presentation.ui.composables.MeetingSection
 import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.composables.TopBar
+import realm.domain.model.UserEntity
 import screenmodel.ScreenData
 import ui.theme.backgroundLight
 
@@ -110,7 +111,7 @@ data class DisciplerHomeScreen(val screenData: ScreenData): Screen {
             ) {
                 MeetingSection()
                 DiscipleSection()
-                ToolsSection(toolsList)
+                ToolsSection(userEntity = screenData.userEntity as UserEntity)
             }
         }
     }

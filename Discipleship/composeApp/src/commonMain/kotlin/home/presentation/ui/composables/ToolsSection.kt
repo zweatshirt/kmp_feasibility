@@ -17,13 +17,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import home.domain.model.Tool
+import home.presentation.viewmodel.discipleToolsList
+import home.presentation.viewmodel.disciplerToolsList
+import realm.domain.model.UserEntity
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 
@@ -35,12 +36,21 @@ TODO: Fix padding at the end of the lazy rows
 */
 
 @Composable
-fun ToolsSection(toolList: List<Tool>) {
+fun ToolsSection(userEntity: UserEntity) {
 //    val containerPad = 16.dp
     SectionTitle("Recommended tools")
-    LazyRow {
-        items(toolList.size) {
-            ToolCard(toolList[it])
+    if (userEntity.isDisciple == true) {
+        LazyRow {
+            items(discipleToolsList.size) {
+                ToolCard(discipleToolsList[it])
+            }
+        }
+    }
+    else {
+        LazyRow {
+            items(disciplerToolsList.size) {
+                ToolCard(disciplerToolsList[it])
+            }
         }
     }
 }

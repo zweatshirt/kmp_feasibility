@@ -22,10 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import home.presentation.ui.disciple_home.toDoList
+import home.presentation.viewmodel.toDoList
 import ui.theme.primaryCheck
 import ui.theme.primaryLight
 
@@ -43,11 +44,10 @@ fun ToDoSection() {
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun ToDoCard(tool: Tool) {
     val cardHeight = 140.dp
-    val squareSize = 48.dp
+    val tName = tool.name
 
     Card(
         modifier = Modifier
@@ -59,10 +59,9 @@ private fun ToDoCard(tool: Tool) {
     ) {
         Column(
         ) {
-
                 Text(
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 36.dp ),
-                    text = tool.name, // replace with dynamic loading
+                    text = tName, // replace with dynamic loading
                     fontSize = 20.sp,
                     color = primaryLight,
                     fontWeight = FontWeight.SemiBold
