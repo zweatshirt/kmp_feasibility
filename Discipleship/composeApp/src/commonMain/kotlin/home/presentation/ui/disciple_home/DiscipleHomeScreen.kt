@@ -133,7 +133,6 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
         }
 
         discipleHomeViewModel.getTools()
-        toDoList.addAll(discipleToolsList)
         Scaffold(
             topBar = {
                 TopBar(navigator = navigator, title = "Christ Companions")

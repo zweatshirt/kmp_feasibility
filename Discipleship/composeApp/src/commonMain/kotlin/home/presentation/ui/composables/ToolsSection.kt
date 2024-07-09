@@ -14,17 +14,24 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.touchlab.kermit.Logger
 import home.domain.model.Tool
+import home.presentation.viewmodel.completedList
 import home.presentation.viewmodel.discipleToolsList
 import home.presentation.viewmodel.disciplerToolsList
+import home.presentation.viewmodel.toDoList
 import realm.domain.model.UserEntity
+import ui.theme.primaryCheck
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 
@@ -39,17 +46,22 @@ TODO: Fix padding at the end of the lazy rows
 fun ToolsSection(userEntity: UserEntity) {
 //    val containerPad = 16.dp
     SectionTitle("Recommended tools")
+
+    // This needs to be fixed asap:
+    // Differentiate between populating discipler list and
+    // disciple list. As it stands the disciple list is technically
+    // populated for both because it is hardcoded in the ToolCard
     if (userEntity.isDisciple == true) {
         LazyRow {
-            items(discipleToolsList.size) {
-                ToolCard(discipleToolsList[it])
+            items(discipleToolsList.size) { index ->
+                ToolCard(index)
             }
         }
     }
     else {
         LazyRow {
-            items(disciplerToolsList.size) {
-                ToolCard(disciplerToolsList[it])
+            items(disciplerToolsList.size) { index ->
+                ToolCard(index)
             }
         }
     }
@@ -60,11 +72,12 @@ fun ToolsSection(userEntity: UserEntity) {
 // the time, data, and disciple parameters will need to be redefined to the specific object
 // e.g. a disciple.Disciple object
 @Composable
-fun ToolCard(tool: Tool) {
-    val tName = tool.name
-    val tDescription = tool.description
+fun ToolCard(index: Int) {
+    val discipleListRemember = remember { discipleToolsList }
+    val tName = discipleListRemember[index].name
+    val tDescription = discipleListRemember[index].description
     val uriHandler = LocalUriHandler.current
-    val url = tool.toolLink
+    val url = discipleListRemember[index].toolLink
 
     Card(
         modifier = Modifier
@@ -96,6 +109,17 @@ fun ToolCard(tool: Tool) {
                     color = primaryLight,
                     fontWeight = FontWeight.SemiBold
                 )
+                Column {
+                    ButtonBox(
+                        Icons.Rounded.Check,
+                        "Checkmark icon",
+                        primaryCheck,
+                        onClick = {
+                            if (!toDoList.contains(discipleListRemember[index]))
+                                toDoList.add(discipleListRemember.removeAt(index))
+                        }
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.padding(4.dp))

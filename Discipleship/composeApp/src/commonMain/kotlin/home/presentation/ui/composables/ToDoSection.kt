@@ -19,6 +19,8 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +28,10 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.touchlab.kermit.Logger
+import home.presentation.viewmodel.completedList
+import home.presentation.viewmodel.discipleToolsList
+import home.presentation.viewmodel.disciplerToolsList
 import home.presentation.viewmodel.toDoList
 import ui.theme.primaryCheck
 import ui.theme.primaryLight
@@ -37,18 +43,18 @@ import ui.theme.primaryLight
 fun ToDoSection() {
     SectionTitle("To-do list")
     LazyRow {
-        items(toDoList.size) {
-            ToDoCard(toDoList[it])
+        items(toDoList.size) { index ->
+            ToDoCard(index)
         }
     }
 }
 
 
 @Composable
-private fun ToDoCard(tool: Tool) {
+private fun ToDoCard(index: Int) {
     val cardHeight = 140.dp
-    val tName = tool.name
-
+    val tName = toDoList[index].name
+    val toDoListRemember = remember { toDoList }
     Card(
         modifier = Modifier
             .width(240.dp)
@@ -64,7 +70,8 @@ private fun ToDoCard(tool: Tool) {
                     text = tName, // replace with dynamic loading
                     fontSize = 20.sp,
                     color = primaryLight,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 2
                 )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -77,7 +84,9 @@ private fun ToDoCard(tool: Tool) {
                     Icons.Default.Delete,
                     "Trash Icon",
                     Color.Black,
-                    onClick = {})
+                    onClick = {
+                        discipleToolsList.add(toDoListRemember.removeAt(index))
+                    })
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
                 ButtonBox(
                     Icons.Default.Favorite,
@@ -89,7 +98,11 @@ private fun ToDoCard(tool: Tool) {
                     Icons.Rounded.Check,
                     "Checkmark icon",
                     primaryCheck,
-                    onClick = {})
+                    onClick = {
+                        completedList.add(toDoList[index])
+                        toDoListRemember.removeAt(index)
+                    }
+                )
             }
 
         }
