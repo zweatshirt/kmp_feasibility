@@ -236,7 +236,7 @@ class SignupScreen: Screen {
                                     signupScreenViewModel.writeUserToDb()
                                 }
                                 Logger.i("currentUser value update: $currentUser")
-                                navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
+                                navigator.push(DorDScreen(ScreenData(false, currentUser)))
 
                             }
                         },
@@ -264,7 +264,7 @@ class SignupScreen: Screen {
             }
         }
         else {
-            navigator.push(DorDScreen(ScreenData(false, currentUser, null)))
+            navigator.push(DorDScreen(ScreenData(false, currentUser)))
         }
     }
 }

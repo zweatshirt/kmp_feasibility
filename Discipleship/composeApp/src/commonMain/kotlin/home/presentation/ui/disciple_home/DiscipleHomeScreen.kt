@@ -13,6 +13,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.jetpack.navigatorViewModel
@@ -32,6 +33,8 @@ import home.presentation.ui.composables.ToDoSection
 import home.presentation.ui.composables.ToolsSection
 import home.presentation.ui.discipler_home.disciplesList
 import home.presentation.viewmodel.DiscipleHomeViewModel
+import home.presentation.viewmodel.MyEventListener
+import kotlinx.serialization.Serializable
 import screenmodel.ScreenData
 import ui.theme.backgroundLight
 
@@ -112,13 +115,40 @@ val finishedList = listOf(
     ),
 )
 
-
+@Serializable
 data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
     override val key = "DiscipleHome"
     @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
+
         val navigator = LocalNavigator.currentOrThrow
+
+        MyEventListener {
+            when (it) {
+                Lifecycle.Event.ON_RESUME -> {
+                    Logger.i("On Resume")
+                    navigator.replaceAll(DiscipleHomeScreen(screenData))
+                }
+                Lifecycle.Event.ON_PAUSE -> {
+                    Logger.i("On Pause")
+                }
+                Lifecycle.Event.ON_STOP -> {
+                    Logger.i("On Stop")
+                }
+                Lifecycle.Event.ON_START -> {
+                    Logger.i("On Start")
+                }
+                Lifecycle.Event.ON_DESTROY -> {
+                    Logger.i("On Destroy")
+                }
+                Lifecycle.Event.ON_CREATE -> {
+                    Logger.i("On Create")
+                }
+                else -> {}
+            }
+        }
+
         // initialize the disciple view model, passing in the tools repository that fetches from
         // the GodTools/KnowGod.com API by use of the ToolsApi
         val discipleHomeViewModel = navigatorViewModel { DiscipleHomeViewModel(toolsRepository = ToolsRepoImplementation(

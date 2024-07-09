@@ -200,7 +200,7 @@ class LoginScreen: Screen {
                                 currentUser = loginViewModel.atlasAuth()
                                 val userEntity = loginViewModel.fetchUserData(currentUser)
                                 Logger.i("userEntity value update: $userEntity")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser, null)))
+                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser)))
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -230,7 +230,7 @@ class LoginScreen: Screen {
                 }
             }
             else {
-                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser, null)))
+                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser)))
             }
         }
     }

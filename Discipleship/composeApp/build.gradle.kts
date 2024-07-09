@@ -108,6 +108,8 @@ kotlin {
             /* MongoDB (Realm related) */
             // Enables conversion from Kotlin objects to MongoDB BSON data
             implementation(libs.bson.kotlinx)
+
+            implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
         }
     }
 }
@@ -160,4 +162,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.core)
     implementation(libs.firebase.common.ktx)
+    implementation(libs.androidx.lifecycle.common.jvm)
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
 }

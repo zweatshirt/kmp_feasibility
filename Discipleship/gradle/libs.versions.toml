@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.4.1"
 android-compileSdk = "34"
 android-minSdk = "25"
 android-targetSdk = "34"
@@ -41,6 +41,8 @@ gservices = "4.4.2"
 firebaseCommonKtx = "21.0.0"
 ktor = "2.3.12"
 coroutines = "1.8.1"
+lifecycleCommonJvm = "2.8.3"
+lifecycleRuntimeComposeAndroid = "2.8.3"
 
 [libraries]
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
@@ -88,6 +90,8 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-lifecycle-common-jvm = { group = "androidx.lifecycle", name = "lifecycle-common-jvm", version.ref = "lifecycleCommonJvm" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

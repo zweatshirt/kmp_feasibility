@@ -32,23 +32,25 @@ class DiscipleHomeViewModel constructor(
 
     fun getTools() {
         var toolObjects: List<Tool> = mutableListOf()
-        _scope.launch {
-            // returns Either<NetworkError, List<Tool>>
-            toolsRepository.getTools()
-                .onRight { tools ->
-                    // this is for testing
-                    toolsRepository.readToolsFromDb()
-                    // update state with the tools
-                    Logger.i("Successful Tools API request in DiscipleHomeViewModel")
-                    toolObjects = tools
-                } // successful request, returns list of tools
-                .onLeft {
-                    Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
-                } // unsuccessful request, throws NetworkError
-            //discipleHomeScreenState.toolsList = toolObjects
-            toolList = toolObjects
-            Logger.i("The size of the tool list is: ${discipleHomeScreenState.toolsList.size}")
+        if (toolList.isEmpty()) {
+            _scope.launch {
+                // returns Either<NetworkError, List<Tool>>
+                toolsRepository.getTools()
+                    .onRight { tools ->
+                        // this is for testing
+                        toolsRepository.readToolsFromDb()
+                        // update state with the tools
+                        Logger.i("Successful Tools API request in DiscipleHomeViewModel")
+                        toolObjects = tools
+                    } // successful request, returns list of tools
+                    .onLeft {
+                        Logger.e("Failed request for Tools API in DiscipleHomeViewModel")
+                    } // unsuccessful request, throws NetworkError
+                //discipleHomeScreenState.toolsList = toolObjects
+                toolList = toolObjects
+                Logger.i("The size of the tool list is: ${discipleHomeScreenState.toolsList.size}")
 
+            }
         }
     }
 }
