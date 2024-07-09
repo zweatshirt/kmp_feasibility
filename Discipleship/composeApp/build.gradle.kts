@@ -10,6 +10,8 @@ plugins {
     alias(libs.plugins.realm)
     kotlin("plugin.serialization")
     id("de.jensklingenberg.ktorfit") version "2.0.0"
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
 
 }
 
@@ -18,6 +20,7 @@ kotlin {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+            freeCompilerArgs.addAll("-P", "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=example.CommonParcelize")
         }
     }
     

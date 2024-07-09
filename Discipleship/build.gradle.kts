@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.googleServices) apply false
     kotlin("plugin.serialization") version "1.7.0" apply false
+
 }

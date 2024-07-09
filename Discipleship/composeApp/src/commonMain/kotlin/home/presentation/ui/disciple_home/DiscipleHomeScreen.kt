@@ -115,7 +115,7 @@ val finishedList = listOf(
     ),
 )
 
-@Serializable
+
 data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
     override val key = "DiscipleHome"
     @OptIn(ExperimentalVoyagerApi::class)
