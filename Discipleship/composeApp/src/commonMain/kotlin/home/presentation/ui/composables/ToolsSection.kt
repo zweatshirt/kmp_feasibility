@@ -15,8 +15,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +32,7 @@ import home.presentation.viewmodel.completedList
 import home.presentation.viewmodel.discipleToolsList
 import home.presentation.viewmodel.disciplerToolsList
 import home.presentation.viewmodel.toDoList
+import profile.domain.model.Disciple
 import realm.domain.model.UserEntity
 import ui.theme.primaryCheck
 import ui.theme.primaryContainerLight
@@ -54,14 +57,14 @@ fun ToolsSection(userEntity: UserEntity) {
     if (userEntity.isDisciple == true) {
         LazyRow {
             items(discipleToolsList.size) { index ->
-                ToolCard(index)
+                ToolCard(index, true)
             }
         }
     }
     else {
         LazyRow {
             items(disciplerToolsList.size) { index ->
-                ToolCard(index)
+                ToolCard(index, false)
             }
         }
     }
@@ -72,12 +75,18 @@ fun ToolsSection(userEntity: UserEntity) {
 // the time, data, and disciple parameters will need to be redefined to the specific object
 // e.g. a disciple.Disciple object
 @Composable
-fun ToolCard(index: Int) {
-    val discipleListRemember = remember { discipleToolsList }
-    val tName = discipleListRemember[index].name
-    val tDescription = discipleListRemember[index].description
+fun ToolCard(index: Int, isDisciple: Boolean) {
+    var listRemember = mutableStateListOf<Tool>()
+    if (isDisciple) {
+        listRemember = remember { discipleToolsList }
+    }
+    else {
+        listRemember = remember { disciplerToolsList }
+    }
+    val tName = listRemember[index].name
+    val tDescription =listRemember[index].description
     val uriHandler = LocalUriHandler.current
-    val url = discipleListRemember[index].toolLink
+    val url = listRemember[index].toolLink
 
     Card(
         modifier = Modifier
@@ -100,23 +109,26 @@ fun ToolCard(index: Int) {
                 modifier = Modifier
                     .fillMaxWidth()
                 ,
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top,
             ) {
-                Text(
-                    text = tName,
-                    fontSize = 24.sp,
-                    color = primaryLight,
-                    fontWeight = FontWeight.SemiBold
-                )
+                Column(modifier = Modifier.width(200.dp)) {
+                    Text(
+                        text = tName,
+                        fontSize = 24.sp,
+                        color = primaryLight,
+                        fontWeight = FontWeight.SemiBold,
+                        maxLines = 2
+                    )
+                }
                 Column {
                     ButtonBox(
-                        Icons.Rounded.Check,
-                        "Checkmark icon",
+                        Icons.Rounded.Add,
+                        "Icon",
                         primaryCheck,
                         onClick = {
-                            if (!toDoList.contains(discipleListRemember[index]))
-                                toDoList.add(discipleListRemember.removeAt(index))
+                            if (!toDoList.contains(listRemember[index]))
+                                toDoList.add(listRemember.removeAt(index))
                         }
                     )
                 }

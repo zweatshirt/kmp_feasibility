@@ -44,7 +44,7 @@ TODO: Fix padding at the end of the lazy rows
 fun DiscipleSection() {
     val containerPad = 16.dp
     SectionTitle("Disciples")
-    LazyRow() {
+    LazyRow {
         items(disciplesList.size) {
             DiscipleCard(disciplesList[it])
         }
