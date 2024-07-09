@@ -1,12 +1,8 @@
 package screenmodel
 
-import dev.gitlive.firebase.auth.FirebaseUser
-import kotlinx.serialization.Serializable
-import realm.data.remote.RealmApi
+import io.realm.kotlin.types.RealmObject
 
 // the one thing we want to persist across screens is the firebase user for authentication
-@Serializable
 data class ScreenData(
-    var isDisciple: Boolean,
-    var currentUser: io.realm.kotlin.mongodb.User?,
-    )
+    var userEntity: RealmObject?
+)

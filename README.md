@@ -15,18 +15,22 @@ Kotlin Multiplatform Mobile
 - 0.8.2(233)-8 JetBrains
 
 Kotlin
-- 1.9.29
+- 2.0.0
 
 Device Emulator (Subject to change)
 - Pixel 3a API 34
 - Android 14.0 ("UpsideDownCake") | x86_64
 
 Gradle
-- 8.4.1
+- 8.5.0
 
-## Authorization library in use:
-Open source Firebase Kotlin SDK + Firebase Authentication
-- Another option we had was Atlas Device SDKs by MongoDB (previously known as Realm)
+## Major dependencies:
+- Atlas Device SDK (Realm) for Sync Database and user authentication/management.
+- Ktor for performing the API call to KnowGod.com.
+- Arrow for functionally handling exceptions in API call (not necessary but a useful library).
+- Kermit for quick and useful debug logging.
+- Voyager for screen navigation. Kotlin Multiplatform has a default library for screen navigation, we decided not to implement it due to preference. As far as we know, there are no issues with the default library.
+- __NOTE:__ Ktorfit was not used due to time constraints, but it is a seemingly decent alternative to Retrofit.
 
 ## Positive and negative notes:
 ### Positives
@@ -38,21 +42,25 @@ Open source Firebase Kotlin SDK + Firebase Authentication
 - Kotlin is interoperable with Java and Swift
 - Kotlin is statically typed, decreasing chances of bugs in applications
 - Broad range of platforms that KMP supports.
-- large changes being made constantly
+- Large changes being made constantly (good and bad fact).
+- Active and seemingly growing community of developers.
+- User auth is doable both through Atlas Device SDK and the open source Firebase SDK. Both behave very similarly and are very easy to implement.
+- Atlas Device SDK is surprisingly fleshed out and works well. The documentation, however, is not. It offers a multitude of services, like Realm, device to cloud syncing, user management/auth, and decent analytics on operations. Definitely recommend.
+
+
 ### Negatives
 - Platform specific requirements must be heavily understood before taking on projects
-- There is still a possibility you will need to write platform specific UI code.
-- The Kotlin community is smaller compared to Flutter, which may affect the availability of libraries, third party tools, and the responsiveness of community support.
+- There is still a possibility you will need to write platform specific UI code, especially if you want your app to look native to the device you are intending the UI for.
+- The KMP community is currently smaller compared to Flutter, which may affect the availability of libraries, third party tools, and the responsiveness of community support.
 - Cross-platform desktop UIs have been neglected for quite a while. Swing has been a standard for some time, but it’s old and unmaintained. JetBrains is hoping to bring Compose fully to Desktop and Web
 - Compose UI is apparently 'technically usable for iOS' but it's still in beta
 	- SwiftUI is the alternative for it
 	- More fully fledged for Android
-	- Compose for Web is in alpha, may be unstable
-- large changes are being made all the time, there is a lot to learn (both good and bad)
-- Navigation across application screens is still in an experimental phase, deep links are not supported. Also cannot override default back handling (what button or gesture to use for going to previous Composable)
-- generally a lack of documentation
-- Permissions still need to be managed on the individual platforms (you can create a package to handle the permissions across the different platforms yourself but it is an initial time consuming process)
-- Dependency injection is a bit of a pain it seems but not terrible (a good option is Koin)
-- User auth is doable but there is no official library for it as far as we are aware. There is an open source Firebase SDK that offers user auth, and it works well.
-- Extremely challenging trying to find a cloud database library that works well. First we are tried Atlas Device SDK (Realm) but moved to Firebase due to the complexity of Realm, and the common code capabilities were limited with Firebase RealTime Database. We are trying Room, which has dependency issues, and may return to Atlas Device SDK
-- A lot of MongoDB and Realm/Atlas Device SDK plugins/dependencies are not yet compatible with Kotlin 2.0.0
+	- Despite this, we found it works quite well and is practically fully functional.
+- Compose for Web is in alpha, may be unstable.
+- Navigation across application screens is still in an experimental phase, deep links are not supported by the default navigation library. Also apparently cannot override default back handling (what button or gesture to use for going to previous Composable), but this makes sense since it is highly dependent on OS.
+- Generally a lack of documentation, mostly on the business logic side of things.
+- Permissions still need to be managed on the individual platforms (you can create a package to handle the permissions across the different platforms yourself but it is an initial time consuming process).
+- Dependency injection is a bit of a pain it seems but not terrible. A good library for it is Koin. @Inject annotation would not work from our attempts, but this isn't really an issue.
+- Because everything is "bleeding edge," a lot of dependencies do not work well together, and it can be very time consuming trying to manage dependencies that are updating very often and causing Gradle issues. The chance of one dependency breaking a project seems quite high.
+- You will be the first to face an issue in a lot of cases, so there is not a lot of support online or forums/threads to find where you can quickly solve issues.

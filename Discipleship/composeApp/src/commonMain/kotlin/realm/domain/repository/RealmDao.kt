@@ -8,6 +8,7 @@ import io.realm.kotlin.notifications.ResultsChange
 import io.realm.kotlin.query.RealmResults
 import io.realm.kotlin.types.RealmObject
 import kotlinx.coroutines.flow.Flow
+import realm.domain.model.UserEntity
 import kotlin.reflect.KClass
 
 interface RealmDao<T : RealmObject> {
@@ -41,6 +42,10 @@ interface RealmDao<T : RealmObject> {
 
     suspend fun findById(id: String): T? {
         return realm.query(clazz, "_id == $0", id).first().find()
+    }
+
+    suspend fun findBy(userId: String): T? {
+        return realm.query(clazz, "userId == $0", userId).first().find()
     }
 
     suspend fun delete(entity: T) {

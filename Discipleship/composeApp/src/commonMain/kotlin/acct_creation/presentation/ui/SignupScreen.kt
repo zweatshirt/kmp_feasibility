@@ -38,23 +38,18 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
-import dev.gitlive.firebase.auth.FirebaseUser
-import home.data.remote.ToolsApi
-import home.data.repository.ToolsRepoImplementation
-import home.presentation.viewmodel.DiscipleHomeViewModel
 import realm.data.remote.RealmApi
 import realm.data.repository.RealmRepoImpl
-import realm.domain.repository.RealmRepository
+import realm.domain.model.UserEntity
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.inverseSurfaceLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
-import screenmodel.ScreenData
 
-/* Author: Zachery Linscott
-* */
+/* Author: Zach */
 
 class SignupScreen: Screen {
     override val key: ScreenKey = "SignupScreen"
@@ -70,6 +65,7 @@ class SignupScreen: Screen {
                 )
             )
         var currentUser: io.realm.kotlin.mongodb.User? by remember { mutableStateOf(null) }
+        var userEntity: UserEntity? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
 
@@ -103,7 +99,7 @@ class SignupScreen: Screen {
                         Spacer(modifier = Modifier.padding(16.dp))
 
                         // User first name and last name fields
-                        OutlinedTextField(value = signupScreenViewModel.firstName, onValueChange = {
+                        OutlinedTextField(value = signupScreenViewModel.vmFirstName, onValueChange = {
                             firstName ->
                                 signupScreenViewModel.updateFirstName(firstName)
                                 Logger.i("First name: $firstName")
@@ -125,7 +121,7 @@ class SignupScreen: Screen {
                             //Spacer(modifier = Modifier.padding(8.dp))
                         }
 
-                        OutlinedTextField(value = signupScreenViewModel.lastName, onValueChange = {
+                        OutlinedTextField(value = signupScreenViewModel.vmLastName, onValueChange = {
                             lastName ->
                                 signupScreenViewModel.updateLastName(lastName)
                                 Logger.i("First name: $lastName")
@@ -150,7 +146,7 @@ class SignupScreen: Screen {
                         Spacer(modifier = Modifier.padding(8.dp))
 
                         // Login fields
-                        OutlinedTextField(value = signupScreenViewModel.email, onValueChange = {
+                        OutlinedTextField(value = signupScreenViewModel.vmEmail, onValueChange = {
                             email ->
                                 signupScreenViewModel.updateEmail(email)
                                 Logger.i("Email: $email")
@@ -174,7 +170,7 @@ class SignupScreen: Screen {
 
                         Spacer(modifier = Modifier.padding(8.dp))
 
-                        OutlinedTextField(value = signupScreenViewModel.password, onValueChange = {
+                        OutlinedTextField(value = signupScreenViewModel.vmPassword, onValueChange = {
                             password ->
                                 signupScreenViewModel.updatePassword(password)
                                 Logger.i("Password: $password")
@@ -232,12 +228,16 @@ class SignupScreen: Screen {
                                 currentUser = signupScreenViewModel.atlasAuth()
                                 if (currentUser != null) {
                                     Logger.i("User authorized by Atlas successfully")
-                                    signupScreenViewModel.createUserObject()
-                                    signupScreenViewModel.writeUserToDb()
-                                }
-                                Logger.i("currentUser value update: $currentUser")
-                                navigator.push(DorDScreen(ScreenData(false, currentUser)))
 
+                                    signupScreenViewModel.initRealm()
+                                    signupScreenViewModel.createUserObject()
+                                    userEntity = signupScreenViewModel.writeUserToDb()
+                                    navigator.push(DorDScreen(ScreenData(userEntity)))
+                                }
+                                // eventually give user feedback on failed sign up
+                                // likely due to lack of internet connection
+                                else throw Exception("Failed to initialize Realm, app user is null")
+                                Logger.i("currentUser value update: $currentUser")
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -264,7 +264,7 @@ class SignupScreen: Screen {
             }
         }
         else {
-            navigator.push(DorDScreen(ScreenData(false, currentUser)))
+            navigator.push(DorDScreen(ScreenData(userEntity)))
         }
     }
 }
