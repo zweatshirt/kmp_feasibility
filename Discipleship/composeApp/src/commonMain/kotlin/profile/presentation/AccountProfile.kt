@@ -37,6 +37,7 @@ import home.presentation.ui.composables.TopBar
 import home.presentation.ui.discipler_home.disciplesList
 import screenmodel.ScreenData
 import org.jetbrains.compose.resources.painterResource
+import realm.domain.model.DiscipleEntity
 import ui.theme.backgroundLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
@@ -137,7 +138,7 @@ data class AccountProfile(val screenData: ScreenData): Screen {
 
                 Spacer(modifier = Modifier.padding(8.dp))
 
-                if (screenData.isDisciple) {
+                if (screenData.userEntity is DiscipleEntity) {
                     DiscipleProfileInfo(user)
                 } else {
                     DisciplerProfileInfo(user)

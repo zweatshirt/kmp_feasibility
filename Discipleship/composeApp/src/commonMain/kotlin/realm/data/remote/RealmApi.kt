@@ -4,11 +4,11 @@ import co.touchlab.kermit.Logger
 import global_consts.Constants
 import io.realm.kotlin.Realm
 import io.realm.kotlin.mongodb.App
-import io.realm.kotlin.mongodb.User
 import io.realm.kotlin.mongodb.annotations.ExperimentalFlexibleSyncApi
 import io.realm.kotlin.mongodb.ext.subscribe
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
-import io.realm.kotlin.query.RealmQuery
+import realm.data.repository.DiscipleDaoImpl
+import realm.data.repository.DisciplerDaoImpl
 import realm.data.repository.UserDaoImpl
 import realm.domain.model.DiscipleEntity
 import realm.domain.model.DisciplerEntity
@@ -46,9 +46,24 @@ class RealmApi {
         } // change to handle exception
         Logger.i("Realm successfully opened in RealmApi.initRealm()")
         RealmInstance.realm!!.query(UserEntity::class).subscribe()
-        RealmInstance.realm!!.query(DisciplerEntity::class).subscribe()
         RealmInstance.realm!!.query(DiscipleEntity::class).subscribe()
+        RealmInstance.realm!!.query(DisciplerEntity::class).subscribe()
     }
+
+    suspend fun userFindBy(userId: String): UserEntity? {
+       return RealmInstance.realm?.let { UserDaoImpl(it).findBy(userId) }
+    }
+    suspend fun userFindById(_id: String): UserEntity? {
+        return RealmInstance.realm?.let { UserDaoImpl(it).findById(_id) }
+    }
+
+    suspend fun discipleFindBy(userId: String): DiscipleEntity? {
+        return RealmInstance.realm?.let { DiscipleDaoImpl(it).findBy(userId) }
+    }
+    suspend fun disciplerFindBy(userId: String): DisciplerEntity? {
+        return RealmInstance.realm?.let { DisciplerDaoImpl(it).findBy(userId) }
+    }
+
 
     suspend fun writeUser(userEntity: UserEntity) {
         RealmInstance.realm?.let { UserDaoImpl(it).insert(userEntity) }
@@ -56,5 +71,33 @@ class RealmApi {
 
     suspend fun readUser(id: String): UserEntity? {
         return RealmInstance.realm?.let { UserDaoImpl(it).findById(id) }
+    }
+
+    suspend fun writeDisciple(userEntity: DiscipleEntity) {
+        RealmInstance.realm?.let { DiscipleDaoImpl(it).insert(userEntity) }
+    }
+
+    suspend fun readDisciple(id: String): DiscipleEntity? {
+        return RealmInstance.realm?.let { DiscipleDaoImpl(it).findById(id) }
+    }
+
+    suspend fun writeDiscipler(disciplerEntity: DisciplerEntity) {
+        RealmInstance.realm?.let { DisciplerDaoImpl(it).insert(disciplerEntity) }
+    }
+
+    suspend fun readDiscipler(id: String): DisciplerEntity? {
+        return RealmInstance.realm?.let { DisciplerDaoImpl(it).findById(id) }
+    }
+
+    suspend fun updateUser(user: UserEntity) {
+        RealmInstance.realm?.let { UserDaoImpl(it).update(user) }
+    }
+
+    // shouldn't be here, needs to be implemented in the Dao class
+    suspend fun updateDiscipleStatus(userId: String, bool: Boolean) {
+        RealmInstance.realm?.write {
+            val user = this.query(UserEntity::class,"_id == $0", userId).find().first()
+            user.isDisciple = bool
+        }
     }
 }

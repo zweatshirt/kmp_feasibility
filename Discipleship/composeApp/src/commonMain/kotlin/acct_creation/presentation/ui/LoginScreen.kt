@@ -2,7 +2,6 @@ package acct_creation.presentation.ui
 
 import acct_creation.presentation.viewmodel.LoginScreenViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
-import acct_creation.presentation.viewmodel.SignupScreenViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,12 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.relocation.BringIntoViewRequester
-import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -31,44 +26,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import discipleship.composeapp.generated.resources.Res
-import discipleship.composeapp.generated.resources.crulogo
-import discipleship.composeapp.generated.resources.dove
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
-import  androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import arrow.core.raise.Null
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.touchlab.kermit.Logger
-import dev.gitlive.firebase.auth.FirebaseUser
+import discipleship.composeapp.generated.resources.Res
+import discipleship.composeapp.generated.resources.crulogo
+import discipleship.composeapp.generated.resources.dove
 import home.presentation.ui.disciple_home.DiscipleHomeScreen
-import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import realm.data.remote.RealmApi
 import realm.data.repository.RealmRepoImpl
-import realm.domain.repository.RealmRepository
+import realm.domain.model.UserEntity
+import screenmodel.ScreenData
 import ui.theme.backgroundLight
 import ui.theme.errorLight
 import ui.theme.primaryContainerLight
 import ui.theme.primaryLight
 import ui.theme.secondaryLight
-import screenmodel.ScreenData
 
 /* Author: Zach and Josh
 * This is the primary login screen for the application.
@@ -87,6 +76,7 @@ class LoginScreen: Screen {
             )
         )
         var currentUser: io.realm.kotlin.mongodb.User? by remember { mutableStateOf(null) }
+        var userEntity: UserEntity? by remember { mutableStateOf(null) }
         var passwordVisible by remember { mutableStateOf(false) }
         passwordVisible = false
 
@@ -95,7 +85,7 @@ class LoginScreen: Screen {
         // This screen only needs to be displayed if the user
         // is not logged in
         Scaffold {
-            if (currentUser == null) {
+//            if (currentUser == null) {
                 Column(
                     modifier = Modifier
                         .background(
@@ -194,13 +184,33 @@ class LoginScreen: Screen {
 
                     // Login button
                     Button(
+                        modifier = Modifier.clip(RoundedCornerShape(12.dp)),
                         onClick = {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {
                                 currentUser = loginViewModel.atlasAuth()
-                                val userEntity = loginViewModel.fetchUserData(currentUser)
-                                Logger.i("userEntity value update: $userEntity")
-                                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(true, currentUser, null)))
+                                Logger.i("$currentUser in LoginScreen")
+                            }
+                            try {
+                                if (currentUser != null) {
+                                    userEntity = loginViewModel.fetchUserData(currentUser)
+                                    Logger.i("userEntity value update: $userEntity")
+                                    if (userEntity?.isDisciple == true) {
+                                        navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
+                                    }
+                                    else if (userEntity?.isDisciple == false) {
+                                        navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(userEntity)))
+                                    }
+                                    else {
+                                        navigator.replaceAll(DorDScreen(screenData = ScreenData(userEntity)))
+                                    }
+                                }
+                                else throw NullPointerException("Atlas User is null in LoginScreen, " +
+                                        "likely bad connection.")
+                            }
+                            catch (e: Exception) {
+                                if (e.message != null) Logger.e(e.message!!)
+                                else Logger.e("Exception $e in LoginScreen")
                             }
                         },
                         colors = ButtonDefaults.buttonColors(
@@ -228,10 +238,11 @@ class LoginScreen: Screen {
                         }
                     )
                 }
-            }
-            else {
-                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, currentUser, null)))
-            }
+            //}
+//            else {
+//                // switch to DiscipleEntity
+//                navigator.replaceAll(DiscipleHomeScreen(screenData = ScreenData(false, userEntity, null)))
+            //}
         }
     }
 }

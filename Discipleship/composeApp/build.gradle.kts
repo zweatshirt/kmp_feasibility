@@ -73,7 +73,7 @@ kotlin {
             implementation("cafe.adriel.voyager:voyager-lifecycle-kmp:1.1.0-beta02")
 
             // Firebase auth library
-            implementation(libs.gitlive.firebase.auth)
+//            implementation(libs.gitlive.firebase.auth)
 
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
