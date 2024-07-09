@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 fun ButtonBox(icon: ImageVector, contentDesc: String, iconTint: Color, onClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .clickable {},
+            .clickable { onClick() },
     ) {
         Icon(
             icon,

@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +27,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import home.presentation.ui.disciple_home.finishedList
+import home.presentation.viewmodel.completedList
+import home.presentation.viewmodel.discipleToolsList
+import home.presentation.viewmodel.toDoList
 import ui.theme.errorLight
 import ui.theme.primaryLight
 
@@ -34,17 +38,18 @@ import ui.theme.primaryLight
 fun FinishedStudiesSection() {
     SectionTitle("Completed tools")
     LazyRow {
-        items(finishedList.size) {
-            FinishedStudyCard(finishedList[it])
+        items(completedList.size) { index ->
+            FinishedStudyCard(index)
         }
     }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun FinishedStudyCard(tool: Tool) {
+private fun FinishedStudyCard(index: Int) {
     val cardHeight = 140.dp
-
+    val completedListRemember = remember { completedList }
+    val tName = completedListRemember[index].name
     Card(
         modifier = Modifier
             .width(240.dp)
@@ -58,7 +63,7 @@ private fun FinishedStudyCard(tool: Tool) {
 
             Text(
                 modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 36.dp ),
-                text = tool.name, // replace with dynamic loading
+                text = tName, // replace with dynamic loading
                 fontSize = 20.sp,
                 color = primaryLight,
                 fontWeight = FontWeight.SemiBold
@@ -71,13 +76,17 @@ private fun FinishedStudyCard(tool: Tool) {
                     .weight(1f)
             ) {
                 // notify user on clicking trash icon with dialog on whether they really want to delete the card
-                ButtonBox(Icons.Default.Delete, "Trash Icon", Color.Black) {  }
+                ButtonBox(Icons.Default.Delete, "Trash Icon", Color.Black, onClick = {
+                    discipleToolsList.add(completedListRemember.removeAt(index))
+                })
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
                 // change to unfilled on unlike (we also want a list of favorite tools eventually)
                 ButtonBox(Icons.Default.Favorite, "Favorite icon", Color.Red.copy(alpha = .5f)) {  }
                 VerticalDivider(thickness = 2.dp, color = primaryLight, modifier = Modifier.padding(2.dp))
                 // implement onClick functionality to return back to toDoList:
-                ButtonBox(Icons.Default.Close, "Checkmark icon", errorLight) {  }
+                ButtonBox(Icons.Default.Close, "X icon", errorLight, onClick = {
+                    toDoList.add(completedListRemember.removeAt(index))
+                })
             }
 
         }
