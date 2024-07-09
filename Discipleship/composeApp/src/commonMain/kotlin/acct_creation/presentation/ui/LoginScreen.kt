@@ -184,7 +184,7 @@ class LoginScreen: Screen {
 
                     // Login button
                     Button(
-                        modifier = Modifier.clip(RoundedCornerShape(12.dp)),
+                        modifier = Modifier.clip(RoundedCornerShape(12.dp)).width(100.dp),
                         onClick = {
                             Logger.i("Login button click success")
                             if (loginViewModel.loginIsValid()) {

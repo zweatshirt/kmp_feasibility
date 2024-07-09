@@ -107,16 +107,6 @@ fun MeetingCard(meeting: Meeting) {
                     )
                 }
             }
-//            if (meeting.note != null) {
-//                Text(
-//                    text = "${meeting.note}",
-//                    fontSize = 16.sp,
-//                    color = primaryLight,
-//                    fontWeight = FontWeight.Bold
-//                )
-//            }
-
-
 
         }
     }
