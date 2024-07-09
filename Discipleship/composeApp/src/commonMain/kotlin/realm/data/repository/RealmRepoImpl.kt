@@ -1,6 +1,7 @@
 package realm.data.repository
 
 import co.touchlab.kermit.Logger
+import io.realm.kotlin.types.RealmList
 import realm.data.remote.RealmApi
 import realm.data.remote.RealmApi.RealmInstance
 import realm.domain.model.DiscipleEntity
@@ -84,4 +85,11 @@ class RealmRepoImpl(private val realmApi: RealmApi): RealmRepository {
     override suspend fun updateDiscipleStatus(userId: String, bool: Boolean) {
         return realmApi.updateDiscipleStatus(userId, bool)
     }
+
+//    override suspend fun updateDiscipleToDoList(_id: String, toolList: RealmList<String>) {
+//        realmApi.updateDiscipleToDoList(_id, toolList)
+//    }
+//    override suspend fun updateDiscipleCompletedList(_id: String, toolList: RealmList<String>) {
+//        realmApi.updateDiscipleCompletedList(_id, toolList)
+//    }
 }

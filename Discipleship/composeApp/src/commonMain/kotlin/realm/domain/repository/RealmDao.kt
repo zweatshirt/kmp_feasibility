@@ -3,12 +3,12 @@ package realm.domain.repository
 import io.realm.kotlin.Realm
 import io.realm.kotlin.mongodb.annotations.ExperimentalFlexibleSyncApi
 import io.realm.kotlin.mongodb.ext.subscribe
-import io.realm.kotlin.mongodb.syncSession
 import io.realm.kotlin.notifications.ResultsChange
 import io.realm.kotlin.query.RealmResults
+import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject
 import kotlinx.coroutines.flow.Flow
-import realm.domain.model.UserEntity
+import realm.domain.model.DiscipleEntity
 import kotlin.reflect.KClass
 
 interface RealmDao<T : RealmObject> {
@@ -64,4 +64,5 @@ interface RealmDao<T : RealmObject> {
             delete(all)
         }
     }
+
 }

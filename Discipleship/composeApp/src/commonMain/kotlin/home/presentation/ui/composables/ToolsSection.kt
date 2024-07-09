@@ -16,7 +16,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
@@ -26,13 +25,13 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import co.touchlab.kermit.Logger
 import home.domain.model.Tool
-import home.presentation.viewmodel.completedList
 import home.presentation.viewmodel.discipleToolsList
 import home.presentation.viewmodel.disciplerToolsList
 import home.presentation.viewmodel.toDoList
+import io.realm.kotlin.types.RealmObject
 import profile.domain.model.Disciple
+import realm.domain.model.DiscipleEntity
 import realm.domain.model.UserEntity
 import ui.theme.primaryCheck
 import ui.theme.primaryContainerLight
@@ -46,7 +45,7 @@ TODO: Fix padding at the end of the lazy rows
 */
 
 @Composable
-fun ToolsSection(userEntity: UserEntity) {
+fun ToolsSection(userEntity: RealmObject) {
 //    val containerPad = 16.dp
     SectionTitle("Recommended tools")
 
@@ -54,7 +53,7 @@ fun ToolsSection(userEntity: UserEntity) {
     // Differentiate between populating discipler list and
     // disciple list. As it stands the disciple list is technically
     // populated for both because it is hardcoded in the ToolCard
-    if (userEntity.isDisciple == true) {
+    if (userEntity is DiscipleEntity) {
         LazyRow {
             items(discipleToolsList.size) { index ->
                 ToolCard(index, true)

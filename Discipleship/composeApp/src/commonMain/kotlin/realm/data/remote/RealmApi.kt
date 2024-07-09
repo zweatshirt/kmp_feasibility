@@ -7,6 +7,7 @@ import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.annotations.ExperimentalFlexibleSyncApi
 import io.realm.kotlin.mongodb.ext.subscribe
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
+import io.realm.kotlin.types.RealmList
 import realm.data.repository.DiscipleDaoImpl
 import realm.data.repository.DisciplerDaoImpl
 import realm.data.repository.UserDaoImpl
@@ -100,4 +101,18 @@ class RealmApi {
             user.isDisciple = bool
         }
     }
+//    // also should not be here
+//    suspend fun updateDiscipleToDoList(_id: String, toolList: RealmList<String>) {
+//        RealmInstance.realm?.write {
+//            val user = this.query(DiscipleEntity::class, "_id == $0", _id).first().find()
+//            if (user != null) user.toDoToolIds = toolList
+//        }
+//    }
+//    // same with this one
+//    suspend fun updateDiscipleCompletedList(_id: String, toolList: RealmList<String>) {
+//        RealmInstance.realm?.write {
+//            val user = this.query(DiscipleEntity::class, "_id == $0", _id).first().find()
+//            if (user != null) user.completedToolIds = toolList
+//        }
+//    }
 }

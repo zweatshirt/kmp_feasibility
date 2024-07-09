@@ -24,9 +24,6 @@ class DiscipleHomeViewModel constructor(
     private val _scope = viewModelScope
     private val isPopulated = mutableStateOf(false)
 
-//    var discipleHomeScreenState by mutableStateOf(DiscipleHomeScreenState())
-//        private set
-
     fun getTools() {
         if (!isPopulated.value) {
             var toolObjects: List<Tool> = mutableListOf()
@@ -53,8 +50,8 @@ class DiscipleHomeViewModel constructor(
             }
         }
     }
-
-    fun addToTodoList() {
-        TODO()
-    }
+//
+//    fun updateDatabaseList(list: List<Tool>) {
+//        toolsRepository
+//    }
 }

@@ -13,5 +13,7 @@ class DiscipleEntity : RealmObject {
 
     var userId: String? = null
 
-    var toolIds: RealmList<String> = realmListOf()
+//    var completedToolIds: RealmList<String> = realmListOf()
+//
+//    var toDoToolIds: RealmList<String> = realmListOf()
 }

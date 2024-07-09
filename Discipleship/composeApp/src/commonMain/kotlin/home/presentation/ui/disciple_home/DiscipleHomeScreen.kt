@@ -36,6 +36,7 @@ import home.presentation.viewmodel.discipleToolsList
 import home.presentation.viewmodel.disciplerToolsList
 import home.presentation.viewmodel.toDoList
 import profile.domain.model.Disciple
+import realm.domain.model.DiscipleEntity
 import realm.domain.model.UserEntity
 import screenmodel.ScreenData
 import ui.theme.backgroundLight
@@ -156,7 +157,7 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
                 Spacer(modifier = Modifier.padding(12.dp))
                 FinishedStudiesSection()
                 Spacer(modifier = Modifier.padding(12.dp))
-                ToolsSection(screenData.userEntity as UserEntity)
+                ToolsSection(screenData.userEntity!!)
             }
         }
     }
