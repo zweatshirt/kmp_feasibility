@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -111,7 +112,7 @@ data class DisciplerHomeScreen(val screenData: ScreenData): Screen {
             ) {
                 MeetingSection()
                 DiscipleSection()
-                ToolsSection(userEntity = screenData.userEntity as UserEntity)
+                ToolsSection(mutableStateOf(false))
             }
         }
     }

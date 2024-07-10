@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -157,7 +158,7 @@ data class DiscipleHomeScreen(val screenData: ScreenData): Screen {
                 Spacer(modifier = Modifier.padding(12.dp))
                 FinishedStudiesSection()
                 Spacer(modifier = Modifier.padding(12.dp))
-                ToolsSection(screenData.userEntity!!)
+                ToolsSection(mutableStateOf(true))
             }
         }
     }
