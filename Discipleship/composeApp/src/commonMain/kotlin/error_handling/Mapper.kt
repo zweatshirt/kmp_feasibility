@@ -13,11 +13,3 @@ fun Throwable.toNetworkError(): NetworkError {
     }
     return NetworkError(error, this)
 }
-
-//fun Throwable.toSerializationError(): SerializationError {
-//    val error = when(this) {
-//        is SerializationException -> Error.SerializationError
-//        else -> Error.UnknownError
-//    }
-//    return SerializationError(error, this)
-//}

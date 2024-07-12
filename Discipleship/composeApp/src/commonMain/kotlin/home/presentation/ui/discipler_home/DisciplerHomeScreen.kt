@@ -47,11 +47,11 @@ val disciplesList = mutableListOf(
     ),
     Disciple(
         uID = "20",
-        firstName = "Meep",
-        lastName = "Moop",
-        email = "meepmoop",
+        firstName = "Moses",
+        lastName = "Fernandez",
+        email = "ferntree@gmail.com",
         image = null,
-        bio = "I like food"
+        bio = "Food is yummy"
     ),
     Disciple(
         uID = "20",
@@ -69,7 +69,7 @@ val meetingsList = mutableListOf(
         date = "7/7/2024",
         time = "10:30AM",
         disciple = disciplesList[2],
-        note = "Meep mooping"
+        note = "Going over the book of Ephesians and the four spiritual laws."
     ),
     Meeting(
         date = "7/18/2024",

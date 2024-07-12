@@ -2,6 +2,7 @@ package realm.domain.model
 
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
+import kotlinx.serialization.Serializable
 import org.mongodb.kbson.BsonObjectId
 
 class UserEntity : RealmObject {

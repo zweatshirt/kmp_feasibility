@@ -14,7 +14,6 @@ import kotlinx.serialization.json.Json
 // make call to GodTools/KnowGod.com API from here using Ktor lib
 class ToolsApi {
     private val client = HttpClient()
-//    private val db = Firebase.database.reference()
 
     // Request to KnowingGod.com API
     suspend fun getTools(): List<Tool> {
@@ -22,9 +21,7 @@ class ToolsApi {
         Logger.i("In ToolsApi.getTools()\nREQUEST TO: ${Constants.TOOLS_API}")
         val response: HttpResponse = client.request(Constants.TOOLS_API) // get
         val responseBody: String = response.body()
-        val json = Json {
-             ignoreUnknownKeys = true
-        }
+        val json = Json { ignoreUnknownKeys = true }
         val tools: ToolData = json.decodeFromString(responseBody) // Response String to JSON
         return toolDataToObjects(tools) // converts JSON object to needed Tool objects
     }
@@ -50,18 +47,18 @@ class ToolsApi {
         return toolsObjs
     }
 
-    suspend fun writeToolsToDb(tools: List<Tool>) {
+    fun writeToolsToDb(tools: List<Tool>) {
         tools.forEach() { tool ->
             writeToolToDb(tool)
         }
     }
 
-    suspend fun writeToolToDb(tool: Tool) {
+    fun writeToolToDb(tool: Tool) {
 //        db.child(Constants.DB_TOOLS_NAME).child(tool.id).setValue(tool)
     }
 
     // Create read tools from DB function
-    suspend fun readToolsFromDb(): List<Tool> {
+    fun readToolsFromDb(): List<Tool> {
 //        val toolsRef = db.child(Constants.DB_TOOLS_NAME)
         return listOf(Tool("2", "2", "2", "2", 2))
     }

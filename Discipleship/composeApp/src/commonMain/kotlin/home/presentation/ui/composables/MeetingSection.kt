@@ -94,7 +94,8 @@ fun MeetingCard(meeting: Meeting) {
                         .padding(4.dp)
                 ) {
                     Text(
-                        text = "Meeting with ${meetDisc.firstName} ${meetDisc.lastName}",
+                        modifier = Modifier.padding(bottom = 2.dp),
+                        text = "Meeting with ${meetDisc.firstName} ${meetDisc.lastName}.",
                         fontSize = 18.sp,
                         color = primaryLight,
                         fontWeight = FontWeight.Bold
