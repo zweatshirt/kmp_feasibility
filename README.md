@@ -64,3 +64,11 @@ Gradle
 - Dependency injection is a bit of a pain it seems but not terrible. A good library for it is Koin. @Inject annotation would not work from our attempts, but this isn't really an issue.
 - Because everything is "bleeding edge," a lot of dependencies do not work well together, and it can be very time consuming trying to manage dependencies that are updating very often and causing Gradle issues. The chance of one dependency breaking a project seems quite high.
 - You will be the first to face an issue in a lot of cases, so there is not a lot of support online or forums/threads to find where you can quickly solve issues.
+
+
+### Thoughts on KMP and Compose Multiplatform
+- Compose Multiplatform is a great library that is very similar to Jetpack Compose, which is easy to learn and use. The downside is that it does have more of an Android-like feel.
+- It has good flexibility in how much code you want to share between platforms. You can put some or all of the code in the common code shared between platforms and write the rest in platform-specific code.
+- Some features are lacking in Kotlin multiplatform and compose because it is still new and not all libraries are fully built out and up to date. It is good for smaller projects at the moment but you could run into problems on bigger projects with more features.
+- The future of KMP and Compose Multiplatform appears to be really good and the support is growing, so libraries will continue to grow and be developed which will make it better and better in the future. 
+
