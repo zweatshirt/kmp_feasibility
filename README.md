@@ -1,4 +1,4 @@
-# compose_feasability
+# kmp_feasability
 Zach and Josh @ Cru Kotlin feasability testing repository
 
 ## [Helpful repo for libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries?tab=readme-ov-file)
